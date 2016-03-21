@@ -116,7 +116,7 @@ namespace MapleShark
                 MessageBox.Show("Failed to set the device in Promiscuous mode! But that doesn't really matter lol.");
                 mDevice.Open();
             }
-            //mDevice.Filter = string.Format("tcp portrange {0}-{1}", Config.Instance.LowPort, Config.Instance.HighPort);
+            mDevice.Filter = string.Format("tcp portrange {0}-{1}", Config.Instance.LowPort, Config.Instance.HighPort);
         }
 
         private void MainForm_Load(object pSender, EventArgs pArgs)
@@ -205,9 +205,9 @@ namespace MapleShark
                     if (tcpPacket == null)
                         continue;
 
-                    //if ((tcpPacket.SourcePort < Config.Instance.LowPort || tcpPacket.SourcePort > Config.Instance.HighPort) &&
-                    //    (tcpPacket.DestinationPort < Config.Instance.LowPort || tcpPacket.DestinationPort > Config.Instance.HighPort))
-                    //    continue;
+                    if ((tcpPacket.SourcePort < Config.Instance.LowPort || tcpPacket.SourcePort > Config.Instance.HighPort) &&
+                        (tcpPacket.DestinationPort < Config.Instance.LowPort || tcpPacket.DestinationPort > Config.Instance.HighPort))
+                        continue;
                     try
                     {
                         if (tcpPacket.Syn && !tcpPacket.Ack)
@@ -308,7 +308,6 @@ namespace MapleShark
         List<SessionForm> closes = new List<SessionForm>();
         private void mTimer_Tick(object sender, EventArgs e)
         {
-           
             try
             {
                 RawCapture packet = null;
@@ -332,12 +331,7 @@ namespace MapleShark
                     SessionForm session = null;
                     try
                     {
-                        if (tcpPacket == null)
-                            return;
-
-                        if (tcpPacket.Syn && !tcpPacket.Ack)
-
-                            //if (tcpPacket.Syn && !tcpPacket.Ack && tcpPacket.DestinationPort >= Config.Instance.LowPort && tcpPacket.DestinationPort <= Config.Instance.HighPort)
+                        if (tcpPacket.Syn && !tcpPacket.Ack && tcpPacket.DestinationPort >= Config.Instance.LowPort && tcpPacket.DestinationPort <= Config.Instance.HighPort)
                         {
                             session = NewSession();
                             var res = session.BufferTCPPacket(tcpPacket, packet.Timeval.Date);
@@ -594,7 +588,6 @@ namespace MapleShark
             if (currentSession != null)
                 currentSession.Show(mDockPanel, DockState.Document);
         }
-
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //var inf = new                Tools.IniFiles();

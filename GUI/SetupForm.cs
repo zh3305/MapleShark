@@ -36,8 +36,8 @@ namespace MapleShark
 
             if (!selected && localAreaConnection >= 0) mInterfaceCombo.SelectedIndex = localAreaConnection;
             else if (!selected && mInterfaceCombo.Items.Count > 0) mInterfaceCombo.SelectedIndex = 0;
-            //mLowPortNumeric.Value = Config.Instance.LowPort;
-            //mHighPortNumeric.Value = Config.Instance.HighPort;
+            mLowPortNumeric.Value = Config.Instance.LowPort;
+            mHighPortNumeric.Value = Config.Instance.HighPort;
         }
 
         private void mInterfaceCombo_SelectedIndexChanged(object pSender, EventArgs pArgs)
@@ -47,19 +47,19 @@ namespace MapleShark
 
         private void mLowPortNumeric_ValueChanged(object pSender, EventArgs pArgs)
         {
-            //if (mLowPortNumeric.Value > mHighPortNumeric.Value) mLowPortNumeric.Value = mHighPortNumeric.Value;
+            if (mLowPortNumeric.Value > mHighPortNumeric.Value) mLowPortNumeric.Value = mHighPortNumeric.Value;
         }
 
         private void mHighPortNumeric_ValueChanged(object pSender, EventArgs pArgs)
         {
-            //if (mHighPortNumeric.Value < mLowPortNumeric.Value) mHighPortNumeric.Value = mLowPortNumeric.Value;
+            if (mHighPortNumeric.Value < mLowPortNumeric.Value) mHighPortNumeric.Value = mLowPortNumeric.Value;
         }
 
         private void mOKButton_Click(object pSender, EventArgs pArgs)
         {
             Config.Instance.Interface = (string)mInterfaceCombo.SelectedItem;
-            //Config.Instance.LowPort = (ushort)mLowPortNumeric.Value;
-            //Config.Instance.HighPort = (ushort)mHighPortNumeric.Value;
+            Config.Instance.LowPort = (ushort)mLowPortNumeric.Value;
+            Config.Instance.HighPort = (ushort)mHighPortNumeric.Value;
             Config.Instance.Save();
 
             DialogResult = DialogResult.OK;

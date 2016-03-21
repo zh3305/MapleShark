@@ -64,7 +64,7 @@ namespace MapleShark
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                //Fail, w / e
+                // Fail, w/e
                 if (File.Exists("cached_keys.txt"))
                     InitByContents(File.ReadAllText("cached_keys.txt"));
                 else

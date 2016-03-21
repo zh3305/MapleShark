@@ -31,14 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupForm));
             this.mCancelButton = new System.Windows.Forms.Button();
             this.mOKButton = new System.Windows.Forms.Button();
-            //this.mHighPortNumeric = new System.Windows.Forms.NumericUpDown();
-            //this.mLowPortNumeric = new System.Windows.Forms.NumericUpDown();
+            this.mHighPortNumeric = new System.Windows.Forms.NumericUpDown();
+            this.mLowPortNumeric = new System.Windows.Forms.NumericUpDown();
             this.mPortsLabel = new System.Windows.Forms.Label();
             this.mInterfaceCombo = new System.Windows.Forms.ComboBox();
             this.mInterfaceLabel = new System.Windows.Forms.Label();
             this.mMainPicture = new System.Windows.Forms.PictureBox();
-            //((System.ComponentModel.ISupportInitialize)(this.mHighPortNumeric)).BeginInit();
-            //((System.ComponentModel.ISupportInitialize)(this.mLowPortNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mHighPortNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mLowPortNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mMainPicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,49 +65,49 @@
             // 
             // mHighPortNumeric
             // 
-            //this.mHighPortNumeric.Location = new System.Drawing.Point(316, 39);
-            //this.mHighPortNumeric.Maximum = new decimal(new int[] {
-            //65535,
-            //0,
-            //0,
-            //0});
-            //this.mHighPortNumeric.Minimum = new decimal(new int[] {
-            //1,
-            //0,
-            //0,
-            //0});
-            //this.mHighPortNumeric.Name = "mHighPortNumeric";
-            //this.mHighPortNumeric.Size = new System.Drawing.Size(100, 20);
-            //this.mHighPortNumeric.TabIndex = 12;
-            //this.mHighPortNumeric.Value = new decimal(new int[] {
-            //65535,
-            //0,
-            //0,
-            //0});
-            //this.mHighPortNumeric.ValueChanged += new System.EventHandler(this.mHighPortNumeric_ValueChanged);
-            //// 
-            //// mLowPortNumeric
-            //// 
-            //this.mLowPortNumeric.Location = new System.Drawing.Point(201, 39);
-            //this.mLowPortNumeric.Maximum = new decimal(new int[] {
-            //65535,
-            //0,
-            //0,
-            //0});
-            //this.mLowPortNumeric.Minimum = new decimal(new int[] {
-            //1,
-            //0,
-            //0,
-            //0});
-            //this.mLowPortNumeric.Name = "mLowPortNumeric";
-            //this.mLowPortNumeric.Size = new System.Drawing.Size(100, 20);
-            //this.mLowPortNumeric.TabIndex = 11;
-            //this.mLowPortNumeric.Value = new decimal(new int[] {
-            //65535,
-            //0,
-            //0,
-            //0});
-            //this.mLowPortNumeric.ValueChanged += new System.EventHandler(this.mLowPortNumeric_ValueChanged);
+            this.mHighPortNumeric.Location = new System.Drawing.Point(316, 39);
+            this.mHighPortNumeric.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.mHighPortNumeric.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.mHighPortNumeric.Name = "mHighPortNumeric";
+            this.mHighPortNumeric.Size = new System.Drawing.Size(100, 20);
+            this.mHighPortNumeric.TabIndex = 12;
+            this.mHighPortNumeric.Value = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.mHighPortNumeric.ValueChanged += new System.EventHandler(this.mHighPortNumeric_ValueChanged);
+            // 
+            // mLowPortNumeric
+            // 
+            this.mLowPortNumeric.Location = new System.Drawing.Point(201, 39);
+            this.mLowPortNumeric.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.mLowPortNumeric.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.mLowPortNumeric.Name = "mLowPortNumeric";
+            this.mLowPortNumeric.Size = new System.Drawing.Size(100, 20);
+            this.mLowPortNumeric.TabIndex = 11;
+            this.mLowPortNumeric.Value = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.mLowPortNumeric.ValueChanged += new System.EventHandler(this.mLowPortNumeric_ValueChanged);
             // 
             // mPortsLabel
             // 
@@ -157,8 +157,8 @@
             this.Controls.Add(this.mMainPicture);
             this.Controls.Add(this.mCancelButton);
             this.Controls.Add(this.mOKButton);
-            //this.Controls.Add(this.mHighPortNumeric);
-            //this.Controls.Add(this.mLowPortNumeric);
+            this.Controls.Add(this.mHighPortNumeric);
+            this.Controls.Add(this.mLowPortNumeric);
             this.Controls.Add(this.mPortsLabel);
             this.Controls.Add(this.mInterfaceCombo);
             this.Controls.Add(this.mInterfaceLabel);
@@ -170,8 +170,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Setup";
             this.Load += new System.EventHandler(this.SetupForm_Load);
-            //((System.ComponentModel.ISupportInitialize)(this.mHighPortNumeric)).EndInit();
-            //((System.ComponentModel.ISupportInitialize)(this.mLowPortNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mHighPortNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mLowPortNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mMainPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -182,8 +182,8 @@
 
         private System.Windows.Forms.Button mCancelButton;
         private System.Windows.Forms.Button mOKButton;
-        //private System.Windows.Forms.NumericUpDown mHighPortNumeric;
-        //private System.Windows.Forms.NumericUpDown mLowPortNumeric;
+        private System.Windows.Forms.NumericUpDown mHighPortNumeric;
+        private System.Windows.Forms.NumericUpDown mLowPortNumeric;
         private System.Windows.Forms.Label mPortsLabel;
         private System.Windows.Forms.ComboBox mInterfaceCombo;
         private System.Windows.Forms.Label mInterfaceLabel;
