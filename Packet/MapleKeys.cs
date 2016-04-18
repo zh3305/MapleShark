@@ -46,30 +46,30 @@ namespace MapleShark
             Console.WriteLine("Initializing keys...");
             MapleStoryKeys = new Dictionary<byte, Dictionary<KeyValuePair<ushort, byte>, byte[]>>();
             //不从远程 加载秘钥
-            try
-            {
-                if (File.Exists("noupdate.txt")) throw new Exception(); // Trigger offline file loading
+            //try
+            //{
+            //    if (File.Exists("noupdate.txt")) throw new Exception(); // Trigger offline file loading
 
-                var req = WebRequest.Create("http://direct.craftnet.nl/app_updates/get_keys.php?source=SRK&version=4") as HttpWebRequest;
-                req.Proxy = null;
+            //    var req = WebRequest.Create("http://direct.craftnet.nl/app_updates/get_keys.php?source=SRK&version=4") as HttpWebRequest;
+            //    req.Proxy = null;
 
-                using (var response = (HttpWebResponse)req.GetResponse())
-                using (var sr = new StreamReader(response.GetResponseStream()))
-                {
-                    string responseText = sr.ReadToEnd();
-                    InitByContents(responseText);
-                    File.WriteAllText("cached_keys.txt", responseText);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
+            //    using (var response = (HttpWebResponse)req.GetResponse())
+            //    using (var sr = new StreamReader(response.GetResponseStream()))
+            //    {
+            //        string responseText = sr.ReadToEnd();
+            //        InitByContents(responseText);
+            //        File.WriteAllText("cached_keys.txt", responseText);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.ToString());
                 // Fail, w/e
                 if (File.Exists("cached_keys.txt"))
                     InitByContents(File.ReadAllText("cached_keys.txt"));
                 else
                     MessageBox.Show("Unable to load MapleStory Keys, because there were no cached keys stored and I failed retrieving them from the webserver! D:\r\nYou might want to check your internet connection and see if you can access http://direct.craftnet.nl/ directly.", "Problems!");
-            }
+            //}
 
             AddKey(8, 118, 1, new byte[] {
                 0x5A, // Full key's lost

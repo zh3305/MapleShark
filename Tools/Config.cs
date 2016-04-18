@@ -10,8 +10,8 @@ namespace MapleShark
     public sealed class Config
     {
         public string Interface = "";
-        //public ushort LowPort = 8484;
-        //public ushort HighPort = 8989;
+        public ushort LowPort = 8484;
+        public ushort HighPort = 8989;
         //Dictonary 
         public static Tools.ReadProperties send;
         public static Tools.ReadProperties recv;

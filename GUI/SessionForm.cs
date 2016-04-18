@@ -155,7 +155,7 @@ namespace MapleShark
 
                 PacketReader pr = new PacketReader(headerData);
 
-                if (length != tcpData.Length || tcpData.Length < 13)
+                if (!(headerData.Length==1072&& headerData[0]==(byte)0x0E) &&(length != tcpData.Length || tcpData.Length < 13))
                 {
                     if (socks5 > 0 && socks5 < 7)
                     {
@@ -530,7 +530,7 @@ namespace MapleShark
             mPacketList_SelectedIndexChanged(null, null);
         }
 
-        private static Regex _packetRegex = new Regex(@"\[(.{1,2}):(.{1,2}):(.{1,2})\]\[(\d+)\] (Recv|Send):  (.+)");
+        private static Regex _packetRegex = new Regex(@"(.{1,2}):(.{1,2}):(.{1,2})\.\d+\|(發送到客戶端|發送到伺服器|握手包)\|[^\|]+\|[^\|]+\|(\d+)\|([^\|]+)\|");
         internal void ParseMSnifferLine(string packetLine)
         {
             var match = _packetRegex.Match(packetLine);
@@ -543,9 +543,9 @@ namespace MapleShark
                 int.Parse(match.Groups[2].Value),
                 int.Parse(match.Groups[3].Value)
             );
-            int packetLength = int.Parse(match.Groups[4].Value);
+            int packetLength = int.Parse(match.Groups[5].Value);
             byte[] buffer = new byte[packetLength - 2];
-            bool outbound = match.Groups[5].Value == "Send";
+            bool outbound = match.Groups[4].Value == "發送到伺服器";
             string[] bytesText = match.Groups[6].Value.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             ushort opcode = (ushort)(byte.Parse(bytesText[0], System.Globalization.NumberStyles.HexNumber) | byte.Parse(bytesText[1], System.Globalization.NumberStyles.HexNumber) << 8);
