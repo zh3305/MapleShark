@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MapleShark</RootNamespace>
     <AssemblyName>MapleShark</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Shark.ico</ApplicationIcon>
     <StartupObject>MapleShark.Program</StartupObject>
@@ -54,6 +54,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -65,6 +66,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -273,14 +275,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ScriptDotNet\IronyLibrary\Microsoft\MathResources.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Docking\Resources\Thumbs.db" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
-    <None Include="ScriptDotNet\Runtime\Operators\Operators_Native.zip" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -294,171 +292,6 @@
     </Compile>
     <Compile Include="Tools\properties.cs" />
     <Compile Include="Tools\ScriptAPI.cs" />
-    <Compile Include="ScriptDotNet\AST\AScriptAstTemplate.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptArrayConstructor.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptArrayResolution.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptAssignExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptAst.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptBinExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptCompoundStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptCondition.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptConstExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptElements.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptExprList.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptFlowControlStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptForEachStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptForStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptFuncContract.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptFuncContractInv.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptFuncContractPost.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptFuncContractPre.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptFuncParameters.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptFunctionCall.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptFunctionDefinition.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptGenericsPostfix.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptGlobalList.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptIfStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptIsExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptMetaExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptMObject.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptMObjectPart.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptNewArrStmt.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptNewStmt.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptProg.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptQualifiedName.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptSwitchCaseStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptSwitchDefaultStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptSwitchStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptTryCatchFinallyStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptTypeConstructor.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptTypeConvertExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptTypeExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptTypeExprList.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptUnaryExpr.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptUsingStatement.cs" />
-    <Compile Include="ScriptDotNet\AST\ScriptWhileStatement.cs" />
-    <Compile Include="ScriptDotNet\CustomFunctions\AboutFunc.cs" />
-    <Compile Include="ScriptDotNet\CustomFunctions\AppendFunc.cs" />
-    <Compile Include="ScriptDotNet\CustomFunctions\ArrayFunc.cs" />
-    <Compile Include="ScriptDotNet\CustomFunctions\CharFunc.cs" />
-    <Compile Include="ScriptDotNet\CustomFunctions\EvalFunc.cs" />
-    <Compile Include="ScriptDotNet\CustomFunctions\ReplaceFunc.cs" />
-    <Compile Include="ScriptDotNet\CustomFunctions\RunConsole.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Common.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\AstProcessing\AstProcessor.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\AstProcessing\LexicalAddress.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\AstProcessing\ProcInfo.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\AstProcessing\Scope.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\AST\AstNode.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\AST\AstNodeArgs.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\AST\AstVisitor.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\CompilerContext.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Enums.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\EventArgs.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Grammar\BnfExpression.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Grammar\BnfTerm.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Grammar\Grammar.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Grammar\GrammarData.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Grammar\GrammarDataBuilder.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Grammar\NonTerminal.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Grammar\Terminal.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\LanguageCompiler.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Parser\Parser.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Parser\ParserStack.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Scanner\Scanner.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Scanner\SourceFile.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Scanner\Token.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\SyntaxError.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\CommentTerminal.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\CompoundTerminalBase.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\ConstantTerminal.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\CustomTerminal.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\IdentifierTerminal.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\NumberLiteral.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\RegExBasedTerminal.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\StringLiteral.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\SymbolTerminal.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\Terminals\TerminalFactory.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\TokenFilters\BraceMatchFilter.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\TokenFilters\CodeOutlineFilter.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Compiler\TokenFilters\TokenFilter.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Exceptions.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Microsoft\BigInteger.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Microsoft\Complex64.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\Microsoft\MathResources.Designer.cs" />
-    <Compile Include="ScriptDotNet\IronyLibrary\TextUtils.cs" />
-    <Compile Include="ScriptDotNet\Processing\DebugMarkerVisitor.cs" />
-    <Compile Include="ScriptDotNet\Processing\FunctionDeclarationVisitor.cs" />
-    <Compile Include="ScriptDotNet\Processing\IPostProcessing.cs" />
-    <Compile Include="ScriptDotNet\Runtime\AssemblyManager.cs" />
-    <Compile Include="ScriptDotNet\Runtime\BaseAssemblyManager.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Configuration\ConfigSchema.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Configuration\Operator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Configuration\Reference.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Configuration\ScopeDefinition.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Configuration\ScriptConfiguration.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Configuration\SettingXml.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Configuration\TypeXml.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Exceptions.cs" />
-    <Compile Include="ScriptDotNet\Runtime\IAssemblyManager.cs" />
-    <Compile Include="ScriptDotNet\Runtime\IOperatorHandler.cs" />
-    <Compile Include="ScriptDotNet\Runtime\IScriptContext.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\BindableAttribute.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\ConstructorBind.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\EventBind.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\FieldBind.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\LateBoundMember.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\LateBoundMethod.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\MethodBind.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\ObjectBinder.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\ObjectBinderExtended.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\ObjectBinderHelpers.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Binder\PropertyBind.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Components\EventBroker.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Components\Expando.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Components\ExpandoWrapper.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Components\ExplicitInterface.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Components\MemberRename.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\Components\NameSpaceResolver.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\IInvokable.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\IObjectActivator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\IObjectBind.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\IObjectBinder.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\IScriptable.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\ISupportAssign.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ObjectModel\ObjectActivator\ObjectActivator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\BinaryOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\BoolOperators.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\DivOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\GqOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\GrOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\IEvaluator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\IsOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\LessOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\LqOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\MinusOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\ModOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\MulOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\PlusOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Binary\PowOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\IOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\UnaryOperator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Operators\Unary\NegateOperators.cs" />
-    <Compile Include="ScriptDotNet\Runtime\RuntimeHost.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\EventScopeActivator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\FunctionScope.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\INotifyingScope.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\IScopeActivator.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\IScopeFactory.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\IScriptScope.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\ScopeFactory.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\ScriptScope.cs" />
-    <Compile Include="ScriptDotNet\Runtime\Scopes\ScriptUsingScope.cs" />
-    <Compile Include="ScriptDotNet\Runtime\ScriptContext.cs" />
-    <Compile Include="ScriptDotNet\Script.cs" />
-    <Compile Include="ScriptDotNet\ScriptGrammar.cs" />
     <Compile Include="GUI\ScriptForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -658,7 +491,6 @@
     <Compile Include="SyntaxBox\Win32\NativeSubclasser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ScriptDotNet\RuntimeConfig.xml" />
     <EmbeddedResource Include="GUI\SessionInformation.resx">
       <DependentUpon>SessionInformation.cs</DependentUpon>
     </EmbeddedResource>
@@ -868,7 +700,19 @@
       <DefaultIcon>Shark.ico</DefaultIcon>
     </FileAssociation>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="SSharp-development\SSharp.Net\GrammarGenerator\GrammarGenerator.csproj">
+      <Project>{d6b6380d-55ff-4201-ab10-eb70f795b125}</Project>
+      <Name>GrammarGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="SSharp-development\SSharp.Net\SSharp.Net.csproj">
+      <Project>{b2b5382d-959b-4a31-9f0b-d55ebcf40132}</Project>
+      <Name>SSharp.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
     <ItemGroup>
