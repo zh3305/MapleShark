@@ -270,18 +270,18 @@ namespace MapleShark
                     if (!File.Exists(filename))
                     {
                         string contents = "";
-                        contents += "using (ScriptAPI) {\r\n";
-                        contents += "\tAddShort(\"Packet Size\");\r\n";
-                        contents += "\tAddUShort(\"MapleStory Version\");\r\n";
-                        contents += "\tAddString(\"MapleStory Patch Location/Subversion\");\r\n";
-                        contents += "\tAddField(\"Local Initializing Vector (IV)\", 4);\r\n";
-                        contents += "\tAddField(\"Remote Initializing Vector (IV)\", 4);\r\n";
-                        contents += "\tAddByte(\"MapleStory Locale\");\r\n";
+                        //contents += "using (ScriptAPI) {\r\n";
+                        contents += "\tScriptAPI.AddShort(\"Packet Size\");\r\n";
+                        contents += "\tScriptAPI.AddUShort(\"MapleStory Version\");\r\n";
+                        contents += "\tScriptAPI.AddString(\"MapleStory Patch Location/Subversion\");\r\n";
+                        contents += "\tScriptAPI.AddField(\"Local Initializing Vector (IV)\", 4);\r\n";
+                        contents += "\tScriptAPI.AddField(\"Remote Initializing Vector (IV)\", 4);\r\n";
+                        contents += "\tScriptAPI.AddByte(\"MapleStory Locale\");\r\n";
                         if (mRemotePort == 8484 && ((mLocale == MapleLocale.GLOBAL && version >= 160) ||
                                                     (mLocale == MapleLocale.TAIWAN && version >= 176) ||
                                                     (mLocale == MapleLocale.CHINA && version >= 122)))
-                            contents += "\tAddByte(\"Unknown\");\r\n";
-                        contents += "}";
+                            contents += "\tScriptAPI.AddByte(\"Unknown\");\r\n";
+                        //contents += "}";
                         File.WriteAllText(filename, contents);
                     }
                 }

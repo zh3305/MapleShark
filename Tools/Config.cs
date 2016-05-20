@@ -62,7 +62,7 @@ namespace MapleShark
 
         public static string GetPropertiesFile(bool pOutbound, byte pLocale, ushort pVersion)
         {
-            return System.Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Scripts" + Path.DirectorySeparatorChar + pLocale.ToString() + Path.DirectorySeparatorChar + pVersion.ToString() + Path.DirectorySeparatorChar + (pOutbound ? "send" : "recv") + ".properties";
+            return System.Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Scripts" + Path.DirectorySeparatorChar + pLocale.ToString() + Path.DirectorySeparatorChar + pVersion.ToString() + Path.DirectorySeparatorChar + (pOutbound ? "sendops" : "recvops") + ".properties";
         }
         public static string GetPropertiesFile(bool pOutbound)
         {

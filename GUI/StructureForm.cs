@@ -42,9 +42,20 @@ namespace MapleShark
                     StringBuilder scriptCode = new StringBuilder();
                     scriptCode.Append(File.ReadAllText(scriptPath));
                     if (File.Exists(commonPath)) scriptCode.Append(File.ReadAllText(commonPath));
-                    Script script = Script.Compile(scriptCode.ToString());
-                    script.Context.SetItem("ScriptAPI", new ScriptAPI(this));
-                    script.Execute();
+                    //SSharp
+                    //Script script = Script.Compile(scriptCode.ToString());
+                    //script.Context.SetItem("ScriptAPI", new ScriptAPI(this));
+                    //script.Execute();
+
+                    //Jint
+                    var engine = new Jint.Engine();
+                    engine.SetValue("ScriptAPI", new ScriptAPI(this));
+                    engine.Execute(scriptCode.ToString());
+
+                    //var context = new NiL.JS.Core.Context();
+                    //context.DefineVariable("ScriptAPI").Assign(NiL.JS.Core.JSValue.Marshal(new ScriptAPI(this)));
+                    //context.Eval(scriptCode.ToString());
+
                 }
                 catch (Exception exc)
                 {

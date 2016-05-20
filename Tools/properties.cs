@@ -41,6 +41,11 @@ namespace MapleShark.Tools
         }
         private static string GetText(string file)
         {
+
+            if (!File.Exists(file))
+            {
+                return "";
+            }
             string content = File.ReadAllText(file);
             if (content.Contains("�"))
             {
@@ -72,6 +77,11 @@ namespace MapleShark.Tools
         /// <param name="filePath">文件路径</param>
         public void Load(string filePath)
         {
+
+            if (!File.Exists(filePath))
+            {
+                return;
+            }
             char[] convertBuf = new char[1024];
             int limit;
             int keyLen;
