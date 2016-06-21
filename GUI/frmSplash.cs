@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
-//using ScriptNET.Runtime;
-using Scripting.SSharp.Runtime;
+using ScriptNET.Runtime;
+//using Scripting.SSharp.Runtime;
 using System.Reflection;
 using System.Security.Principal;
 
@@ -82,8 +82,8 @@ namespace MapleShark
             //initialisator.ReportProgress(0, "Initializing MapleStory AES Keys");
             //MapleKeys.Initialize();
 
-            initialisator.ReportProgress(0, "Loading Script.NET context");
-            RuntimeHost.Initialize();
+            //initialisator.ReportProgress(0, "Loading Script.NET context");
+            //ScriptNET.Runtime.RuntimeHost.Initialize();
 
             initialisator.ReportProgress(0, "Loading packet definitions");
             DefinitionsContainer.Load();

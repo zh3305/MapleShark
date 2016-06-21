@@ -1,17 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapleShark", "MapleShark.csproj", "{01F7E3B6-B831-4D44-8B44-095768212822}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D6B6380D-55FF-4201-AB10-EB70F795B125} = {D6B6380D-55FF-4201-AB10-EB70F795B125}
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132} = {B2B5382D-959B-4A31-9F0B-D55EBCF40132}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSharp.Net", "SSharp-development\SSharp.Net\SSharp.Net.csproj", "{B2B5382D-959B-4A31-9F0B-D55EBCF40132}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrammarGenerator", "SSharp-development\SSharp.Net\GrammarGenerator\GrammarGenerator.csproj", "{D6B6380D-55FF-4201-AB10-EB70F795B125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,22 +19,6 @@ Global
 		{01F7E3B6-B831-4D44-8B44-095768212822}.Release|Any CPU.ActiveCfg = Release|x86
 		{01F7E3B6-B831-4D44-8B44-095768212822}.Release|x86.ActiveCfg = Release|x86
 		{01F7E3B6-B831-4D44-8B44-095768212822}.Release|x86.Build.0 = Release|x86
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132}.Debug|x86.Build.0 = Debug|Any CPU
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132}.Release|x86.ActiveCfg = Release|Any CPU
-		{B2B5382D-959B-4A31-9F0B-D55EBCF40132}.Release|x86.Build.0 = Release|Any CPU
-		{D6B6380D-55FF-4201-AB10-EB70F795B125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6B6380D-55FF-4201-AB10-EB70F795B125}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6B6380D-55FF-4201-AB10-EB70F795B125}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D6B6380D-55FF-4201-AB10-EB70F795B125}.Debug|x86.Build.0 = Debug|Any CPU
-		{D6B6380D-55FF-4201-AB10-EB70F795B125}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6B6380D-55FF-4201-AB10-EB70F795B125}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6B6380D-55FF-4201-AB10-EB70F795B125}.Release|x86.ActiveCfg = Release|Any CPU
-		{D6B6380D-55FF-4201-AB10-EB70F795B125}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

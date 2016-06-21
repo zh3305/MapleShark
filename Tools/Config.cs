@@ -55,6 +55,8 @@ namespace MapleShark
 
         internal Definition GetDefinition(ushort pBuild, byte pLocale, bool pOutbound, ushort pOpcode)
         {
+            if (DefinitionsContainer.Instance == null)
+                DefinitionsContainer.Load();
             return DefinitionsContainer.Instance.GetDefinition(pLocale, pBuild, pOpcode, pOutbound);
             // return Definitions.Find(d => d.Locale == pLocale && d.Build == pBuild && d.Outbound == pOutbound && d.Opcode == pOpcode);
         }
