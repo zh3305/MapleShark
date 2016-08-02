@@ -825,9 +825,6 @@
     <Content Include="Docking\Resources\DockPane_Dock.bmp" />
     <Content Include="Docking\Resources\DockPane_Option.bmp" />
     <Content Include="Docking\Resources\DockPane_OptionOverflow.bmp" />
-    <Content Include="Readme.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\Button-Blank-Green-icon.png" />
     <None Include="Resources\Button-Blank-Red-icon.png" />
     <None Include="Resources\save-icon.png" />

@@ -79,8 +79,8 @@ namespace MapleShark
             //initialisator.ReportProgress(0, "Checking for updates");
             //CraftNetTools.AppUpdates.Check();
 
-            //initialisator.ReportProgress(0, "Initializing MapleStory AES Keys");
-            //MapleKeys.Initialize();
+            initialisator.ReportProgress(0, "Initializing MapleStory AES Keys");
+            MapleKeys.Initialize();
 
             //initialisator.ReportProgress(0, "Loading Script.NET context");
             //ScriptNET.Runtime.RuntimeHost.Initialize();
