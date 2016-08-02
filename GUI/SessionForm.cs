@@ -280,7 +280,7 @@ namespace MapleShark
                         if (mRemotePort == 8484 && ((mLocale == MapleLocale.GLOBAL && version >= 160) ||
                                                     (mLocale == MapleLocale.TAIWAN && version >= 176) ||
                                                     (mLocale == MapleLocale.CHINA && version >= 122)))
-                            contents += "\tScriptAPI.AddByte(\"Unknown\");\r\n";
+                         //   contents += "\tScriptAPI.AddByte(\"Unknown\");\r\n";
                         //contents += "}";
                         File.WriteAllText(filename, contents);
                     }
