@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
-using ScriptNET.Runtime;
+//using ScriptNET.Runtime;
 //using Scripting.SSharp.Runtime;
 using System.Reflection;
 using System.Security.Principal;

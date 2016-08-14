@@ -1,4 +1,4 @@
-﻿using ScriptNET.Runtime;
+﻿//using ScriptNET.Runtime;
 
 //using Scripting.SSharp.Runtime;
 using System;
@@ -13,7 +13,7 @@ namespace MapleShark
     {
         private StructureForm mStructure = null;
 
-        [ScriptNET.Runtime.Bindable(false)]
+        [Bindable(false)]
         internal ScriptAPI(StructureForm pStructure) { mStructure = pStructure; }
 
         public long AddByte(string pName) { return mStructure.APIAddByte(pName); }

@@ -129,7 +129,7 @@ namespace MapleShark
                 {
                     mRemoteEndpoint = ((PacketDotNet.IPv4Packet)pTCPPacket.ParentPacket).SourceAddress.ToString() + ":" + pTCPPacket.SourcePort.ToString();
                     mLocalEndpoint = ((PacketDotNet.IPv4Packet)pTCPPacket.ParentPacket).DestinationAddress.ToString() + ":" + pTCPPacket.DestinationPort.ToString();
-                    Console.WriteLine("[CONNECTION] From {0} to {1}", mRemoteEndpoint, mLocalEndpoint);
+                    Console.WriteLine("[CONNECTION] From {0} to {1} Lenth {2} ", mRemoteEndpoint, mLocalEndpoint, pTCPPacket.PayloadData.Length);
 
                     return Results.Continue;
                 }
@@ -138,8 +138,15 @@ namespace MapleShark
                     return Results.CloseMe;
                 }
             }
-            if (pTCPPacket.Syn && pTCPPacket.Ack) { mInboundSequence = (uint)(pTCPPacket.SequenceNumber + 1); return Results.Continue; }
-            if (pTCPPacket.PayloadData.Length == 0) return Results.Continue;
+            if (pTCPPacket.Syn && pTCPPacket.Ack)
+            {
+                mInboundSequence = (uint)(pTCPPacket.SequenceNumber + 1);
+                return Results.Continue;
+            }
+            if (pTCPPacket.PayloadData.Length == 0)
+            {
+                return Results.Continue;
+            }
             if (mBuild == 0)
             {
                 byte[] tcpData = pTCPPacket.PayloadData;
@@ -155,7 +162,9 @@ namespace MapleShark
 
                 PacketReader pr = new PacketReader(headerData);
 
-                if (!(headerData.Length==1072&& headerData[0]==(byte)0x0E) &&(length != tcpData.Length || tcpData.Length < 13))
+             
+
+                if (tcpData.Length < 13)//if (!(headerData.Length==1072&& headerData[0]==(byte)0x0E) &&(length != tcpData.Length || tcpData.Length < 13))
                 {
                     if (socks5 > 0 && socks5 < 7)
                     {
@@ -280,9 +289,9 @@ namespace MapleShark
                         if (mRemotePort == 8484 && ((mLocale == MapleLocale.GLOBAL && version >= 160) ||
                                                     (mLocale == MapleLocale.TAIWAN && version >= 176) ||
                                                     (mLocale == MapleLocale.CHINA && version >= 122)))
-                         //   contents += "\tScriptAPI.AddByte(\"Unknown\");\r\n";
-                        //contents += "}";
-                        File.WriteAllText(filename, contents);
+                            //   contents += "\tScriptAPI.AddByte(\"Unknown\");\r\n";
+                            //contents += "}";
+                            File.WriteAllText(filename, contents);
                     }
                 }
 
@@ -296,12 +305,17 @@ namespace MapleShark
                 mPackets.Add(packet);
 
                 Console.WriteLine("[CONNECTION] MapleStory V{2}.{3} Locale {4}", mLocalEndpoint, mRemoteEndpoint, mBuild, subVersion, serverLocale);
-                
                 ProcessTCPPacket(pTCPPacket, ref mInboundSequence, mInboundBuffer, mInboundStream, pArrivalTime);
                 return Results.Show;
             }
-            if (pTCPPacket.SourcePort == mLocalPort) ProcessTCPPacket(pTCPPacket, ref mOutboundSequence, mOutboundBuffer, mOutboundStream, pArrivalTime);
-            else ProcessTCPPacket(pTCPPacket, ref mInboundSequence, mInboundBuffer, mInboundStream, pArrivalTime);
+            if (pTCPPacket.SourcePort == mLocalPort)
+            {
+                ProcessTCPPacket(pTCPPacket, ref mOutboundSequence, mOutboundBuffer, mOutboundStream, pArrivalTime);
+            }
+            else
+            {
+                ProcessTCPPacket(pTCPPacket, ref mInboundSequence, mInboundBuffer, mInboundStream, pArrivalTime);
+            }
             return Results.Continue;
         }
 

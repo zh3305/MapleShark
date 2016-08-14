@@ -1,4 +1,5 @@
-﻿using ScriptNET;
+﻿using Scripting.SSharp;
+//using ScriptNET;
 //using Scripting.SSharp;
 using System;
 using System.Collections.Generic;
@@ -42,20 +43,32 @@ namespace MapleShark
                     StringBuilder scriptCode = new StringBuilder();
                     scriptCode.Append(File.ReadAllText(scriptPath));
                     if (File.Exists(commonPath)) scriptCode.Append(File.ReadAllText(commonPath));
-                    //SSharp
-                    //Script script = Script.Compile(scriptCode.ToString());
-                    //script.Context.SetItem("ScriptAPI", new ScriptAPI(this));
-                    //script.Execute();
+                   // SSharp
+                    Script script = Script.Compile(scriptCode.ToString());
+                    script.Context.SetItem("ScriptAPI", new ScriptAPI(this));
+                    script.Execute();
 
-                    //Jint
-                    var engine = new Jint.Engine();
-                    engine.SetValue("ScriptAPI", new ScriptAPI(this));
-                    engine.Execute(scriptCode.ToString());
+                    ////Jint
+                    //var engine = new Jint.Engine();
+                    //engine.SetValue("ScriptAPI", new ScriptAPI(this));
+                    //engine.Execute(scriptCode.ToString());
 
                     //var context = new NiL.JS.Core.Context();
                     //context.DefineVariable("ScriptAPI").Assign(NiL.JS.Core.JSValue.Marshal(new ScriptAPI(this)));
                     //context.Eval(scriptCode.ToString());
 
+                }
+                catch (Jint.Parser.ParserException exc)
+                {
+                    OutputForm output = new OutputForm("Script Error");
+                    output.Append(exc.Message);
+                    output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
+                }
+                catch ( Jint.Runtime.JavaScriptException exc)
+                {
+                    OutputForm output = new OutputForm("Script Error");
+                    output.Append(exc.LineNumber + " : " + exc.Message);
+                    output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
                 }
                 catch (Exception exc)
                 {
