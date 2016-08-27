@@ -1,7 +1,3 @@
----
-
----
-
 ## [MapleShark](https://git.oschina.net/zh3305/MapleShark-master)  [C#](https://git.oschina.net/languages/C%23) 
 
 基于https://github.com/diamondo25/MapleShark
@@ -54,6 +50,7 @@
 
 ## 函数说明
 
+### ScriptAPI
 *函数前需添加类名ScriptAPI*
 
 ```javascript
@@ -79,4 +76,28 @@ void 	EndNode(bool expand)
 void 	Write(string file, string line)
 int 	Remaining()
 void 	CWrite(string text) //输出到控制台
+```
+标示颜色说明
+<font color=#FF0033 >#FF0033</font> 包头与默认值不匹配
+<font color=#009933 >#009933</font> 包头与默认值相同
+<font color=#0099CC >#0099CC</font> 未检查包头
+<font color=#FF6666 >#FF6666</font> 同名称标签值不同
+
+### mplew
+
+*函数前需添加类名mplew*  继承ScriptAPI
+
+```c#
+void    writeZeroBytes(int i)
+byte    write(string Name,params byte[] b)
+int     writeShort(string Name, params int[] b)
+int     writeInt(string Name, params int[] b)
+String  writeAsciiString(String Name,int length, params String[] b)
+String  writeMapleAsciiString( String Name, params String[] b)
+bool    writeBoolean(string Name)
+void    writePos(string Name)//Point s
+void    writeRect(string Name)
+long    writeLong(String Name, params long[] b)
+long    writeReversedLong(String Name, params long[] b)//反向操作未实现
+long    writeReversedInt(String Name, params int[] b)//反向操作未实现
 ```

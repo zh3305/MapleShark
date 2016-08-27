@@ -17,6 +17,23 @@ namespace MapleShark
     {
         private MaplePacket mParsing = null;
         private Stack<StructureNode> mSubNodes = new Stack<StructureNode>();
+        /// <summary>
+        /// 包头与默认值不匹配
+        /// </summary>
+        private Color cl_bpp = Color.FromArgb(0xFF0033);
+        /// <summary>
+        /// 未检查包头
+        /// </summary>
+        private Color cl_dm = Color.FromArgb(0x0099CC);
+        /// <summary>
+        /// 包头与默认值相同
+        /// </summary>
+        private Color cl_tg = Color.FromArgb(0x009933);
+        /// <summary>
+        /// 同名称标签值不同
+        /// </summary>
+        private Color cl_btz = Color.FromArgb(0xFF6666);
+        public Dictionary<String, Object> NodeKeys = new Dictionary<string, object>();
 
         public StructureForm()
         {
@@ -51,6 +68,7 @@ namespace MapleShark
                     //Jint
                     var engine = new Jint.Engine();
                     engine.SetValue("ScriptAPI", new ScriptAPI(this));
+                    engine.SetValue("mplew", new mplew(this));
                     engine.Execute(scriptCode.ToString());
 
                     //var context = new NiL.JS.Core.Context();
@@ -64,7 +82,7 @@ namespace MapleShark
                     output.Append(exc.Message);
                     output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
                 }
-                catch ( Jint.Runtime.JavaScriptException exc)
+                catch (Jint.Runtime.JavaScriptException exc)
                 {
                     OutputForm output = new OutputForm("Script Error");
                     output.Append(exc.LineNumber + " : " + exc.Message);
@@ -95,7 +113,94 @@ namespace MapleShark
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 1, 1));
             return value;
         }
-
+        internal byte APIAddByte(string pName, params Byte[] compare)
+        {
+            byte value;
+            if (!mParsing.ReadByte(out value)) throw new Exception("Insufficient packet data");
+            Color color = Ck<Byte>(pName, value, compare);
+            CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 1, 1, color));
+            return value;
+        }
+        internal int APIAddInt(string pName, params int[] compare)
+        {
+            int value;
+            if (!mParsing.ReadInt(out value)) throw new Exception("Insufficient packet data");
+            Color color = Ck<int>(pName, value, compare);
+            CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 4, 4, color));
+            return value;
+        }
+        internal long APIAddLong(string pName, params long[] compare)
+        {
+            long value;
+            if (!mParsing.ReadLong(out value)) throw new Exception("Insufficient packet data");
+            Color color = Ck<long>(pName, value, compare);
+            CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 8, 8, color));
+            return value;
+        }
+        internal string APIAddPaddedString(string pName, int pLength ,params string[] compare)
+        {
+            string value;
+            if (!mParsing.ReadPaddedString(out value, pLength)) throw new Exception("Insufficient packet data");
+            Color color = Ck<string>(pName, value, compare);
+            CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - pLength, pLength, color));
+            return value;
+        }
+        internal string APIAddString(string pName, params string[] compare)
+        {
+            APIStartNode("String");
+            short size = APIAddShort("Size");
+            string value = APIAddPaddedString(pName, size, compare);
+            APIEndNode(false);
+            return value;
+        }
+        public Color Ck<T>(string pName,T value, params T[] compare) where T : IComparable //struct,
+        {
+            Color color = cl_dm;
+            var Defaults = false;
+            if (pName == string.Empty)
+            {
+                Defaults = true;
+                pName += "fixed ";
+            }
+            else
+            {
+                if (NodeKeys.ContainsKey(pName))
+                {
+                    if (0!= value.CompareTo(NodeKeys[pName]))
+                    {
+                        color = cl_btz;
+                    }
+                }
+                else
+                {
+                    NodeKeys.Add("pName", value);
+                }
+            }
+            if (compare != null && compare.Length > 0)
+            {
+                color = cl_bpp;
+                foreach (var a in compare)
+                {
+                    if (Defaults)
+                    {
+                        pName += a.ToString() + " ";
+                    }
+                    if (value.CompareTo(a)  == 0)
+                    {
+                        color = cl_tg;
+                    }
+                }
+            }
+            return color;
+        }
+        internal short APIAddShort(string pName, params int[] compare)
+        {
+            short value;
+            if (!mParsing.ReadShort(out value)) throw new Exception("Insufficient packet data");
+            Color color = Ck<int>(pName, value, compare);
+            CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 1, 2, color));
+            return value;
+        }
         internal sbyte APIAddSByte(string pName)
         {
             sbyte value;
