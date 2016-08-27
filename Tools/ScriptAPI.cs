@@ -17,11 +17,13 @@ namespace MapleShark
         internal ScriptAPI(StructureForm pStructure) { mStructure = pStructure; }
 
         public long AddByte(string pName) { return mStructure.APIAddByte(pName); }
+        public long DAddByte() { return mStructure.APIDAddByte(); }
         public long AddSByte(string pName) { return mStructure.APIAddSByte(pName); }
         public long AddUShort(string pName) { return mStructure.APIAddUShort(pName); }
         public long AddShort(string pName) { return mStructure.APIAddShort(pName); }
         public long AddUInt(string pName) { return mStructure.APIAddUInt(pName); }
         public long AddInt(string pName) { return mStructure.APIAddInt(pName); }
+        public long DAddInt() { return mStructure.APIDAddInt(); }
         public long AddLong(string pName) { return mStructure.APIAddLong(pName); }
         public double AddFloat(string pName) { return mStructure.APIAddFloat(pName); }
         public double AddDouble(string pName) { return mStructure.APIAddDouble(pName); }
@@ -33,10 +35,13 @@ namespace MapleShark
         public void StartNode(string pName) { mStructure.APIStartNode(pName); }
         public void EndNode(bool pExpand) { mStructure.APIEndNode(pExpand); }
         public string GetFiletime() { return mStructure.APIGetFiletime(); }
+        public void CWrite(string count)
+        {
+            Console.WriteLine(count);
+        }
         public void Write(string pPath, string pLine) {
 			pLine = pLine.Replace("\r\n", "\\r\\n");
 			using (StreamWriter writer = File.AppendText(pPath)) {
-
 				writer.WriteLine(pLine);
 			}
         }

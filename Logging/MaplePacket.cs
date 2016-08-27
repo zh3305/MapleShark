@@ -80,6 +80,25 @@ namespace MapleShark
                             Buffer[Cursor++] << 24);
             return true;
         }
+        public bool DReadInt(out int pValue)
+        {
+            pValue = 0;
+            if (Cursor + 4 > Length) return false;
+            var TCursor = Cursor;
+            pValue = (int)(Buffer[TCursor++] |
+                           Buffer[TCursor++] << 8 |
+                           Buffer[TCursor++] << 16 |
+                           Buffer[TCursor++] << 24);
+            return true;
+        }
+        public bool DReadByte(out byte pValue)
+        {
+            pValue = 0;
+            if (Cursor + 1 > Length) return false;
+            var TCursor = Cursor;
+            pValue = Buffer[TCursor++];
+            return true;
+        }
         public bool ReadInt(out int pValue)
         {
             pValue = 0;
