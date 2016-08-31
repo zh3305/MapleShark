@@ -135,14 +135,18 @@ namespace MapleShark
         {
             pValue = 0;
             if (Cursor + 8 > Length) return false;
-            pValue = (long)(Buffer[Cursor++] |
-                            Buffer[Cursor++] << 8 |
-                            Buffer[Cursor++] << 16 |
-                            Buffer[Cursor++] << 24 |
-                            Buffer[Cursor++] << 32 |
-                            Buffer[Cursor++] << 40 |
-                            Buffer[Cursor++] << 48 |
-                            Buffer[Cursor++] << 56);
+            pValue = BitConverter.ToInt64(Buffer, Cursor);//旧方法 读取数据错误
+                                                          //例
+                                                          // 2<<32 ==2
+            Cursor = Cursor + 8;
+            //pValue =    (Buffer[Cursor++] |
+            //                Buffer[Cursor++] << 8 |
+            //                Buffer[Cursor++] << 16 |
+            //                Buffer[Cursor++] << 24 |
+            //               Buffer[Cursor++] << 32 |
+            //                Buffer[Cursor++] << 40 |
+            //                Buffer[Cursor++] << 48 |
+            //                Buffer[Cursor++] << 56);
             return true;
         }
         public bool ReadFlippedLong(out long pValue) // 5 6 7 8 1 2 3 4

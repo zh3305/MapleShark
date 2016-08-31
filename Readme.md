@@ -53,7 +53,7 @@
 ### ScriptAPI
 *函数前需添加类名ScriptAPI*
 
-```javascript
+```c#
 byte 	AddByte(string name)  
 long 	DAddByte()//读取Byte 不移动指针
 sbyte 	AddSByte(string name)

@@ -117,7 +117,7 @@ namespace MapleShark
         {
             byte value;
             if (!mParsing.ReadByte(out value)) throw new Exception("Insufficient packet data");
-            Color color = Ck<Byte>(pName, value, compare);
+            Color color = Ck<Byte>(ref pName, value, compare);
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 1, 1, color));
             return value;
         }
@@ -125,7 +125,7 @@ namespace MapleShark
         {
             int value;
             if (!mParsing.ReadInt(out value)) throw new Exception("Insufficient packet data");
-            Color color = Ck<int>(pName, value, compare);
+            Color color = Ck<int>(ref pName, value, compare);
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 4, 4, color));
             return value;
         }
@@ -133,7 +133,7 @@ namespace MapleShark
         {
             long value;
             if (!mParsing.ReadLong(out value)) throw new Exception("Insufficient packet data");
-            Color color = Ck<long>(pName, value, compare);
+            Color color = Ck<long>(ref pName, value, compare);
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 8, 8, color));
             return value;
         }
@@ -141,7 +141,7 @@ namespace MapleShark
         {
             string value;
             if (!mParsing.ReadPaddedString(out value, pLength)) throw new Exception("Insufficient packet data");
-            Color color = Ck<string>(pName, value, compare);
+            Color color = Ck<string>(ref pName, value, compare);
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - pLength, pLength, color));
             return value;
         }
@@ -153,11 +153,11 @@ namespace MapleShark
             APIEndNode(false);
             return value;
         }
-        public Color Ck<T>(string pName,T value, params T[] compare) where T : IComparable //struct,
+        public Color Ck<T>(ref string pName,T value, params T[] compare) where T : IComparable //struct,
         {
             Color color = cl_dm;
             var Defaults = false;
-            if (pName == string.Empty)
+            if (pName.Trim() == string.Empty)
             {
                 Defaults = true;
                 pName += "fixed ";
@@ -173,7 +173,7 @@ namespace MapleShark
                 }
                 else
                 {
-                    NodeKeys.Add("pName", value);
+                    NodeKeys.Add(pName, value);
                 }
             }
             if (compare != null && compare.Length > 0)
@@ -197,7 +197,7 @@ namespace MapleShark
         {
             short value;
             if (!mParsing.ReadShort(out value)) throw new Exception("Insufficient packet data");
-            Color color = Ck<int>(pName, value, compare);
+            Color color = Ck<int>(ref pName, value, compare);
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 1, 2, color));
             return value;
         }
