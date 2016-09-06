@@ -7,6 +7,9 @@ namespace MapleShark
     public sealed class MaplePacket : ListViewItem
     {
         public DateTime Timestamp { get; private set; }
+        /// <summary>
+        /// 收发类别
+        /// </summary>
         public bool Outbound { get; private set; }
         public ushort Build { get; private set; }
         public ushort Locale { get; private set; }
@@ -23,7 +26,7 @@ namespace MapleShark
         internal MaplePacket(DateTime pTimestamp, bool pOutbound, ushort pBuild, ushort pLocale, ushort pOpcode, string pName, byte[] pBuffer, uint pPreDecodeIV, uint pPostDecodeIV)
             : base(new string[] {
                 pTimestamp.ToLocalTime().ToString("HH:mm:ss.fff"),
-                pOutbound ? "发送" : "接收",
+                pOutbound ? "Outbound" : "Inbound",
                 pBuffer.Length.ToString(),
                 "0x" + pOpcode.ToString("X4"),
                 pName==string.Empty?pOutbound ?  Config.recv.getkey( "0x" + pOpcode.ToString("X4")): Config.send.getkey( "0x" + pOpcode.ToString("X4"))  :pName})

@@ -7,7 +7,14 @@ namespace MapleShark
     {
         private byte[] mBuffer;
         private Encoding encoding = Encoding.UTF8;
-
+        private int index = -1;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pBuffer">字符流</param>
+        /// <param name="pStart">开始</param>
+        /// <param name="pLength">长度</param>
+        /// <param name="locale">ASII编码</param>
         public StructureSegment(byte[] pBuffer, int pStart, int pLength, byte locale)
         {
             mBuffer = new byte[pLength];
@@ -40,8 +47,10 @@ namespace MapleShark
             {
                 encoding = Encoding.UTF8;
             }
+            index = pStart;
             Buffer.BlockCopy(pBuffer, pStart, mBuffer, 0, pLength);
         }
+        public int? Index { get { if (mBuffer.Length >= 1) return index; return null; } }
 
         public byte? Byte { get { if (mBuffer.Length >= 1) return mBuffer[0]; return null; } }
         public sbyte? SByte { get { if (mBuffer.Length >= 1) return (sbyte)mBuffer[0]; return null; } }

@@ -33,10 +33,14 @@ namespace MapleShark
             }
             catch
             {
-                if (MessageBox.Show(null, "Did you install WinPcap first? If you did, then try to run MapleShark in Administrator Mode, else press 'No' to go to the install page of WinPcap.", "Interface Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.No)
+                if (MessageBox.Show(null, "Did you install WinPcap first? If you did, then try to run MapleShark in Administrator Mode, else press 'No' to go to the install page of WinPcap.\r\n缺少WinPcap组件\r\n 按否  安装WinPcap \r\n按是进入组件下载网站!安装后请重新启动 ", "Interface Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.No)
                 {
                     //System.Diagnostics.Process.Start("http://www.winpcap.org/install/default.htm");
                     System.Diagnostics.Process.Start("WinPcap_4.1.3.exe");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start("http://www.winpcap.org/install/default.htm");
                 }
                 Environment.Exit(2);
                 return;

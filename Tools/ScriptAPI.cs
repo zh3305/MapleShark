@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using tools;
 
 namespace MapleShark
 {
@@ -172,37 +173,63 @@ namespace MapleShark
             //baosWrite((byte)(int)(a >>> 56 & 255L));
 
         }
-
+        public void skip(int length)
+        {
+            base.AddField("skip " + length, length);
+        }
+        public byte[] writeBuffer(String Name, int length)
+        {
+            StartNode("Buffer " + Name);
+            byte[] rtb = new byte[length];
+            for (var i = 0; i < length; i++)
+            {
+                rtb[i] = write("Buffer " + i);
+            }
+            EndNode(false);
+            return rtb;
+        }
+        public byte[] writeBuffer(String Name, string HexString)
+        {
+        var hex=    HexTool.getByteArrayFromHexString(HexString);
+            StartNode("BufferFromHexString" + Name);
+            //byte[] rtb = new byte[length];
+            for (var i = 0; i < hex.Length; i++)
+            {
+                hex[i] = write("", hex[i]);
+            }
+            EndNode(false);
+            return hex;
+        }
         //public  void writeFile( File file)
         //{
-            //try
-            //{
-            //    byte[] bytes;
-            //    InputStream is = new FileInputStream(file);
-            //    long length = file.length();
-            //    if (length > Integer.MAX_VALUE)
-            //    {
-            //        System.err.println("档案太大");
-            //        return;
-            //    }
-            //    bytes = new byte[(int)length];
-            //    int offset = 0;
-            //    int numRead = 0;
-            //    while ((offset < bytes.length) && ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)) {
-            //        offset += numRead;
-            //    }
-            //    if (offset < bytes.length)
-            //    {
-            //        System.err.println("无法完整读取档案:" + file.getName());
-            //        return;
-            //    }
-            //    writeInt(bytes.length);
-            //    write(bytes);
-            //}
-            //catch (IOException e)
-            //{
-            //    System.err.println("读取档案失败:" + e);
-            //}
+        //try
+        //{
+        //    byte[] bytes;
+        //    InputStream is = new FileInputStream(file);
+        //    long length = file.length();
+        //    if (length > Integer.MAX_VALUE)
+        //    {
+        //        System.err.println("档案太大");
+        //        return;
+        //    }
+        //    bytes = new byte[(int)length];
+        //    int offset = 0;
+        //    int numRead = 0;
+        //    while ((offset < bytes.length) && ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)) {
+        //        offset += numRead;
+        //    }
+        //    if (offset < bytes.length)
+        //    {
+        //        System.err.println("无法完整读取档案:" + file.getName());
+        //        return;
+        //    }
+        //    writeInt(bytes.length);
+        //    write(bytes);
+        //}
+        //catch (IOException e)
+        //{
+        //    System.err.println("读取档案失败:" + e);
+        //}
         //}
     }
 }

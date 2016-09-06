@@ -166,9 +166,19 @@ namespace MapleShark
             {
                 if (NodeKeys.ContainsKey(pName))
                 {
-                    if (0!= value.CompareTo(NodeKeys[pName]))
+                    if (value.GetType() == NodeKeys[pName].GetType())
                     {
-                        color = cl_btz;
+                        if (0 != value.CompareTo(NodeKeys[pName]))
+                        {
+                            color = cl_btz;
+                        }
+                    }
+                    else
+                    {
+                        if (value.ToString().Trim() != NodeKeys[pName].ToString().Trim())
+                        {
+                            color = cl_btz;
+                        }
                     }
                 }
                 else
@@ -183,7 +193,7 @@ namespace MapleShark
                 {
                     if (Defaults)
                     {
-                        pName += a.ToString() + " ";
+                        pName += a.ToString() + "  0x" + Convert.ToString(int.Parse(a.ToString()), 16).ToUpper();
                     }
                     if (value.CompareTo(a)  == 0)
                     {
@@ -198,7 +208,7 @@ namespace MapleShark
             short value;
             if (!mParsing.ReadShort(out value)) throw new Exception("Insufficient packet data");
             Color color = Ck<int>(ref pName, value, compare);
-            CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 1, 2, color));
+            CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 2, 2, color));
             return value;
         }
         internal sbyte APIAddSByte(string pName)

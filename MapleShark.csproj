@@ -6,7 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{01F7E3B6-B831-4D44-8B44-095768212822}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MapleShark</RootNamespace>
     <AssemblyName>MapleShark</AssemblyName>
@@ -119,6 +119,9 @@
   <ItemGroup>
     <Compile Include="SyntaxBox\Properties\Resources.Designer.cs" />
     <Compile Include="Tools\AppUpdates.cs" />
+    <Compile Include="Tools\PlaceHolderTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tools\Config.cs" />
     <Compile Include="GUI\DataForm.cs">
       <SubType>Form</SubType>
@@ -276,6 +279,7 @@
     <Compile Include="GUI\OutputForm.Designer.cs">
       <DependentUpon>OutputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools\HexTool.cs" />
     <Compile Include="Tools\INIClass.cs" />
     <Compile Include="Tools\IniHelper.cs" />
     <Compile Include="Tools\PacketReader.cs" />
@@ -479,6 +483,9 @@
       <Progid>122314</Progid>
       <DefaultIcon>Shark.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
