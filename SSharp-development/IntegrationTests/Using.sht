@@ -1,8 +1,0 @@
-using (Math)
-{
-  //Build-in Objects
-  //using the Pow function from Math class
-  a = Pow(2, 3);
-}
-
-Test.AreEqual(8d, a);

@@ -1,4 +1,4 @@
-## ![](Shark.ico) [MapleShark](https://git.oschina.net/zh3305/MapleShark-master)  [C#](https://git.oschina.net/languages/C%23) 
+## ![icon](Shark.ico) [MapleShark](https://git.oschina.net/zh3305/MapleShark-master)  [C#](https://git.oschina.net/languages/C%23) 
 
 
 
@@ -6,15 +6,15 @@
 
 [TOC]
 
-![](Prv.png)
+![Main](Prv.png)
 
 ## **Operating Environment 运行环境**
-+ .net framework 4.5 [微软下载](https://www.microsoft.com/zh-cn/download/details.aspx?id=30653)
++ .net framework 4.5 [Microsoft Download](https://www.microsoft.com/zh-cn/download/details.aspx?id=30653)
 + Visual Studio 2015
+
 ## **重要变化**
 
 > 修改原有脚本引擎为 javascript引擎 最新版本 Jint(可选 NiL 在StructureForm.cs中启用) 通过VS自带NuGet工具管理和更新
-
 
 
 > 新引擎和旧引擎脚本变化
@@ -39,7 +39,6 @@
 > import Msniffer logfile功能已修正,可以直接打开Msniffer 保存的日志文件
 
 
-
 > Import Java *.properties file 功能已修正,导入包头名称
 
 - Propertise file:为选着要导入的包头名称文件
@@ -53,7 +52,7 @@
 
 
 ## **Search 搜索**
-![](Prv1.png)
+![Search](Prv1.png)
 - 上栏:   包头搜索
 - 左下:   Hex 十六进制检索  *注:未实现 Prev(向上)检索功能*
 - 右下:   正则表达式检索
@@ -61,10 +60,12 @@
     2. OnOp:  根据上栏选择的包头检索数据
     3. NoEmy: 检索文字是否包含空格. 勾选 {FFFFFFFF} 未勾选{FF FF FF FF}
 
----
+
 ## **Funitcon 函数**
 
 > ScriptAPI
+
+
 *函数前需添加类名ScriptAPI*
 
 ```javascript
@@ -92,8 +93,14 @@ int 	Remaining()
 void 	CWrite(string text) //输出到控制台
 ```
 
-> mplew
-标示颜色说明
+
+> mplew 
+
+
+*函数前需添加类名mplew*  继承ScriptAPI
+
+
+**标示颜色说明**
 
 <font color=#FF0033 >#FF0033</font> 包头与默认值不匹配
 
@@ -102,7 +109,6 @@ void 	CWrite(string text) //输出到控制台
 <font color=#FF6666 >#FF6666</font> 同名称标签值不同
 
 <font color=#0099CC >#0099CC</font> 未检查包头
-*函数前需添加类名mplew*  继承ScriptAPI
 
 ```c#
 void    writeZeroBytes(int i)//输出指定个数的0
