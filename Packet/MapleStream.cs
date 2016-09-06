@@ -105,7 +105,9 @@ namespace MapleShark
             if (mCursor < _expectedDataSize) return null;
             if (!mAES.ConfirmHeader(mBuffer, 0))
             {
-                throw new Exception("Failed to confirm packet header");
+                //throw new Exception("Failed to confirm packet header");
+                Console.WriteLine("无法确认数据包报头");
+                return null;
             }
 
             int headerLength = MapleAES.GetHeaderLength(mBuffer, mCursor, _usesOldHeader);

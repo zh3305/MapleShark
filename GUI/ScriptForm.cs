@@ -22,7 +22,7 @@ namespace MapleShark
             mPacket = pPacket;
             InitializeComponent();
             if (pPacket != null)
-                Text = "Script 0x" + pPacket.Opcode.ToString("X4") + ", " + (pPacket.Outbound ? "Outbound" : "Inbound");
+                Text = "Script 0x" + pPacket.Opcode.ToString("X4") + ", " + (pPacket.Outbound ? "发送" : "接收");
             else
                 Text = "Common Script";
         }

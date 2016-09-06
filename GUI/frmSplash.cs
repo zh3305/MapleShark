@@ -8,7 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
-using ScriptNET.Runtime;
+//using ScriptNET.Runtime;
+//using Scripting.SSharp.Runtime;
 using System.Reflection;
 using System.Security.Principal;
 
@@ -75,20 +76,23 @@ namespace MapleShark
             var filepath = Assembly.GetExecutingAssembly().Location;
             Environment.CurrentDirectory = filepath.Remove(filepath.LastIndexOf(System.IO.Path.DirectorySeparatorChar));
 
-            initialisator.ReportProgress(0, "Checking for updates");
-            CraftNetTools.AppUpdates.Check();
+            //initialisator.ReportProgress(0, "Checking for updates");
+            //CraftNetTools.AppUpdates.Check();
 
             initialisator.ReportProgress(0, "Initializing MapleStory AES Keys");
             MapleKeys.Initialize();
 
-            initialisator.ReportProgress(0, "Loading Script.NET context");
-            RuntimeHost.Initialize();
+            //initialisator.ReportProgress(0, "Loading Script.NET context");
+            //ScriptNET.Runtime.RuntimeHost.Initialize();
 
             initialisator.ReportProgress(0, "Loading packet definitions");
             DefinitionsContainer.Load();
 
-            initialisator.ReportProgress(0, "Loading + saving config file");
+            initialisator.ReportProgress(0, "Loading + 保存配置文件");
             Config.Instance.Save();
+
+            initialisator.ReportProgress(0, "Loading 加在包头配置");
+            Config.LoadProperties();
 
             initialisator.ReportProgress(0, "Registering .msb extension");
             RegisterFileAssociation(".msb", "MapleShark", "MapleShark Binary File", filepath, string.Empty, 0);

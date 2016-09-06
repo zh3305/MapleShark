@@ -1,4 +1,4 @@
-﻿using ScriptNET;
+﻿//using ScriptNET;
 using PacketDotNet;
 using PacketDotNet.Utils;
 using PacketDotNet.LLDP;
@@ -129,7 +129,7 @@ namespace MapleShark
                 {
                     mRemoteEndpoint = ((PacketDotNet.IPv4Packet)pTCPPacket.ParentPacket).SourceAddress.ToString() + ":" + pTCPPacket.SourcePort.ToString();
                     mLocalEndpoint = ((PacketDotNet.IPv4Packet)pTCPPacket.ParentPacket).DestinationAddress.ToString() + ":" + pTCPPacket.DestinationPort.ToString();
-                    Console.WriteLine("[CONNECTION] From {0} to {1}", mRemoteEndpoint, mLocalEndpoint);
+                    Console.WriteLine("[CONNECTION] From {0} to {1} Lenth {2} ", mRemoteEndpoint, mLocalEndpoint, pTCPPacket.PayloadData.Length);
 
                     return Results.Continue;
                 }
@@ -138,8 +138,15 @@ namespace MapleShark
                     return Results.CloseMe;
                 }
             }
-            if (pTCPPacket.Syn && pTCPPacket.Ack) { mInboundSequence = (uint)(pTCPPacket.SequenceNumber + 1); return Results.Continue; }
-            if (pTCPPacket.PayloadData.Length == 0) return Results.Continue;
+            if (pTCPPacket.Syn && pTCPPacket.Ack)
+            {
+                mInboundSequence = (uint)(pTCPPacket.SequenceNumber + 1);
+                return Results.Continue;
+            }
+            if (pTCPPacket.PayloadData.Length == 0)
+            {
+                return Results.Continue;
+            }
             if (mBuild == 0)
             {
                 byte[] tcpData = pTCPPacket.PayloadData;
@@ -155,7 +162,9 @@ namespace MapleShark
 
                 PacketReader pr = new PacketReader(headerData);
 
-                if (length != tcpData.Length || tcpData.Length < 13)
+             
+
+                if (tcpData.Length < 13)//if (!(headerData.Length==1072&& headerData[0]==(byte)0x0E) &&(length != tcpData.Length || tcpData.Length < 13))
                 {
                     if (socks5 > 0 && socks5 < 7)
                     {
@@ -255,7 +264,7 @@ namespace MapleShark
                     definition.Outbound = false;
                     definition.Locale = mLocale;
                     definition.Opcode = 0xFFFF;
-                    definition.Name = "Maple Handshake";
+                    definition.Name = "握手包";
                     definition.Build = mBuild;
                     DefinitionsContainer.Instance.SaveDefinition(definition);
                 }
@@ -264,25 +273,25 @@ namespace MapleShark
                     string filename = "Scripts" +
                         Path.DirectorySeparatorChar + mLocale.ToString() +
                         Path.DirectorySeparatorChar + mBuild.ToString() +
-                        Path.DirectorySeparatorChar + "Inbound" +
+                        Path.DirectorySeparatorChar + "接收" +
                         Path.DirectorySeparatorChar + "0xFFFF.txt";
                     if (!Directory.Exists(Path.GetDirectoryName(filename))) Directory.CreateDirectory(Path.GetDirectoryName(filename));
                     if (!File.Exists(filename))
                     {
                         string contents = "";
-                        contents += "using (ScriptAPI) {\r\n";
-                        contents += "\tAddShort(\"Packet Size\");\r\n";
-                        contents += "\tAddUShort(\"MapleStory Version\");\r\n";
-                        contents += "\tAddString(\"MapleStory Patch Location/Subversion\");\r\n";
-                        contents += "\tAddField(\"Local Initializing Vector (IV)\", 4);\r\n";
-                        contents += "\tAddField(\"Remote Initializing Vector (IV)\", 4);\r\n";
-                        contents += "\tAddByte(\"MapleStory Locale\");\r\n";
+                        //contents += "using (ScriptAPI) {\r\n";
+                        contents += "\tScriptAPI.AddShort(\"Packet Size\");\r\n";
+                        contents += "\tScriptAPI.AddUShort(\"MapleStory Version\");\r\n";
+                        contents += "\tScriptAPI.AddString(\"MapleStory Patch Location/Subversion\");\r\n";
+                        contents += "\tScriptAPI.AddField(\"Local Initializing Vector (IV)\", 4);\r\n";
+                        contents += "\tScriptAPI.AddField(\"Remote Initializing Vector (IV)\", 4);\r\n";
+                        contents += "\tScriptAPI.AddByte(\"MapleStory Locale\");\r\n";
                         if (mRemotePort == 8484 && ((mLocale == MapleLocale.GLOBAL && version >= 160) ||
                                                     (mLocale == MapleLocale.TAIWAN && version >= 176) ||
                                                     (mLocale == MapleLocale.CHINA && version >= 122)))
-                            contents += "\tAddByte(\"Unknown\");\r\n";
-                        contents += "}";
-                        File.WriteAllText(filename, contents);
+                            //   contents += "\tScriptAPI.AddByte(\"Unknown\");\r\n";
+                            //contents += "}";
+                            File.WriteAllText(filename, contents);
                     }
                 }
 
@@ -296,12 +305,17 @@ namespace MapleShark
                 mPackets.Add(packet);
 
                 Console.WriteLine("[CONNECTION] MapleStory V{2}.{3} Locale {4}", mLocalEndpoint, mRemoteEndpoint, mBuild, subVersion, serverLocale);
-                
                 ProcessTCPPacket(pTCPPacket, ref mInboundSequence, mInboundBuffer, mInboundStream, pArrivalTime);
                 return Results.Show;
             }
-            if (pTCPPacket.SourcePort == mLocalPort) ProcessTCPPacket(pTCPPacket, ref mOutboundSequence, mOutboundBuffer, mOutboundStream, pArrivalTime);
-            else ProcessTCPPacket(pTCPPacket, ref mInboundSequence, mInboundBuffer, mInboundStream, pArrivalTime);
+            if (pTCPPacket.SourcePort == mLocalPort)
+            {
+                ProcessTCPPacket(pTCPPacket, ref mOutboundSequence, mOutboundBuffer, mOutboundStream, pArrivalTime);
+            }
+            else
+            {
+                ProcessTCPPacket(pTCPPacket, ref mInboundSequence, mInboundBuffer, mInboundStream, pArrivalTime);
+            }
             return Results.Continue;
         }
 
@@ -357,6 +371,10 @@ namespace MapleShark
                     if (definition != null && !mViewIgnoredMenu.Checked && definition.Ignore) continue;
                     if (packet.Outbound && !mViewOutboundMenu.Checked) continue;
                     if (!packet.Outbound && !mViewInboundMenu.Checked) continue;
+                    if (Config.StkHeader.ContainsKey(packet.Name) && Config.StkHeader[packet.Name].ToLower() == "true")
+                    {
+                        continue;
+                    }
 
                     mPacketList.Items.Add(packet);
                     if (mPacketList.SelectedItems.Count == 0) packet.EnsureVisible();
@@ -526,7 +544,7 @@ namespace MapleShark
             mPacketList_SelectedIndexChanged(null, null);
         }
 
-        private static Regex _packetRegex = new Regex(@"\[(.{1,2}):(.{1,2}):(.{1,2})\]\[(\d+)\] (Recv|Send):  (.+)");
+        private static Regex _packetRegex = new Regex(@"(.{1,2}):(.{1,2}):(.{1,2})\.\d+\|(發送到客戶端|發送到伺服器|握手包)\|[^\|]+\|[^\|]+\|(\d+)\|([^\|]+)\|");
         internal void ParseMSnifferLine(string packetLine)
         {
             var match = _packetRegex.Match(packetLine);
@@ -539,9 +557,9 @@ namespace MapleShark
                 int.Parse(match.Groups[2].Value),
                 int.Parse(match.Groups[3].Value)
             );
-            int packetLength = int.Parse(match.Groups[4].Value);
+            int packetLength = int.Parse(match.Groups[5].Value);
             byte[] buffer = new byte[packetLength - 2];
-            bool outbound = match.Groups[5].Value == "Send";
+            bool outbound = match.Groups[4].Value == "發送到伺服器";
             string[] bytesText = match.Groups[6].Value.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             ushort opcode = (ushort)(byte.Parse(bytesText[0], System.Globalization.NumberStyles.HexNumber) | byte.Parse(bytesText[1], System.Globalization.NumberStyles.HexNumber) << 8);
@@ -698,7 +716,7 @@ namespace MapleShark
         {
             if (mPacketList.SelectedIndices.Count == 0) return;
             MaplePacket packet = mPacketList.SelectedItems[0] as MaplePacket;
-            string scriptPath = "Scripts" + Path.DirectorySeparatorChar + mLocale.ToString() + Path.DirectorySeparatorChar + mBuild.ToString() + Path.DirectorySeparatorChar + (packet.Outbound ? "Outbound" : "Inbound") + Path.DirectorySeparatorChar + "0x" + packet.Opcode.ToString("X4") + ".txt";
+            string scriptPath = "Scripts" + Path.DirectorySeparatorChar + mLocale.ToString() + Path.DirectorySeparatorChar + mBuild.ToString() + Path.DirectorySeparatorChar + (packet.Outbound ? "发送" : "接收") + Path.DirectorySeparatorChar + "0x" + packet.Opcode.ToString("X4") + ".txt";
 
             if (!Directory.Exists(Path.GetDirectoryName(scriptPath))) Directory.CreateDirectory(Path.GetDirectoryName(scriptPath));
 

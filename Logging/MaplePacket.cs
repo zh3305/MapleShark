@@ -11,7 +11,7 @@ namespace MapleShark
         public ushort Build { get; private set; }
         public ushort Locale { get; private set; }
         public ushort Opcode { get; private set; }
-        public new string Name { set { SubItems[4].Text = value; } }
+        public new string Name { set { SubItems[4].Text = value; } get { return SubItems[4].Text; } }
 
         public byte[] Buffer { get; private set; }
         public int Cursor { get; private set; }
@@ -22,11 +22,11 @@ namespace MapleShark
 
         internal MaplePacket(DateTime pTimestamp, bool pOutbound, ushort pBuild, ushort pLocale, ushort pOpcode, string pName, byte[] pBuffer, uint pPreDecodeIV, uint pPostDecodeIV)
             : base(new string[] {
-                pTimestamp.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                pOutbound ? "Outbound" : "Inbound",
+                pTimestamp.ToLocalTime().ToString("HH:mm:ss.fff"),
+                pOutbound ? "发送" : "接收",
                 pBuffer.Length.ToString(),
                 "0x" + pOpcode.ToString("X4"),
-                pName })
+                pName==string.Empty?pOutbound ?  Config.recv.getkey( "0x" + pOpcode.ToString("X4")): Config.send.getkey( "0x" + pOpcode.ToString("X4"))  :pName})
         {
             Timestamp = pTimestamp;
             Outbound = pOutbound;
@@ -80,6 +80,25 @@ namespace MapleShark
                             Buffer[Cursor++] << 24);
             return true;
         }
+        public bool DReadInt(out int pValue)
+        {
+            pValue = 0;
+            if (Cursor + 4 > Length) return false;
+            var TCursor = Cursor;
+            pValue = (int)(Buffer[TCursor++] |
+                           Buffer[TCursor++] << 8 |
+                           Buffer[TCursor++] << 16 |
+                           Buffer[TCursor++] << 24);
+            return true;
+        }
+        public bool DReadByte(out byte pValue)
+        {
+            pValue = 0;
+            if (Cursor + 1 > Length) return false;
+            var TCursor = Cursor;
+            pValue = Buffer[TCursor++];
+            return true;
+        }
         public bool ReadInt(out int pValue)
         {
             pValue = 0;
@@ -116,14 +135,18 @@ namespace MapleShark
         {
             pValue = 0;
             if (Cursor + 8 > Length) return false;
-            pValue = (long)(Buffer[Cursor++] |
-                            Buffer[Cursor++] << 8 |
-                            Buffer[Cursor++] << 16 |
-                            Buffer[Cursor++] << 24 |
-                            Buffer[Cursor++] << 32 |
-                            Buffer[Cursor++] << 40 |
-                            Buffer[Cursor++] << 48 |
-                            Buffer[Cursor++] << 56);
+            pValue = BitConverter.ToInt64(Buffer, Cursor);//旧方法 读取数据错误
+                                                          //例
+                                                          // 2<<32 ==2
+            Cursor = Cursor + 8;
+            //pValue =    (Buffer[Cursor++] |
+            //                Buffer[Cursor++] << 8 |
+            //                Buffer[Cursor++] << 16 |
+            //                Buffer[Cursor++] << 24 |
+            //               Buffer[Cursor++] << 32 |
+            //                Buffer[Cursor++] << 40 |
+            //                Buffer[Cursor++] << 48 |
+            //                Buffer[Cursor++] << 56);
             return true;
         }
         public bool ReadFlippedLong(out long pValue) // 5 6 7 8 1 2 3 4

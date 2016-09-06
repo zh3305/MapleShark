@@ -349,7 +349,7 @@
             this.mViewOutboundMenu.Name = "mViewOutboundMenu";
             this.mViewOutboundMenu.ShortcutKeys = System.Windows.Forms.Keys.F6;
             this.mViewOutboundMenu.Size = new System.Drawing.Size(223, 22);
-            this.mViewOutboundMenu.Text = "Outbound";
+            this.mViewOutboundMenu.Text = "发送";
             this.mViewOutboundMenu.CheckedChanged += new System.EventHandler(this.mViewOutboundMenu_CheckedChanged);
             // 
             // mViewInboundMenu
@@ -362,7 +362,7 @@
             this.mViewInboundMenu.Name = "mViewInboundMenu";
             this.mViewInboundMenu.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.mViewInboundMenu.Size = new System.Drawing.Size(223, 22);
-            this.mViewInboundMenu.Text = "Inbound";
+            this.mViewInboundMenu.Text = "接收";
             this.mViewInboundMenu.CheckedChanged += new System.EventHandler(this.mViewInboundMenu_CheckedChanged);
             // 
             // mViewIgnoredMenu

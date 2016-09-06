@@ -64,6 +64,7 @@ namespace MapleShark
                 AddOpcode(version, locale, !chkIsSend.Checked, header, name);
             }
             Config.Instance.Save();
+            DefinitionsContainer.Instance.Save();
         }
 
         private void AddOpcode(ushort pBuild, byte pLocale, bool pOutbound, ushort pOpcode, string pName)

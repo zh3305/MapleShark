@@ -36,6 +36,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.mImportButton = new System.Windows.Forms.Button();
             this.FileImporter = new System.Windows.Forms.OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -47,7 +48,7 @@
             this.mSaveButton.Enabled = false;
             this.mSaveButton.Location = new System.Drawing.Point(0, 0);
             this.mSaveButton.Name = "mSaveButton";
-            this.mSaveButton.Size = new System.Drawing.Size(392, 25);
+            this.mSaveButton.Size = new System.Drawing.Size(490, 25);
             this.mSaveButton.TabIndex = 5;
             this.mSaveButton.Text = "&Save script";
             this.mSaveButton.UseVisualStyleBackColor = true;
@@ -77,13 +78,15 @@
             this.mScriptEditor.Name = "mScriptEditor";
             this.mScriptEditor.ParseOnPaste = true;
             this.mScriptEditor.ShowScopeIndicator = false;
-            this.mScriptEditor.Size = new System.Drawing.Size(598, 370);
-            this.mScriptEditor.SmoothScroll = false;
+            this.mScriptEditor.Size = new System.Drawing.Size(748, 446);
+            this.mScriptEditor.SmoothScroll = true;
             this.mScriptEditor.SplitviewH = -4;
             this.mScriptEditor.SplitviewV = -4;
             this.mScriptEditor.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(219)))), ((int)(((byte)(214)))));
             this.mScriptEditor.TabIndex = 0;
             this.mScriptEditor.TabsToSpaces = true;
+            this.mScriptEditor.Text = "\tScriptAPI.AddShort(\"Packet Size\");";
+            this.mScriptEditor.VirtualWhitespace = true;
             this.mScriptEditor.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
             this.mScriptEditor.TextChanged += new System.EventHandler(this.mScriptEditor_TextChanged);
             // 
@@ -99,7 +102,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 370);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 446);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -109,8 +112,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.mImportButton);
-            this.splitContainer1.Size = new System.Drawing.Size(598, 25);
-            this.splitContainer1.SplitterDistance = 392;
+            this.splitContainer1.Size = new System.Drawing.Size(748, 25);
+            this.splitContainer1.SplitterDistance = 490;
             this.splitContainer1.TabIndex = 6;
             // 
             // mImportButton
@@ -118,7 +121,7 @@
             this.mImportButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mImportButton.Location = new System.Drawing.Point(0, 0);
             this.mImportButton.Name = "mImportButton";
-            this.mImportButton.Size = new System.Drawing.Size(202, 25);
+            this.mImportButton.Size = new System.Drawing.Size(254, 25);
             this.mImportButton.TabIndex = 0;
             this.mImportButton.Text = "Import script...";
             this.mImportButton.UseVisualStyleBackColor = true;
@@ -132,7 +135,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 395);
+            this.ClientSize = new System.Drawing.Size(748, 471);
             this.Controls.Add(this.mScriptEditor);
             this.Controls.Add(this.splitContainer1);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) 
@@ -150,6 +153,7 @@
             this.Load += new System.EventHandler(this.ScriptForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -163,6 +167,5 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button mImportButton;
         private System.Windows.Forms.OpenFileDialog FileImporter;
-
     }
 }

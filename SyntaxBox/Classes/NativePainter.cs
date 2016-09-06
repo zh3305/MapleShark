@@ -615,13 +615,13 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
 
                                 Control.InfoTip.Location = itP;
                                 Control.InfoTip.Visible = true;
-                                Debug.WriteLine("Infotip Made Visible");
+                                System.Diagnostics. Debug.WriteLine("Infotip Made Visible");
                             }
                         }
                         else
                         {
                             Control.InfoTip.Visible = false;
-                            Debug.WriteLine("Infotip Made Invisible");
+                            System.Diagnostics. Debug.WriteLine("Infotip Made Invisible");
                         }
                     }
                     catch {}

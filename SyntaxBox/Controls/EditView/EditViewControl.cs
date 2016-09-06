@@ -207,7 +207,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             if (_SyntaxBox != null && !_SyntaxBox.DisableAutoList &&
                 _AutoList == null)
             {
-                Debug.WriteLine("Creating Autolist");
+                System.Diagnostics.Debug.WriteLine("Creating Autolist");
 
                 AutoList = new AutoListForm();
                 NativeMethods.SetWindowLong(AutoList.Handle,
@@ -232,7 +232,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         {
             if (!_SyntaxBox.DisableFindForm && _FindReplaceDialog == null)
             {
-                Debug.WriteLine("Creating Findform");
+                System.Diagnostics. Debug.WriteLine("Creating Findform");
                 FindReplaceDialog = new FindReplaceForm(this);
             }
         }
@@ -242,7 +242,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             if (_SyntaxBox != null && !_SyntaxBox.DisableInfoTip &&
                 _InfoTip == null)
             {
-                Debug.WriteLine("Creating Infotip");
+                System.Diagnostics. Debug.WriteLine("Creating Infotip");
 
                 InfoTip = new InfoTipForm(this);
                 NativeMethods.SetWindowLong(InfoTip.Handle,
@@ -1186,7 +1186,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         private static int CharType(string s)
         {
             const string g1 = " \t";
-            const string g2 = ".,-+'?´=)(/&%¤#!\"\\<>[]$£@*:;{}";
+            const string g2 = ".,-+'??)(/&%?!\"\\<>[]$£@*:;{}";
 
             if (g1.IndexOf(s) >= 0)
                 return 1;
@@ -1828,7 +1828,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     pattern = " " + Pattern + " ";
                     foreach (char c in s)
                     {
-                        if (".,+-*^\\/()[]{}@:;'?£$#%& \t=<>".IndexOf(c) >= 0)
+                        if (".,+-*^\\/()[]{}@:;'??#%& \t=<>".IndexOf(c) >= 0)
                             t += " ";
                         else
                             t += c;

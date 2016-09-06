@@ -12,8 +12,11 @@ namespace MapleShark
         public string Interface = "";
         public ushort LowPort = 8484;
         public ushort HighPort = 8989;
-
-        [XmlIgnore]
+        //Dictonary 
+        public static Tools.ReadProperties send;
+        public static Tools.ReadProperties recv;
+        public static Tools.ReadProperties StkHeader;
+       [XmlIgnore]
         public bool LoadedFromFile = false;
 
         private static Config sInstance = null;
@@ -52,14 +55,28 @@ namespace MapleShark
 
         internal Definition GetDefinition(ushort pBuild, byte pLocale, bool pOutbound, ushort pOpcode)
         {
+            if (DefinitionsContainer.Instance == null)
+                DefinitionsContainer.Load();
             return DefinitionsContainer.Instance.GetDefinition(pLocale, pBuild, pOpcode, pOutbound);
             // return Definitions.Find(d => d.Locale == pLocale && d.Build == pBuild && d.Outbound == pOutbound && d.Opcode == pOpcode);
         }
 
 
-        internal static string GetPropertiesFile(bool pOutbound, byte pLocale, ushort pVersion)
+        public static string GetPropertiesFile(bool pOutbound, byte pLocale, ushort pVersion)
         {
-            return System.Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Scripts" + Path.DirectorySeparatorChar + pLocale.ToString() + Path.DirectorySeparatorChar + pVersion.ToString() + Path.DirectorySeparatorChar + (pOutbound ? "send" : "recv") + ".properties";
+            return System.Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Scripts" + Path.DirectorySeparatorChar + pLocale.ToString() + Path.DirectorySeparatorChar + pVersion.ToString() + Path.DirectorySeparatorChar + (pOutbound ? "sendops" : "recvops") + ".properties";
+        }
+        public static string GetPropertiesFile(bool pOutbound)
+        {
+            return Environment.CurrentDirectory  + Path.DirectorySeparatorChar + (pOutbound ? "sendops" : "recvops") + ".properties";
+        }
+        public static void LoadProperties()
+        {
+            //Tools.IniFiles inif = new Tools.IniFiles(GetPropertiesFile(pOutbound));
+            send= new Tools.ReadProperties(Config.GetPropertiesFile(true));
+            recv = new Tools.ReadProperties(Config.GetPropertiesFile(false));
+            StkHeader= new Tools.ReadProperties(Environment.CurrentDirectory + Path.DirectorySeparatorChar + "StkHeader.properties");
+
         }
 
         internal void Save()
