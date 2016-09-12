@@ -304,7 +304,7 @@ namespace MapleShark
             else mPropertyForm.Hide();
         }
 
-        Dictionary<int, SessionForm> waiting = new Dictionary<int, SessionForm>(); 
+        Dictionary<int, SessionForm> waiting = new Dictionary<int, SessionForm>();
         List<SessionForm> closes = new List<SessionForm>();
         private void mTimer_Tick(object sender, EventArgs e)
         {
@@ -581,7 +581,7 @@ namespace MapleShark
 
                     }
                     //else if (line[0] == '[' && currentSession != null)
-                    else if ( currentSession != null)
+                    else if (currentSession != null)
                         currentSession.ParseMSnifferLine(line);
                 }
             }
@@ -592,9 +592,10 @@ namespace MapleShark
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //var inf = new                Tools.IniFiles();
-           foreach (var i in Config.send ) {
+            foreach (var i in Config.send)
+            {
 
-                Tools.IniFiles.Write("sendops.properties.txt", "Main", i.Key, i.Value,"");
+                Tools.IniFiles.Write("sendops.properties.txt", "Main", i.Key, i.Value, "");
 
                 //Tools. INIClass.IniWriteValue("recvops.properties.txt", "Main", i.Key, i.Value);
             }
@@ -610,6 +611,27 @@ namespace MapleShark
         private void converScripToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new GUI.ConverterScriptForm().Show(this);
+        }
+
+        private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (toolStripTextBox1.Text.Length == 0)
+            {
+                PropertyForm.Properties.SelectedObject = null;
+            }
+            else
+            {
+                var buffer = tools.HexTool.getByteArrayFromHexString(toolStripTextBox1.Text);
+                if (buffer != null&& buffer.Length!=0)
+                {
+                    var aaaaa = new StructureSegment(buffer, 0, buffer.Length, MapleLocale.CHINA);
+                    PropertyForm.Properties.SelectedObject= aaaaa;
+                }
+                else
+                {
+                    PropertyForm.Properties.SelectedObject = null;
+                }
+            }
         }
     }
 }

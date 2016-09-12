@@ -60,6 +60,7 @@
             this.mViewDataMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mViewStructureMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mViewPropertiesMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.converScripToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mTimer = new System.Windows.Forms.Timer(this.components);
             this.mImportDialog = new System.Windows.Forms.OpenFileDialog();
             this.mOpenDialog = new System.Windows.Forms.OpenFileDialog();
@@ -70,8 +71,10 @@
             this.mStopStartButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.mDockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.converScripToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenu.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -212,6 +215,13 @@
             this.mViewPropertiesMenu.Text = "&Properties";
             this.mViewPropertiesMenu.CheckedChanged += new System.EventHandler(this.mViewPropertiesMenu_CheckedChanged);
             // 
+            // converScripToolStripMenuItem
+            // 
+            this.converScripToolStripMenuItem.Name = "converScripToolStripMenuItem";
+            this.converScripToolStripMenuItem.Size = new System.Drawing.Size(90, 21);
+            this.converScripToolStripMenuItem.Text = "ConverScrip";
+            this.converScripToolStripMenuItem.Click += new System.EventHandler(this.converScripToolStripMenuItem_Click);
+            // 
             // mTimer
             // 
             this.mTimer.Interval = 300;
@@ -240,7 +250,10 @@
             this.toolStripSeparator1,
             this.mStopStartButton,
             this.toolStripSeparator2,
-            this.helpToolStripButton});
+            this.helpToolStripButton,
+            this.toolStripSeparator3,
+            this.toolStripLabel1,
+            this.toolStripTextBox1});
             this.toolStrip.Location = new System.Drawing.Point(0, 25);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(944, 25);
@@ -295,6 +308,23 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "Help";
             this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(56, 22);
+            this.toolStripLabel1.Text = "封包转换";
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(200, 25);
+            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
             // 
             // mDockPanel
             // 
@@ -355,13 +385,6 @@
             this.mDockPanel.TabIndex = 4;
             this.mDockPanel.ActiveDocumentChanged += new System.EventHandler(this.mDockPanel_ActiveDocumentChanged);
             // 
-            // converScripToolStripMenuItem
-            // 
-            this.converScripToolStripMenuItem.Name = "converScripToolStripMenuItem";
-            this.converScripToolStripMenuItem.Size = new System.Drawing.Size(90, 21);
-            this.converScripToolStripMenuItem.Text = "ConverScrip";
-            this.converScripToolStripMenuItem.Click += new System.EventHandler(this.converScripToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -421,6 +444,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem importMSnifferToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem converScripToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
     }
 }
 
