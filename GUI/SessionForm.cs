@@ -498,7 +498,10 @@ namespace MapleShark
                     mPacketList.Items.Add(packet);
                 }
                 mPacketList.EndUpdate();
-                if (mPacketList.Items.Count > 0) mPacketList.EnsureVisible(0);
+                if (mPacketList.Items.Count > 0)
+                {
+                    mPacketList.EnsureVisible(0);
+                }
             }
 
             Text = string.Format("{0} (ReadOnly)", Path.GetFileName(pFilename));

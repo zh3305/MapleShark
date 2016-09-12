@@ -29,7 +29,9 @@ namespace MapleShark
                 pOutbound ? "Outbound" : "Inbound",
                 pBuffer.Length.ToString(),
                 "0x" + pOpcode.ToString("X4"),
-                pName==string.Empty?pOutbound ?  Config.recv.getkey( "0x" + pOpcode.ToString("X4")): Config.send.getkey( "0x" + pOpcode.ToString("X4"))  :pName})
+                //pName==string.Empty?pOutbound ?  Config.recv.getkey( "0x" + pOpcode.ToString("X4")): Config.send.getkey( "0x" + pOpcode.ToString("X4"))  :
+                pName}
+            )
         {
             Timestamp = pTimestamp;
             Outbound = pOutbound;

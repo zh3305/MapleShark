@@ -606,5 +606,10 @@ namespace MapleShark
                 //Tools. INIClass.IniWriteValue("recvops.properties.txt", "Main", i.Key, i.Value);
             }
         }
+
+        private void converScripToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new GUI.ConverterScriptForm().Show(this);
+        }
     }
 }

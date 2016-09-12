@@ -125,5 +125,5 @@ long    writeReversedLong(String Name, params long[] b)//反向操作未实现
 long    writeReversedInt(String Name, params int[] b)//反向操作未实现
 long    skip(int length)//跳过指定个数
 byte[]  writeBuffer(String Name,int length))
-public  byte[] writeBuffer(String Name, string HexString)//HexString 冒险岛hex String
+byte[]  writeBuffer(String Name, string HexString)//HexString 冒险岛hex String
 ```

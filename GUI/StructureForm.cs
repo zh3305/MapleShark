@@ -48,9 +48,10 @@ namespace MapleShark
             mTree.Nodes.Clear();
             mSubNodes.Clear();
             pPacket.Rewind();
+            NodeKeys.Clear();
 
             string scriptPath = Application.StartupPath + Path.DirectorySeparatorChar + "Scripts" + Path.DirectorySeparatorChar + pPacket.Locale.ToString() + Path.DirectorySeparatorChar + pPacket.Build.ToString() + Path.DirectorySeparatorChar + (pPacket.Outbound ? "发送" : "接收") + Path.DirectorySeparatorChar + "0x" + pPacket.Opcode.ToString("X4") + ".txt";
-            string commonPath = Application.StartupPath + Path.DirectorySeparatorChar + "Scripts" + Path.DirectorySeparatorChar + pPacket.Locale.ToString() + Path.DirectorySeparatorChar + pPacket.Build.ToString() + Path.DirectorySeparatorChar + "Common.txt";
+            string commonPath = Application.StartupPath + Path.DirectorySeparatorChar + "Scripts" + Path.DirectorySeparatorChar + pPacket.Locale.ToString() + Path.DirectorySeparatorChar + pPacket.Build.ToString() + Path.DirectorySeparatorChar + "Common.js";
             if (File.Exists(scriptPath))
             {
                 mParsing = pPacket;
@@ -58,8 +59,9 @@ namespace MapleShark
                 try
                 {
                     StringBuilder scriptCode = new StringBuilder();
+                    StringBuilder commonCode = new StringBuilder();
                     scriptCode.Append(File.ReadAllText(scriptPath));
-                    if (File.Exists(commonPath)) scriptCode.Append(File.ReadAllText(commonPath));
+                    if (File.Exists(commonPath)) commonCode.Append(File.ReadAllText(commonPath));
                     // SSharp
                     // Script script = Script.Compile(scriptCode.ToString());
                     // script.Context.SetItem("ScriptAPI", new ScriptAPI(this));
@@ -69,6 +71,7 @@ namespace MapleShark
                     var engine = new Jint.Engine();
                     engine.SetValue("ScriptAPI", new ScriptAPI(this));
                     engine.SetValue("mplew", new mplew(this));
+                    engine.Execute(commonCode.ToString());
                     engine.Execute(scriptCode.ToString());
 
                     //var context = new NiL.JS.Core.Context();

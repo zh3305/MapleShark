@@ -142,7 +142,7 @@ namespace tools
                     highoc = true;
                     baos.WriteByte((byte)nextb);
                 }
-            outerContinue:;
+            //outerContinue:;
             }
         outerBreak:
             return baos.ToArray();
