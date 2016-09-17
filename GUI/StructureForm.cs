@@ -150,7 +150,7 @@ namespace MapleShark
         }
         internal string APIAddString(string pName, params string[] compare)
         {
-            APIStartNode("String");
+            APIStartNode(pName);
             short size = APIAddShort("Size");
             string value = APIAddPaddedString(pName, size, compare);
             APIEndNode(false);
@@ -159,10 +159,10 @@ namespace MapleShark
         public Color Ck<T>(ref string pName,T value, params T[] compare) where T : IComparable //struct,
         {
             Color color = cl_dm;
-            var Defaults = false;
+            //var Defaults = false;
             if (pName.Trim() == string.Empty)
             {
-                Defaults = true;
+                //Defaults = true;
                 pName += "fixed ";
             }
             else
@@ -194,15 +194,20 @@ namespace MapleShark
                 color = cl_bpp;
                 foreach (var a in compare)
                 {
-                    if (Defaults)
-                    {
-                        pName += a.ToString() + "  0x" + Convert.ToString(int.Parse(a.ToString()), 16).ToUpper();
-                    }
+                    //if (Defaults)
+                    //{
+                    //    pName += a.ToString() + "  0x" + Convert.ToString(int.Parse(a.ToString()), 16).ToUpper();
+                    //}
                     if (value.CompareTo(a)  == 0)
                     {
                         color = cl_tg;
                     }
                 }
+            }
+            int outin ;
+            if (int.TryParse(value.ToString(), out outin))
+            { 
+            pName += "  0x" + Convert.ToString(outin, 16).ToUpper();
             }
             return color;
         }

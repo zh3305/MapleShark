@@ -589,23 +589,28 @@ namespace MapleShark
             if (currentSession != null)
                 currentSession.Show(mDockPanel, DockState.Document);
         }
+        /// <summary>
+        /// 输出封包配置 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //var inf = new                Tools.IniFiles();
-            foreach (var i in Config.send)
-            {
+            ////var inf = new                Tools.IniFiles();
+            //foreach (var i in Config.send)
+            //{
 
-                Tools.IniFiles.Write("sendops.properties.txt", "Main", i.Key, i.Value, "");
+            //    Tools.IniFiles.Write("sendops.properties.txt", "Main", i.Key, i.Value, "");
 
-                //Tools. INIClass.IniWriteValue("recvops.properties.txt", "Main", i.Key, i.Value);
-            }
-            foreach (var i in Config.recv)
-            {
+            //    //Tools. INIClass.IniWriteValue("recvops.properties.txt", "Main", i.Key, i.Value);
+            //}
+            //foreach (var i in Config.recv)
+            //{
 
-                Tools.IniFiles.Write("recvops.properties.txt", "Main", i.Key, i.Value, "");
+            //    Tools.IniFiles.Write("recvops.properties.txt", "Main", i.Key, i.Value, "");
 
-                //Tools. INIClass.IniWriteValue("recvops.properties.txt", "Main", i.Key, i.Value);
-            }
+            //    //Tools. INIClass.IniWriteValue("recvops.properties.txt", "Main", i.Key, i.Value);
+            //}
         }
 
         private void converScripToolStripMenuItem_Click(object sender, EventArgs e)
@@ -632,6 +637,11 @@ namespace MapleShark
                     PropertyForm.Properties.SelectedObject = null;
                 }
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Config.LoadProperties();
         }
     }
 }

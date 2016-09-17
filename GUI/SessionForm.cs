@@ -300,7 +300,7 @@ namespace MapleShark
                 {
                     mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
                 }
-
+         
                 mPacketList.Items.Add(packet);
                 mPackets.Add(packet);
 
@@ -371,7 +371,7 @@ namespace MapleShark
                     if (definition != null && !mViewIgnoredMenu.Checked && definition.Ignore) continue;
                     if (packet.Outbound && !mViewOutboundMenu.Checked) continue;
                     if (!packet.Outbound && !mViewInboundMenu.Checked) continue;
-                    if (Config.StkHeader.ContainsKey(packet.Name) && Config.StkHeader[packet.Name].ToLower() == "true")
+                    if (Config.filter(packet.Name))
                     {
                         continue;
                     }
@@ -495,6 +495,10 @@ namespace MapleShark
                     mPackets.Add(packet);
                     if (!mOpcodes.Exists(op => op.Outbound == packet.Outbound && op.Header == packet.Opcode)) mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
                     if (definition != null && definition.Ignore) continue;
+                    if (Config.filter(packet.Name))
+                    {
+                        continue;
+                    }
                     mPacketList.Items.Add(packet);
                 }
                 mPacketList.EndUpdate();
@@ -510,8 +514,7 @@ namespace MapleShark
 
         public void RefreshPackets()
         {
-
-            Opcode search = (MainForm.SearchForm.ComboBox.SelectedIndex >= 0 ? mOpcodes[MainForm.SearchForm.ComboBox.SelectedIndex] : null);
+            Opcode search = (MainForm.SearchForm.ComboBox.SelectedIndex >= 0&& MainForm.SearchForm.ComboBox.SelectedIndex <= mOpcodes.Count  ? mOpcodes[MainForm.SearchForm.ComboBox.SelectedIndex] : null);
             MaplePacket previous = mPacketList.SelectedItems.Count > 0 ? mPacketList.SelectedItems[0] as MaplePacket : null;
             mOpcodes.Clear();
             mPacketList.Items.Clear();
@@ -533,7 +536,10 @@ namespace MapleShark
                 if (!mOpcodes.Exists(op => op.Outbound == packet.Outbound && op.Header == packet.Opcode)) mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
                 if (definition != null && !mViewIgnoredMenu.Checked && definition.Ignore) continue;
                 mPacketList.Items.Add(packet);
-
+                if (Config.filter(packet.Name))
+                {
+                    continue;
+                }
                 if (packet == previous) packet.Selected = true;
             }
             mPacketList.EndUpdate();
@@ -577,7 +583,10 @@ namespace MapleShark
             mPackets.Add(packet);
             if (!mOpcodes.Exists(op => op.Outbound == packet.Outbound && op.Header == packet.Opcode)) mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
             if (definition != null && definition.Ignore) return;
-            mPacketList.Items.Add(packet);
+            if (!Config.filter(packet.Name))
+            {
+                mPacketList.Items.Add(packet);
+            }
         }
 
         public void RunSaveCMD()
@@ -952,5 +961,10 @@ namespace MapleShark
             RefreshPackets();
         }
 
+        private void addPacketsToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            new GUI.frmAddPacket(mPackets, mBuild, mLocale).ShowDialog(this);
+            RefreshPackets();
+        }
     }
 }

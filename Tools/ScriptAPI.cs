@@ -190,7 +190,7 @@ namespace MapleShark
         }
         public byte[] writeBuffer(String Name, string HexString)
         {
-        var hex=    HexTool.getByteArrayFromHexString(HexString);
+            var hex = HexTool.getByteArrayFromHexString(HexString);
             StartNode("BufferFromHexString" + Name);
             //byte[] rtb = new byte[length];
             for (var i = 0; i < hex.Length; i++)

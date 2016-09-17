@@ -127,6 +127,12 @@
     <Compile Include="GUI\ConverterScriptForm.Designer.cs">
       <DependentUpon>ConverterScriptForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmAddPacket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmAddPacket.Designer.cs">
+      <DependentUpon>frmAddPacket.cs</DependentUpon>
+    </Compile>
     <Compile Include="SyntaxBox\Properties\Resources.Designer.cs" />
     <Compile Include="Tools\AppUpdates.cs" />
     <Compile Include="Tools\PlaceHolderTextBox.cs">
@@ -298,6 +304,9 @@
     <EmbeddedResource Include="GUI\ConverterScriptForm.resx">
       <DependentUpon>ConverterScriptForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmAddPacket.resx">
+      <DependentUpon>frmAddPacket.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmImportProps.resx">
       <DependentUpon>frmImportProps.cs</DependentUpon>
     </EmbeddedResource>
@@ -334,6 +343,7 @@
     <Compile Include="GUI\PropertyForm.Designer.cs">
       <DependentUpon>PropertyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools\Prompt.cs" />
     <Compile Include="Tools\properties.cs" />
     <Compile Include="Tools\ScriptAPI.cs" />
     <Compile Include="GUI\ScriptForm.cs">

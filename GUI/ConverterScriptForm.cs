@@ -104,6 +104,8 @@ namespace MapleShark.GUI
                 context.DefineVariable("intb").Assign(NiL.JS.Core.JSValue.Marshal(InTb));
                 context.DefineVariable("outtb").Assign(NiL.JS.Core.JSValue.Marshal(OutTb));
                 context.DefineVariable("Console").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof(Console)));
+                context.DefineVariable("window").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof(Tools.window)));
+
                 context.Eval(scriptCode.ToString());
             }
             catch (Exception exc)
