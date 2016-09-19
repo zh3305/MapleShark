@@ -53,7 +53,7 @@ namespace MapleShark
 
         public void CloseSession(SessionForm form)
         {
-            mDockPanel.Contents.Remove(form);
+            //mDockPanel.Contents.Remove(form);
         }
 
         public void CopyPacketHex(KeyEventArgs pArgs)
@@ -136,12 +136,10 @@ namespace MapleShark
 
             mSearchForm.Show(mDockPanel);
             mDataForm.Show(mDockPanel);
-            mStructureForm.Show(mDockPanel);
-            mPropertyForm.Show(mDockPanel);
-            DockPane rightPane1 = new DockPane(mStructureForm, DockState.DockRight, true);
-            DockPane rightPane2 = new DockPane(mPropertyForm, DockState.DockRight, true);
-            rightPane1.Show();
-            rightPane2.Show();
+            mStructureForm.Show(mDockPanel, DockState.DockRight);
+
+            mPropertyForm.Show(mStructureForm.Pane, DockAlignment.Bottom, 0.5);
+
 
 
             foreach (string arg in _startupArguments)
@@ -524,7 +522,7 @@ namespace MapleShark
                         return;
                     }
                 }
-                mDockPanel.Contents.Remove(ses);
+                //mDockPanel.Contents.Remove(ses);
                 sessionForms.Remove(ses);
             }
 

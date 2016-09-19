@@ -180,7 +180,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 279);
+            this.ClientSize = new System.Drawing.Size(658, 269);
             this.Controls.Add(this.tbPacketOpcode);
             this.Controls.Add(this.tbLocal);
             this.Controls.Add(this.label2);

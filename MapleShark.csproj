@@ -119,6 +119,10 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>packages\DockPanelSuite.2.10.0\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\ConverterScriptForm.cs">
@@ -126,6 +130,12 @@
     </Compile>
     <Compile Include="GUI\ConverterScriptForm.Designer.cs">
       <DependentUpon>ConverterScriptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\DummyOutputWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\DummyOutputWindow.Designer.cs">
+      <DependentUpon>DummyOutputWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmAddPacket.cs">
       <SubType>Form</SubType>
@@ -147,101 +157,6 @@
     </Compile>
     <Compile Include="Logging\Definition.cs" />
     <Compile Include="Logging\DefinitionsContainer.cs" />
-    <Compile Include="Docking\AutoHideStripBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockAreasEditor.cs" />
-    <Compile Include="Docking\DockContent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Docking\DockContentCollection.cs" />
-    <Compile Include="Docking\DockContentEventArgs.cs" />
-    <Compile Include="Docking\DockContentHandler.cs" />
-    <Compile Include="Docking\DockOutlineBase.cs" />
-    <Compile Include="Docking\DockPane.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPane.SplitterControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPaneCaptionBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPaneCollection.cs" />
-    <Compile Include="Docking\DockPanel.AutoHideWindow.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPanel.cs" />
-    <Compile Include="Docking\DockPanel.DockDragHandler.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPanel.DragHandler.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPanel.FocusManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPanel.MdiClientController.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPanel.Persistor.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPanel.SplitterDragHandler.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockPanelExtender.cs" />
-    <Compile Include="Docking\DockPanelSkin.cs" />
-    <Compile Include="Docking\DockPaneStripBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockWindow.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockWindow.SplitterControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\DockWindowCollection.cs" />
-    <Compile Include="Docking\DragForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Docking\DummyControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\Enums.cs" />
-    <Compile Include="Docking\FloatWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Docking\FloatWindowCollection.cs" />
-    <Compile Include="Docking\Helpers\DockHelper.cs" />
-    <Compile Include="Docking\Helpers\DrawHelper.cs" />
-    <Compile Include="Docking\Helpers\ResourceHelper.cs" />
-    <Compile Include="Docking\Helpers\Win32Helper.cs" />
-    <Compile Include="Docking\InertButtonBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\Interfaces.cs" />
-    <Compile Include="Docking\Localization.cs" />
-    <Compile Include="Docking\Measures.cs" />
-    <Compile Include="Docking\NestedDockingStatus.cs" />
-    <Compile Include="Docking\NestedPaneCollection.cs" />
-    <Compile Include="Docking\Resources.Designer.cs" />
-    <Compile Include="Docking\SplitterBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\Strings.Designer.cs" />
-    <Compile Include="Docking\VisibleNestedPaneCollection.cs" />
-    <Compile Include="Docking\VS2005AutoHideStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\VS2005DockPaneCaption.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\VS2005DockPaneStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Docking\Win32\Enums.cs" />
-    <Compile Include="Docking\Win32\NativeMethods.cs" />
     <Compile Include="GUI\DoubleBufferedListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -301,8 +216,15 @@
     <Compile Include="Tools\PacketReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Docking\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConverterScriptForm.resx">
       <DependentUpon>ConverterScriptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\DummyOutputWindow.resx">
+      <DependentUpon>DummyOutputWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmAddPacket.resx">
       <DependentUpon>frmAddPacket.cs</DependentUpon>
@@ -391,23 +313,41 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ConvertScript\PCCodeConvert.js" />
     <Content Include="ConvertScript\RecvopsConvert.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ConvertScript\SSharpConvert.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Bottom.bmp" />
+    <Content Include="Docking\Resources\Dockindicator_PaneDiamond_Fill.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Hotspot.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_HotspotIndex.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Left.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Right.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Top.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelBottom.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelBottom_Active.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelFill.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelFill_Active.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelLeft.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelLeft_Active.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelRight.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelRight_Active.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelTop.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelTop_Active.bmp" />
+    <Content Include="Docking\Resources\DockPane_AutoHide.bmp" />
+    <Content Include="Docking\Resources\DockPane_Close.bmp" />
+    <Content Include="Docking\Resources\DockPane_Dock.bmp" />
+    <Content Include="Docking\Resources\DockPane_Option.bmp" />
+    <Content Include="Docking\Resources\DockPane_OptionOverflow.bmp" />
     <Content Include="WinPcap_4.1.3.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="GUI\DataForm.resx">
       <DependentUpon>DataForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Docking\Resources.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Docking\Strings.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MainForm.resx">
@@ -443,30 +383,6 @@
       <DependentUpon>StructureForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Include="Docking\DockPanel.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Bottom.bmp" />
-    <Content Include="Docking\Resources\Dockindicator_PaneDiamond_Fill.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Hotspot.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_HotspotIndex.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Left.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Right.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Top.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelBottom.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelBottom_Active.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelFill.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelFill_Active.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelLeft.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelLeft_Active.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelRight.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelRight_Active.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelTop.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelTop_Active.bmp" />
-    <Content Include="Docking\Resources\DockPane_AutoHide.bmp" />
-    <Content Include="Docking\Resources\DockPane_Close.bmp" />
-    <Content Include="Docking\Resources\DockPane_Dock.bmp" />
-    <Content Include="Docking\Resources\DockPane_Option.bmp" />
-    <Content Include="Docking\Resources\DockPane_OptionOverflow.bmp" />
     <None Include="Resources\Button-Blank-Green-icon.png" />
     <None Include="Resources\Button-Blank-Red-icon.png" />
     <None Include="Resources\save-icon.png" />

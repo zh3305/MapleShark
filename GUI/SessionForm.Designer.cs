@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.mPacketList = new MapleShark.DoubleBufferedListView();
-            this.mTimestampColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.mDirectionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.mLengthColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.mOpcodeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.mNameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mPacketContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mPacketContextNameLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.mPacketContextNameBox = new System.Windows.Forms.ToolStripTextBox();
@@ -72,57 +66,15 @@
             this.addPacketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.mExportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.mPacketList = new MapleShark.DoubleBufferedListView();
+            this.mTimestampColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.mDirectionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.mLengthColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.mOpcodeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.mNameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mPacketContextMenu.SuspendLayout();
             this.mMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mPacketList
-            // 
-            this.mPacketList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.mTimestampColumn,
-            this.mDirectionColumn,
-            this.mLengthColumn,
-            this.mOpcodeColumn,
-            this.mNameColumn});
-            this.mPacketList.ContextMenuStrip = this.mPacketContextMenu;
-            this.mPacketList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mPacketList.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mPacketList.FullRowSelect = true;
-            this.mPacketList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.mPacketList.HideSelection = false;
-            this.mPacketList.Location = new System.Drawing.Point(0, 25);
-            this.mPacketList.MultiSelect = false;
-            this.mPacketList.Name = "mPacketList";
-            this.mPacketList.Size = new System.Drawing.Size(752, 426);
-            this.mPacketList.TabIndex = 0;
-            this.mPacketList.UseCompatibleStateImageBehavior = false;
-            this.mPacketList.View = System.Windows.Forms.View.Details;
-            this.mPacketList.ItemActivate += new System.EventHandler(this.mPacketList_ItemActivate);
-            this.mPacketList.SelectedIndexChanged += new System.EventHandler(this.mPacketList_SelectedIndexChanged);
-            // 
-            // mTimestampColumn
-            // 
-            this.mTimestampColumn.Text = "Timestamp";
-            this.mTimestampColumn.Width = 175;
-            // 
-            // mDirectionColumn
-            // 
-            this.mDirectionColumn.Text = "Direction";
-            this.mDirectionColumn.Width = 75;
-            // 
-            // mLengthColumn
-            // 
-            this.mLengthColumn.Text = "Length";
-            this.mLengthColumn.Width = 64;
-            // 
-            // mOpcodeColumn
-            // 
-            this.mOpcodeColumn.Text = "Opcode";
-            // 
-            // mNameColumn
-            // 
-            this.mNameColumn.Text = "Name";
-            this.mNameColumn.Width = 147;
             // 
             // mPacketContextMenu
             // 
@@ -133,7 +85,7 @@
             this.mPacketContextIgnoreMenu,
             this.removePacketFromSessionToolStripMenuItem});
             this.mPacketContextMenu.Name = "mPacketContextMenu";
-            this.mPacketContextMenu.Size = new System.Drawing.Size(246, 101);
+            this.mPacketContextMenu.Size = new System.Drawing.Size(246, 123);
             this.mPacketContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.mPacketContextMenu_Opening);
             this.mPacketContextMenu.Opened += new System.EventHandler(this.mPacketContextMenu_Opened);
             // 
@@ -447,6 +399,54 @@
             this.mExportDialog.Filter = "Text Files|*.txt";
             this.mExportDialog.RestoreDirectory = true;
             this.mExportDialog.Title = "Export";
+            // 
+            // mPacketList
+            // 
+            this.mPacketList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.mTimestampColumn,
+            this.mDirectionColumn,
+            this.mLengthColumn,
+            this.mOpcodeColumn,
+            this.mNameColumn});
+            this.mPacketList.ContextMenuStrip = this.mPacketContextMenu;
+            this.mPacketList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mPacketList.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mPacketList.FullRowSelect = true;
+            this.mPacketList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.mPacketList.HideSelection = false;
+            this.mPacketList.Location = new System.Drawing.Point(0, 0);
+            this.mPacketList.MultiSelect = false;
+            this.mPacketList.Name = "mPacketList";
+            this.mPacketList.Size = new System.Drawing.Size(752, 451);
+            this.mPacketList.TabIndex = 0;
+            this.mPacketList.UseCompatibleStateImageBehavior = false;
+            this.mPacketList.View = System.Windows.Forms.View.Details;
+            this.mPacketList.ItemActivate += new System.EventHandler(this.mPacketList_ItemActivate);
+            this.mPacketList.SelectedIndexChanged += new System.EventHandler(this.mPacketList_SelectedIndexChanged);
+            // 
+            // mTimestampColumn
+            // 
+            this.mTimestampColumn.Text = "Timestamp";
+            this.mTimestampColumn.Width = 175;
+            // 
+            // mDirectionColumn
+            // 
+            this.mDirectionColumn.Text = "Direction";
+            this.mDirectionColumn.Width = 75;
+            // 
+            // mLengthColumn
+            // 
+            this.mLengthColumn.Text = "Length";
+            this.mLengthColumn.Width = 64;
+            // 
+            // mOpcodeColumn
+            // 
+            this.mOpcodeColumn.Text = "Opcode";
+            // 
+            // mNameColumn
+            // 
+            this.mNameColumn.Text = "Name";
+            this.mNameColumn.Width = 147;
             // 
             // SessionForm
             // 
