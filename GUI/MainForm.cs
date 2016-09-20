@@ -33,8 +33,13 @@ namespace MapleShark
         {
             InitializeComponent();
             Text = "MapleShark " + Program.AssemblyVersion;
-
             _startupArguments = startupArguments;
+            //mDockPanel.Theme= new VS2013BlueTheme();
+            //mDockPanel.Theme = new VS2013LightTheme();
+           // mDockPanel.Theme = new VS2013DarkTheme();
+            // mDockPanel.Theme = new VS2012BlueTheme();
+            // mDockPanel.Theme = new VS2012LightTheme();
+            // mDockPanel.Theme = new VS2012DarkTheme();
         }
 
         public SearchForm SearchForm { get { return mSearchForm; } }
@@ -134,10 +139,10 @@ namespace MapleShark
 
             mTimer.Enabled = true;
 
-            mSearchForm.Show(mDockPanel);
+            mSearchForm.Show(mDockPanel, DockState.DockTop);
             mDataForm.Show(mDockPanel);
-            mStructureForm.Show(mDockPanel, DockState.DockRight);
 
+            mStructureForm.Show(mDockPanel, DockState.DockRight);
             mPropertyForm.Show(mStructureForm.Pane, DockAlignment.Bottom, 0.5);
 
 
