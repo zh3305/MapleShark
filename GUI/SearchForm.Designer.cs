@@ -33,14 +33,14 @@ namespace MapleShark
             this.mOpcodeCombo = new System.Windows.Forms.ComboBox();
             this.mNextOpcodeButton = new System.Windows.Forms.Button();
             this.mPrevOpcodeButton = new System.Windows.Forms.Button();
-            this.mSequenceHex = new System.Windows.Forms.HexBox();
             this.mPrevSequenceButton = new System.Windows.Forms.Button();
             this.mNextSequenceButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.Tb_Regx = new MapleShark.Tools.PlaceHolderTextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.Cb_NoEmpty = new System.Windows.Forms.CheckBox();
+            this.Tb_Regx = new MapleShark.Tools.PlaceHolderTextBox();
+            this.mSequenceHex = new System.Windows.Forms.HexBox();
             this.SuspendLayout();
             // 
             // mOpcodeCombo
@@ -80,24 +80,11 @@ namespace MapleShark
             this.mPrevOpcodeButton.UseVisualStyleBackColor = true;
             this.mPrevOpcodeButton.Click += new System.EventHandler(this.mPrevOpcodeButton_Click);
             // 
-            // mSequenceHex
-            // 
-            this.mSequenceHex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mSequenceHex.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mSequenceHex.LineInfoForeColor = System.Drawing.Color.Empty;
-            this.mSequenceHex.Location = new System.Drawing.Point(3, 32);
-            this.mSequenceHex.Name = "mSequenceHex";
-            this.mSequenceHex.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.mSequenceHex.Size = new System.Drawing.Size(206, 25);
-            this.mSequenceHex.TabIndex = 6;
-            this.mSequenceHex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mSequenceHex_KeyPress);
-            // 
             // mPrevSequenceButton
             // 
             this.mPrevSequenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.mPrevSequenceButton.Enabled = false;
-            this.mPrevSequenceButton.Location = new System.Drawing.Point(215, 31);
+            this.mPrevSequenceButton.Location = new System.Drawing.Point(215, 27);
             this.mPrevSequenceButton.Name = "mPrevSequenceButton";
             this.mPrevSequenceButton.Size = new System.Drawing.Size(65, 25);
             this.mPrevSequenceButton.TabIndex = 8;
@@ -108,7 +95,7 @@ namespace MapleShark
             // 
             this.mNextSequenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.mNextSequenceButton.Enabled = false;
-            this.mNextSequenceButton.Location = new System.Drawing.Point(286, 31);
+            this.mNextSequenceButton.Location = new System.Drawing.Point(286, 27);
             this.mNextSequenceButton.Name = "mNextSequenceButton";
             this.mNextSequenceButton.Size = new System.Drawing.Size(65, 25);
             this.mNextSequenceButton.TabIndex = 7;
@@ -119,7 +106,7 @@ namespace MapleShark
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(613, 32);
+            this.button1.Location = new System.Drawing.Point(612, 28);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(65, 25);
             this.button1.TabIndex = 10;
@@ -138,23 +125,11 @@ namespace MapleShark
             this.comboBox1.TabIndex = 11;
             this.comboBox1.Visible = false;
             // 
-            // Tb_Regx
-            // 
-            this.Tb_Regx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tb_Regx.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Italic);
-            this.Tb_Regx.ForeColor = System.Drawing.Color.Gray;
-            this.Tb_Regx.Location = new System.Drawing.Point(360, 34);
-            this.Tb_Regx.Name = "Tb_Regx";
-            this.Tb_Regx.PlaceHolderText = "Regex Search";
-            this.Tb_Regx.Size = new System.Drawing.Size(187, 20);
-            this.Tb_Regx.TabIndex = 12;
-            this.Tb_Regx.Text = "Regex Search";
-            // 
             // checkBox1
             // 
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(553, 27);
+            this.checkBox1.Location = new System.Drawing.Point(545, 26);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(0);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(54, 18);
@@ -166,7 +141,7 @@ namespace MapleShark
             // 
             this.Cb_NoEmpty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cb_NoEmpty.AutoSize = true;
-            this.Cb_NoEmpty.Location = new System.Drawing.Point(553, 44);
+            this.Cb_NoEmpty.Location = new System.Drawing.Point(545, 41);
             this.Cb_NoEmpty.Margin = new System.Windows.Forms.Padding(0);
             this.Cb_NoEmpty.Name = "Cb_NoEmpty";
             this.Cb_NoEmpty.Size = new System.Drawing.Size(61, 18);
@@ -174,22 +149,47 @@ namespace MapleShark
             this.Cb_NoEmpty.Text = "NoEmy";
             this.Cb_NoEmpty.UseVisualStyleBackColor = true;
             // 
+            // Tb_Regx
+            // 
+            this.Tb_Regx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tb_Regx.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Italic);
+            this.Tb_Regx.ForeColor = System.Drawing.Color.Gray;
+            this.Tb_Regx.Location = new System.Drawing.Point(360, 30);
+            this.Tb_Regx.Name = "Tb_Regx";
+            this.Tb_Regx.PlaceHolderText = "Regex Search";
+            this.Tb_Regx.Size = new System.Drawing.Size(175, 20);
+            this.Tb_Regx.TabIndex = 12;
+            this.Tb_Regx.Text = "Regex Search";
+            // 
+            // mSequenceHex
+            // 
+            this.mSequenceHex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mSequenceHex.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mSequenceHex.LineInfoForeColor = System.Drawing.Color.Empty;
+            this.mSequenceHex.Location = new System.Drawing.Point(3, 30);
+            this.mSequenceHex.Name = "mSequenceHex";
+            this.mSequenceHex.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
+            this.mSequenceHex.Size = new System.Drawing.Size(206, 20);
+            this.mSequenceHex.TabIndex = 6;
+            this.mSequenceHex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mSequenceHex_KeyPress);
+            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 120);
+            this.ClientSize = new System.Drawing.Size(680, 88);
             this.Controls.Add(this.Cb_NoEmpty);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.Tb_Regx);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.mNextSequenceButton);
-            this.Controls.Add(this.mNextOpcodeButton);
             this.Controls.Add(this.mPrevSequenceButton);
-            this.Controls.Add(this.mPrevOpcodeButton);
             this.Controls.Add(this.mSequenceHex);
             this.Controls.Add(this.mOpcodeCombo);
+            this.Controls.Add(this.mPrevOpcodeButton);
+            this.Controls.Add(this.mNextOpcodeButton);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) 
             | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight) 
             | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) 

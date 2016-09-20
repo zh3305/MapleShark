@@ -89,7 +89,7 @@ void 	AddComment(string pComment)//添加空标记
 void 	StartNode(string name).
 void 	EndNode(bool expand)
 void 	Write(string file, string line)
-int 	Remaining()
+int 	Remaining()//剩余封包数量
 void 	CWrite(string text) //输出到控制台
 ```
 

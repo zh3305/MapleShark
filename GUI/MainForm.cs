@@ -138,8 +138,10 @@ namespace MapleShark
             SetupAdapter();
 
             mTimer.Enabled = true;
+            //mDockPanel.AllowEndUserDocking = false;
+            mDockPanel.SuspendLayout(true);
 
-            mSearchForm.Show(mDockPanel, DockState.DockTop);
+            mSearchForm.Show(mDockPanel);
             mDataForm.Show(mDockPanel);
 
             mStructureForm.Show(mDockPanel, DockState.DockRight);
@@ -153,6 +155,7 @@ namespace MapleShark
                 session.OpenReadOnly(arg);
                 session.Show(mDockPanel, DockState.Document);
             }
+            mDockPanel.ResumeLayout(true, true);
         }
 
         private void MainForm_FormClosed(object pSender, FormClosedEventArgs pArgs)
