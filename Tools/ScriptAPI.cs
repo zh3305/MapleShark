@@ -53,7 +53,21 @@ namespace MapleShark
         public mplew(StructureForm pStructure) : base(pStructure)
         {
         }
-        
+
+        /**
+         * Write the number of zero bytes
+         *
+         * @param i
+         */
+        public void writeZeroBytes(string Name,  int i)
+        {
+            base.StartNode(Name + " Zero "+i);
+            for (int x = 0; x < i; x++)
+            {
+                base.mStructure.APIAddByte("", 0);
+            }
+            base.EndNode(false);
+        }
 
         /**
          * Write the number of zero bytes
