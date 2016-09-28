@@ -26,6 +26,7 @@ namespace MapleShark
         private DataForm mDataForm = new DataForm();
         private StructureForm mStructureForm = new StructureForm();
         private PropertyForm mPropertyForm = new PropertyForm();
+        public static DummyOutputWindow mDummyOutputWindow = new DummyOutputWindow();
 
         private string[] _startupArguments = null;
 
@@ -47,6 +48,7 @@ namespace MapleShark
         public StructureForm StructureForm { get { return mStructureForm; } }
         public PropertyForm PropertyForm { get { return mPropertyForm; } }
         public byte Locale { get { return (mDockPanel.ActiveDocument as SessionForm).Locale; } }
+        public string _dockpanelConfigFile = "DockPanel.xml";
 
         PcapDevice device;
 
@@ -102,7 +104,6 @@ namespace MapleShark
             if (mDevice == null)
             {
                 // Well shit...
-
                 MessageBox.Show("Invalid configuration. Please re-setup your MapleShark configuration.", "MapleShark", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (ShowSetupForm() != DialogResult.OK)
                 {
@@ -139,15 +140,43 @@ namespace MapleShark
 
             mTimer.Enabled = true;
             //mDockPanel.AllowEndUserDocking = false;
-            mDockPanel.SuspendLayout(true);
 
+            try
+            {
+                if (File.Exists(_dockpanelConfigFile))
+                {
+                    mDockPanel.SuspendLayout(true);
+
+                    // In order to load layout from XML, we need to close all the DockContents
+                    CloseAllContents();
+
+                    //Assembly assembly = Assembly.GetAssembly(typeof(MainForm));
+                    //Stream xmlStream = assembly.GetManifestResourceStream(_dockpanelConfigFile);
+                    mDockPanel.LoadFromXml(_dockpanelConfigFile, new DeserializeDockContent(GetContentFromPersistString));
+                    //xmlStream.Close();
+                    mDockPanel.ResumeLayout(true, true);
+                }
+                else
+                {
+                    SetDefautDock();
+                }
+
+            }
+            catch (Exception)
+            {
+                SetDefautDock();
+            }
+        }
+        public void SetDefautDock()
+        {
+            CloseAllContents();
+            mDockPanel.SuspendLayout(true);
             mSearchForm.Show(mDockPanel);
             mDataForm.Show(mDockPanel);
-
             mStructureForm.Show(mDockPanel, DockState.DockRight);
             mPropertyForm.Show(mStructureForm.Pane, DockAlignment.Bottom, 0.5);
-
-
+            mDummyOutputWindow.Show(mDockPanel, DockState.DockBottom);
+            mDataForm.Activate();
 
             foreach (string arg in _startupArguments)
             {
@@ -157,12 +186,78 @@ namespace MapleShark
             }
             mDockPanel.ResumeLayout(true, true);
         }
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            if (persistString == typeof(SearchForm).ToString())
+                return mSearchForm;
+            else if (persistString == typeof(DataForm).ToString())
+                return mDataForm;
+            else if (persistString == typeof(StructureForm).ToString())
+                return mStructureForm;
+            else if (persistString == typeof(PropertyForm).ToString())
+                return mPropertyForm;
+            else if (persistString == typeof(DummyOutputWindow).ToString())
+                return mDummyOutputWindow;
+            else
+            {
+                // DummyDoc overrides GetPersistString to add extra information into persistString.
+                // Any DockContent may override this value to add any needed information for deserialization.
+
+                //string[] parsedStrings = persistString.Split(new char[] { ',' });
+                //if (parsedStrings.Length != 3)
+                //    return null;
+
+                //if (parsedStrings[0] != typeof(DummyDoc).ToString())
+                //    return null;
+
+                //DummyDoc dummyDoc = new DummyDoc();
+                //if (parsedStrings[1] != string.Empty)
+                //    dummyDoc.FileName = parsedStrings[1];
+                //if (parsedStrings[2] != string.Empty)
+                //    dummyDoc.Text = parsedStrings[2];
+
+                return null;
+            }
+        }
+        private void CloseAllContents()
+        {
+            // we don't want to create another instance of tool window, set DockPanel to null
+            mSearchForm.DockPanel = null;
+            mDataForm.DockPanel = null;
+            mStructureForm.DockPanel = null;
+            mPropertyForm.DockPanel = null;
+            mDummyOutputWindow.DockPanel = null;
+
+            // Close all other document windows
+            CloseAllDocuments();
+        }
+        private void CloseAllDocuments()
+        {
+            if (mDockPanel.DocumentStyle == DocumentStyle.SystemMdi)
+            {
+                foreach (Form form in MdiChildren)
+                    form.Close();
+            }
+            else
+            {
+                for (int index = mDockPanel.Contents.Count - 1; index >= 0; index--)
+                {
+                    if (mDockPanel.Contents[index] is IDockContent)
+                    {
+                        IDockContent content = (IDockContent)mDockPanel.Contents[index];
+                        content.DockHandler.Close();
+                    }
+                }
+            }
+        }
 
         private void MainForm_FormClosed(object pSender, FormClosedEventArgs pArgs)
         {
             mTimer.Enabled = false;
             if (mDevice != null) mDevice.Close();
             mClosed = true;
+
+            mDockPanel.SaveAsXml(_dockpanelConfigFile);
         }
 
         private void mDockPanel_ActiveDocumentChanged(object pSender, EventArgs pArgs)
@@ -279,10 +374,11 @@ namespace MapleShark
 
         private void mViewMenu_DropDownOpening(object pSender, EventArgs pArgs)
         {
-            mViewSearchMenu.Checked = mSearchForm.Visible;
-            mViewDataMenu.Checked = mDataForm.Visible;
-            mViewStructureMenu.Checked = mStructureForm.Visible;
-            mViewPropertiesMenu.Checked = mPropertyForm.Visible;
+            mViewSearchMenu.Checked = !mSearchForm.IsHidden;
+            mViewDataMenu.Checked = !mDataForm.IsHidden;
+            mViewStructureMenu.Checked = !mStructureForm.IsHidden;
+            mViewPropertiesMenu.Checked = !mPropertyForm.IsHidden;
+            outToolStripMenuItem.Checked = !mDummyOutputWindow.IsHidden;
         }
 
         private void mViewSearchMenu_CheckedChanged(object pSender, EventArgs pArgs)
@@ -535,7 +631,7 @@ namespace MapleShark
             }
 
             DefinitionsContainer.Instance.Save();
-        }
+    }
 
         private void setupToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -645,9 +741,16 @@ namespace MapleShark
             }
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        //private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        //{
+        //    Config.LoadProperties();
+        //}
+
+
+        private void outToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Config.LoadProperties();
+            if (outToolStripMenuItem.Checked) mDummyOutputWindow.Show();
+            else mDummyOutputWindow.Hide();
         }
     }
 }

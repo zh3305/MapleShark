@@ -1,4 +1,5 @@
-namespace DockSample
+
+namespace MapleShark
 {
     partial class DummyOutputWindow
     {
@@ -29,7 +30,7 @@ namespace DockSample
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DummyOutputWindow));
             this.comboBox = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.mTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // comboBox
@@ -42,24 +43,22 @@ namespace DockSample
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(674, 20);
             this.comboBox.TabIndex = 1;
+            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
-            // textBox1
+            // mTextBox
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(0, 22);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(674, 217);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
-            this.textBox1.WordWrap = false;
+            this.mTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mTextBox.Location = new System.Drawing.Point(0, 22);
+            this.mTextBox.Name = "mTextBox";
+            this.mTextBox.Size = new System.Drawing.Size(674, 217);
+            this.mTextBox.TabIndex = 2;
+            this.mTextBox.Text = "\n---------------------- Done ----------------------\n";
+            this.mTextBox.WordWrap = false;
             // 
             // DummyOutputWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.ClientSize = new System.Drawing.Size(674, 241);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.mTextBox);
             this.Controls.Add(this.comboBox);
             this.Font = new System.Drawing.Font("ËÎÌו", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.HideOnClose = true;
@@ -70,12 +69,11 @@ namespace DockSample
             this.TabText = "Output";
             this.Text = "Output";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
 		}
 		#endregion
 
 		private System.Windows.Forms.ComboBox comboBox;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.RichTextBox mTextBox;
     }
 }

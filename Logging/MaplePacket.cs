@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace MapleShark
 {
-    public sealed class MaplePacket : ListViewItem
+    public sealed class MaplePacket : BrightIdeasSoftware.OLVListItem
     {
         public DateTime Timestamp { get; private set; }
         /// <summary>
@@ -14,7 +14,8 @@ namespace MapleShark
         public ushort Build { get; private set; }
         public ushort Locale { get; private set; }
         public ushort Opcode { get; private set; }
-        public new string Name { set { SubItems[4].Text = value; } get { return SubItems[4].Text; } }
+        //public new string Name { set { SubItems[4].Text = value; } get { return SubItems[4].Text; } }
+        public string name;
 
         public byte[] Buffer { get; private set; }
         public int Cursor { get; private set; }
@@ -23,15 +24,17 @@ namespace MapleShark
         public uint PreDecodeIV { get; private set; }
         public uint PostDecodeIV { get; private set; }
 
+
         internal MaplePacket(DateTime pTimestamp, bool pOutbound, ushort pBuild, ushort pLocale, ushort pOpcode, string pName, byte[] pBuffer, uint pPreDecodeIV, uint pPostDecodeIV)
-            : base(new string[] {
-                pTimestamp.ToLocalTime().ToString("HH:mm:ss.fff"),
-                pOutbound ? "Outbound" : "Inbound",
-                pBuffer.Length.ToString(),
-                "0x" + pOpcode.ToString("X4"),
-                //pName==string.Empty?pOutbound ?  Config.recv.getkey( "0x" + pOpcode.ToString("X4")): Config.send.getkey( "0x" + pOpcode.ToString("X4"))  :
-                pName}
-            )
+            //: base(new string[] {
+            //    pTimestamp.ToLocalTime().ToString("HH:mm:ss.fff"),
+            //    pOutbound ? "Outbound" : "Inbound",
+            //    pBuffer.Length.ToString(),
+            //    "0x" + pOpcode.ToString("X4"),
+            //    //pName==string.Empty?pOutbound ?  Config.recv.getkey( "0x" + pOpcode.ToString("X4")): Config.send.getkey( "0x" + pOpcode.ToString("X4"))  :
+            //    pName}
+            //)
+            :base("")
         {
             Timestamp = pTimestamp;
             Outbound = pOutbound;
@@ -41,8 +44,21 @@ namespace MapleShark
             Locale = pLocale;
             PreDecodeIV = pPreDecodeIV;
             PostDecodeIV = pPostDecodeIV;
+            name = pName;
         }
-
+        public string mTimestampColumn { get { return Timestamp.ToLocalTime().ToString("HH:mm:ss.fff"); } }
+        public string mDirectionColumn { get { return Outbound ? "Outbound" : "Inbound"; } }
+        public string mLengthColumn { get { return Buffer.Length.ToString(); } }
+        public string mOpcodeColumn { get { return "0x" + Opcode.ToString("X4"); } }
+        public string mNameColumn { get { return name; } }
+        public class mMaplePacket
+        {
+            public string Timestamp;
+            public string Direction;
+            public string Length;
+            public string Opcode;
+            public string Name;
+        }
         public void Rewind() { Cursor = 0; }
 
         public bool ReadByte(out byte pValue)

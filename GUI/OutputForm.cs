@@ -12,6 +12,10 @@ namespace MapleShark
 {
     public partial class OutputForm : DockContent
     {
+        public OutputForm()
+        {
+        }
+
         public OutputForm(string pTitle)
         {
             InitializeComponent();

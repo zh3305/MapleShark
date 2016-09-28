@@ -110,9 +110,12 @@ namespace MapleShark.GUI
             }
             catch (Exception exc)
             {
-                OutputForm output = new OutputForm("Script Error");
-                output.Append(exc.ToString());
-                output.Show(this);
+                //OutputForm output = new OutputForm("Script Error");
+                //output.Append(exc.ToString());
+                //output.Show(this);
+
+                MainForm.mDummyOutputWindow.Append(exc.ToString()); ;
+                MainForm.mDummyOutputWindow.Activate();
             }
 
         }

@@ -39,6 +39,8 @@ namespace MapleShark
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.Cb_NoEmpty = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.placeHolderTextBox1 = new MapleShark.Tools.PlaceHolderTextBox();
             this.Tb_Regx = new MapleShark.Tools.PlaceHolderTextBox();
             this.mSequenceHex = new System.Windows.Forms.HexBox();
             this.SuspendLayout();
@@ -52,7 +54,7 @@ namespace MapleShark
             this.mOpcodeCombo.FormattingEnabled = true;
             this.mOpcodeCombo.Location = new System.Drawing.Point(3, 3);
             this.mOpcodeCombo.Name = "mOpcodeCombo";
-            this.mOpcodeCombo.Size = new System.Drawing.Size(532, 23);
+            this.mOpcodeCombo.Size = new System.Drawing.Size(563, 23);
             this.mOpcodeCombo.TabIndex = 4;
             this.mOpcodeCombo.SelectedIndexChanged += new System.EventHandler(this.mOpcodeCombo_SelectedIndexChanged);
             // 
@@ -60,7 +62,7 @@ namespace MapleShark
             // 
             this.mNextOpcodeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.mNextOpcodeButton.Enabled = false;
-            this.mNextOpcodeButton.Location = new System.Drawing.Point(612, 2);
+            this.mNextOpcodeButton.Location = new System.Drawing.Point(643, 2);
             this.mNextOpcodeButton.Name = "mNextOpcodeButton";
             this.mNextOpcodeButton.Size = new System.Drawing.Size(65, 25);
             this.mNextOpcodeButton.TabIndex = 5;
@@ -72,7 +74,7 @@ namespace MapleShark
             // 
             this.mPrevOpcodeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.mPrevOpcodeButton.Enabled = false;
-            this.mPrevOpcodeButton.Location = new System.Drawing.Point(541, 2);
+            this.mPrevOpcodeButton.Location = new System.Drawing.Point(572, 2);
             this.mPrevOpcodeButton.Name = "mPrevOpcodeButton";
             this.mPrevOpcodeButton.Size = new System.Drawing.Size(65, 25);
             this.mPrevOpcodeButton.TabIndex = 9;
@@ -84,9 +86,9 @@ namespace MapleShark
             // 
             this.mPrevSequenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.mPrevSequenceButton.Enabled = false;
-            this.mPrevSequenceButton.Location = new System.Drawing.Point(215, 27);
+            this.mPrevSequenceButton.Location = new System.Drawing.Point(246, 68);
             this.mPrevSequenceButton.Name = "mPrevSequenceButton";
-            this.mPrevSequenceButton.Size = new System.Drawing.Size(65, 25);
+            this.mPrevSequenceButton.Size = new System.Drawing.Size(65, 23);
             this.mPrevSequenceButton.TabIndex = 8;
             this.mPrevSequenceButton.Text = "Prev";
             this.mPrevSequenceButton.UseVisualStyleBackColor = true;
@@ -95,9 +97,9 @@ namespace MapleShark
             // 
             this.mNextSequenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.mNextSequenceButton.Enabled = false;
-            this.mNextSequenceButton.Location = new System.Drawing.Point(286, 27);
+            this.mNextSequenceButton.Location = new System.Drawing.Point(317, 68);
             this.mNextSequenceButton.Name = "mNextSequenceButton";
-            this.mNextSequenceButton.Size = new System.Drawing.Size(65, 25);
+            this.mNextSequenceButton.Size = new System.Drawing.Size(65, 23);
             this.mNextSequenceButton.TabIndex = 7;
             this.mNextSequenceButton.Text = "Next";
             this.mNextSequenceButton.UseVisualStyleBackColor = true;
@@ -106,7 +108,7 @@ namespace MapleShark
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(612, 28);
+            this.button1.Location = new System.Drawing.Point(643, 30);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(65, 25);
             this.button1.TabIndex = 10;
@@ -119,7 +121,7 @@ namespace MapleShark
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(421, 67);
+            this.comboBox1.Location = new System.Drawing.Point(452, 69);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(126, 22);
             this.comboBox1.TabIndex = 11;
@@ -129,7 +131,7 @@ namespace MapleShark
             // 
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(545, 26);
+            this.checkBox1.Location = new System.Drawing.Point(576, 28);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(0);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(54, 18);
@@ -141,7 +143,7 @@ namespace MapleShark
             // 
             this.Cb_NoEmpty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cb_NoEmpty.AutoSize = true;
-            this.Cb_NoEmpty.Location = new System.Drawing.Point(545, 41);
+            this.Cb_NoEmpty.Location = new System.Drawing.Point(576, 43);
             this.Cb_NoEmpty.Margin = new System.Windows.Forms.Padding(0);
             this.Cb_NoEmpty.Name = "Cb_NoEmpty";
             this.Cb_NoEmpty.Size = new System.Drawing.Size(61, 18);
@@ -149,15 +151,40 @@ namespace MapleShark
             this.Cb_NoEmpty.Text = "NoEmy";
             this.Cb_NoEmpty.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.DarkCyan;
+            this.label1.Location = new System.Drawing.Point(0, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 14);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Filter";
+            // 
+            // placeHolderTextBox1
+            // 
+            this.placeHolderTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.placeHolderTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Italic);
+            this.placeHolderTextBox1.ForeColor = System.Drawing.Color.Green;
+            this.placeHolderTextBox1.Location = new System.Drawing.Point(55, 32);
+            this.placeHolderTextBox1.Name = "placeHolderTextBox1";
+            this.placeHolderTextBox1.PlaceHolderText = "Filter text";
+            this.placeHolderTextBox1.Size = new System.Drawing.Size(256, 20);
+            this.placeHolderTextBox1.TabIndex = 12;
+            this.placeHolderTextBox1.Text = "Regex Search";
+            this.placeHolderTextBox1.TextChanged += new System.EventHandler(this.placeHolderTextBox1_TextChanged);
+            // 
             // Tb_Regx
             // 
             this.Tb_Regx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Tb_Regx.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Italic);
             this.Tb_Regx.ForeColor = System.Drawing.Color.Gray;
-            this.Tb_Regx.Location = new System.Drawing.Point(360, 30);
+            this.Tb_Regx.Location = new System.Drawing.Point(348, 32);
             this.Tb_Regx.Name = "Tb_Regx";
             this.Tb_Regx.PlaceHolderText = "Regex Search";
-            this.Tb_Regx.Size = new System.Drawing.Size(175, 20);
+            this.Tb_Regx.Size = new System.Drawing.Size(218, 20);
             this.Tb_Regx.TabIndex = 12;
             this.Tb_Regx.Text = "Regex Search";
             // 
@@ -167,10 +194,10 @@ namespace MapleShark
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mSequenceHex.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mSequenceHex.LineInfoForeColor = System.Drawing.Color.Empty;
-            this.mSequenceHex.Location = new System.Drawing.Point(3, 30);
+            this.mSequenceHex.Location = new System.Drawing.Point(3, 68);
             this.mSequenceHex.Name = "mSequenceHex";
             this.mSequenceHex.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.mSequenceHex.Size = new System.Drawing.Size(206, 20);
+            this.mSequenceHex.Size = new System.Drawing.Size(237, 23);
             this.mSequenceHex.TabIndex = 6;
             this.mSequenceHex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mSequenceHex_KeyPress);
             // 
@@ -178,9 +205,11 @@ namespace MapleShark
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 88);
+            this.ClientSize = new System.Drawing.Size(711, 88);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Cb_NoEmpty);
             this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.placeHolderTextBox1);
             this.Controls.Add(this.Tb_Regx);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button1);
@@ -220,5 +249,7 @@ namespace MapleShark
         private PlaceHolderTextBox Tb_Regx;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox Cb_NoEmpty;
+        private System.Windows.Forms.Label label1;
+        private PlaceHolderTextBox placeHolderTextBox1;
     }
 }

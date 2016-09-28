@@ -45,8 +45,8 @@
             this.mViewDataMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mViewStructureMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mViewPropertiesMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.outToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.converScripToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mTimer = new System.Windows.Forms.Timer(this.components);
             this.mImportDialog = new System.Windows.Forms.OpenFileDialog();
             this.mOpenDialog = new System.Windows.Forms.OpenFileDialog();
@@ -70,8 +70,7 @@
             this.mMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mFileMenu,
             this.mViewMenu,
-            this.converScripToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.converScripToolStripMenuItem});
             this.mMenu.Location = new System.Drawing.Point(0, 0);
             this.mMenu.Name = "mMenu";
             this.mMenu.Size = new System.Drawing.Size(944, 25);
@@ -152,7 +151,8 @@
             this.mViewSearchMenu,
             this.mViewDataMenu,
             this.mViewStructureMenu,
-            this.mViewPropertiesMenu});
+            this.mViewPropertiesMenu,
+            this.outToolStripMenuItem});
             this.mViewMenu.Name = "mViewMenu";
             this.mViewMenu.Size = new System.Drawing.Size(47, 21);
             this.mViewMenu.Text = "&View";
@@ -202,19 +202,22 @@
             this.mViewPropertiesMenu.Text = "&Properties";
             this.mViewPropertiesMenu.CheckedChanged += new System.EventHandler(this.mViewPropertiesMenu_CheckedChanged);
             // 
+            // outToolStripMenuItem
+            // 
+            this.outToolStripMenuItem.Checked = true;
+            this.outToolStripMenuItem.CheckOnClick = true;
+            this.outToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.outToolStripMenuItem.Name = "outToolStripMenuItem";
+            this.outToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.outToolStripMenuItem.Text = "&Out";
+            this.outToolStripMenuItem.Click += new System.EventHandler(this.outToolStripMenuItem_Click);
+            // 
             // converScripToolStripMenuItem
             // 
             this.converScripToolStripMenuItem.Name = "converScripToolStripMenuItem";
             this.converScripToolStripMenuItem.Size = new System.Drawing.Size(90, 21);
             this.converScripToolStripMenuItem.Text = "ConverScrip";
             this.converScripToolStripMenuItem.Click += new System.EventHandler(this.converScripToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(74, 21);
-            this.toolStripMenuItem1.Text = "loadFilter";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // mTimer
             // 
@@ -396,7 +399,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem outToolStripMenuItem;
     }
 }
 

@@ -91,8 +91,8 @@ namespace MapleShark
             initialisator.ReportProgress(0, "Loading + 保存配置文件");
             Config.Instance.Save();
 
-            initialisator.ReportProgress(0, "Loading 加在包头配置");
-            Config.LoadProperties();
+            //initialisator.ReportProgress(0, "Loading 加在包头配置");
+            //Config.LoadProperties();
 
             initialisator.ReportProgress(0, "Registering .msb extension");
             RegisterFileAssociation(".msb", "MapleShark", "MapleShark Binary File", filepath, string.Empty, 0);

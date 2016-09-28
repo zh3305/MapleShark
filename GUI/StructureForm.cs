@@ -56,6 +56,7 @@ namespace MapleShark
             {
                 mParsing = pPacket;
 
+                var engine = new Jint.Engine();
                 try
                 {
                     StringBuilder scriptCode = new StringBuilder();
@@ -68,7 +69,7 @@ namespace MapleShark
                     // script.Execute();
 
                     //Jint
-                    var engine = new Jint.Engine();
+                   // var engine = new Jint.Engine();
                     engine.SetValue("ScriptAPI", new ScriptAPI(this));
                     engine.SetValue("mplew", new mplew(this));
                     engine.Execute(commonCode.ToString());
@@ -81,21 +82,27 @@ namespace MapleShark
                 }
                 catch (Jint.Parser.ParserException exc)
                 {
-                    OutputForm output = new OutputForm("Script Error");
-                    output.Append(exc.Message);
-                    output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
+                    //OutputForm output = new OutputForm("Script Error");
+                    //output.Append(exc.Message);
+                    //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
+                    MainForm.mDummyOutputWindow.Append(exc.Message); ; ;
+                    MainForm.mDummyOutputWindow.Activate();
                 }
                 catch (Jint.Runtime.JavaScriptException exc)
                 {
-                    OutputForm output = new OutputForm("Script Error");
-                    output.Append(exc.LineNumber + " : " + exc.Message);
-                    output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
+                    MainForm.mDummyOutputWindow.Append(exc.LineNumber + " : " + exc.Message); ;
+                    MainForm.mDummyOutputWindow.Activate();
+                    //OutputForm output = new OutputForm("Script Error");
+                    //output.Append(exc.LineNumber + " : " + exc.Message);
+                    //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
                 }
                 catch (Exception exc)
                 {
-                    OutputForm output = new OutputForm("Script Error");
-                    output.Append(exc.ToString());
-                    output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
+                    MainForm.mDummyOutputWindow.Append(exc.InnerException.Message.ToString());
+                    MainForm.mDummyOutputWindow.Activate();
+                    //OutputForm output = new OutputForm("Script Error");
+                    //output.Append(exc.ToString());
+                    //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
                 }
 
                 mParsing = null;

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -75,9 +78,10 @@ namespace MapleShark
                 return;
             Opcode search = (DockPanel.ActiveDocument as SessionForm).Opcodes[mOpcodeCombo.SelectedIndex];
             int initialIndex = session.ListView.SelectedIndices.Count == 0 ? 0 : session.ListView.SelectedIndices[0] + 1;
+
             for (int index = initialIndex; index < session.ListView.Items.Count; ++index)
             {
-                MaplePacket packet = session.ListView.Items[index] as MaplePacket;
+                MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
                 if (packet.Outbound == search.Outbound && packet.Opcode == search.Header)
                 {
                     session.ListView.SelectedIndices.Clear();
@@ -119,7 +123,7 @@ namespace MapleShark
             long startIndex = MainForm.DataForm.HexBox.SelectionLength > 0 ? MainForm.DataForm.HexBox.SelectionStart : -1;
             for (int index = initialIndex; index < session.ListView.Items.Count; ++index)//循环选择列表
             {
-                MaplePacket packet = session.ListView.Items[index] as MaplePacket;
+                MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
                 long searchIndex = startIndex + 1;
                 bool found = false;
                 while (searchIndex <= packet.Buffer.Length - pattern.Length)
@@ -155,7 +159,7 @@ namespace MapleShark
             int initialIndex = session.ListView.SelectedIndices.Count == 0 ? 0 : session.ListView.SelectedIndices[0];
             for (int index = initialIndex - 1; index > 0; --index)
             {
-                MaplePacket packet = session.ListView.Items[index] as MaplePacket;
+                MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
                 if (packet.Outbound == search.Outbound && packet.Opcode == search.Header)
                 {
                     session.ListView.SelectedIndices.Clear();
@@ -199,7 +203,7 @@ namespace MapleShark
             }
             for (int index = initialIndex; index < session.ListView.Items.Count; ++index)
             {
-                MaplePacket packet = session.ListView.Items[index] as MaplePacket;
+                MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
                 if (!checkBox1.Checked || (packet.Outbound == search.Outbound && packet.Opcode == search.Header))
                 {
                     String SerTex;
@@ -265,7 +269,7 @@ namespace MapleShark
             //        //int initialIndex = session.ListView.SelectedIndices.Count == 0 ? 0 : session.ListView.SelectedIndices[0] + 1;
             //        for (int index = initialIndex; index < session.ListView.Items.Count; ++index)
             //        {
-            //            MaplePacket packet = session.ListView.Items[index] as MaplePacket;
+            //            MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
             //            long searchIndex = startIndex + 1;
             //            bool found = false;
             //            if (packet.Outbound == search.Outbound && packet.Opcode == search.Header)
@@ -290,7 +294,7 @@ namespace MapleShark
             //                }
             //                startIndex = -1;
 
-            //                //MaplePacket packet = session.ListView.Items[index] as MaplePacket;
+            //                //MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
             //                //if (packet.Outbound == search.Outbound && packet.Opcode == search.Header)
             //                //{
             //                //    session.ListView.SelectedIndices.Clear();
@@ -310,6 +314,58 @@ namespace MapleShark
             //        break;
             //}
 
+        }
+
+        private void placeHolderTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            if(DockPanel.ActiveDocument!=null)
+                TimedFilter((DockPanel.ActiveDocument as SessionForm ).ListView, ((TextBox)sender).Text);
+        }
+        public void TimedFilter(ObjectListView olv, string txt)
+        {
+            TimedFilter(olv, txt, 0);
+        }
+
+        public void TimedFilter(ObjectListView olv, string txt, int matchKind)
+        {
+            TextMatchFilter filter = null;
+            if (!String.IsNullOrEmpty(txt))
+            {
+                switch (matchKind)
+                {
+                    case 0:
+                    default:
+                        filter = TextMatchFilter.Contains(olv, txt);
+                        break;
+                    case 1:
+                        filter = TextMatchFilter.Prefix(olv, txt);
+                        break;
+                    case 2:
+                        filter = TextMatchFilter.Regex(olv, txt);
+                        break;
+                }
+            }
+
+            // Text highlighting requires at least a default renderer
+            if (olv.DefaultRenderer == null)
+                olv.DefaultRenderer = new HighlightTextRenderer(filter);
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            olv.AdditionalFilter = filter;
+            //olv.Invalidate();
+            stopWatch.Stop();
+
+            IList objects = olv.Objects as IList;
+            //if (objects == null)
+            //    this.ToolStripStatus1 = prefixForNextSelectionMessage =
+            //        String.Format("Filtered in {0}ms", stopWatch.ElapsedMilliseconds);
+            //else
+            //    this.ToolStripStatus1 = prefixForNextSelectionMessage =
+            //        String.Format("Filtered {0} items down to {1} items in {2}ms",
+            //                      objects.Count,
+            //                      olv.Items.Count,
+            //                      stopWatch.ElapsedMilliseconds);
         }
     }
 }

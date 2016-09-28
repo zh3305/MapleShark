@@ -16,6 +16,8 @@ using WeifenLuo.WinFormsUI.Docking;
 
 using MapleLib.PacketLib;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
+using System.Collections;
 
 namespace MapleShark
 {
@@ -62,7 +64,7 @@ namespace MapleShark
         }
 
         public MainForm MainForm { get { return ParentForm as MainForm; } }
-        public ListView ListView { get { return mPacketList; } }
+        public DoubleBufferedListView ListView { get { return mPacketList; } }
         public ushort Build { get { return mBuild; } }
         public byte Locale { get { return mLocale; } }
         public List<Opcode> Opcodes { get { return mOpcodes; } }
@@ -301,7 +303,7 @@ namespace MapleShark
                     mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
                 }
          
-                mPacketList.Items.Add(packet);
+                mPacketList.AddObject(packet);
                 mPackets.Add(packet);
 
                 Console.WriteLine("[CONNECTION] MapleStory V{2}.{3} Locale {4}", mLocalEndpoint, mRemoteEndpoint, mBuild, subVersion, serverLocale);
@@ -357,6 +359,7 @@ namespace MapleShark
             bool refreshOpcodes = false;
             try
             {
+                var pock =new ArrayList();
                 mPacketList.BeginUpdate();
 
                 while ((packet = pStream.Read(pArrivalDate)) != null)
@@ -371,16 +374,22 @@ namespace MapleShark
                     if (definition != null && !mViewIgnoredMenu.Checked && definition.Ignore) continue;
                     if (packet.Outbound && !mViewOutboundMenu.Checked) continue;
                     if (!packet.Outbound && !mViewInboundMenu.Checked) continue;
-                    if (Config.filter(packet.Name))
-                    {
-                        continue;
-                    }
-
-                    mPacketList.Items.Add(packet);
-                    if (mPacketList.SelectedItems.Count == 0) packet.EnsureVisible();
+                    //if (Config.filter(packet.Name))
+                    //{
+                    //    continue;
+                    //}
+                    pock.Add(packet);
+                    //mPacketList.AddObject(packet);
+                    if (mPacketList.SelectedObjects.Count == 0) packet.EnsureVisible();
                 }
 
                 mPacketList.EndUpdate();
+                //Stopwatch sw = new Stopwatch();
+                Cursor.Current = Cursors.WaitCursor;
+                //sw.Start();
+                this.mPacketList.SetObjects(pock);
+                //sw.Stop();
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -463,7 +472,8 @@ namespace MapleShark
                     }
                 }
 
-                mPacketList.BeginUpdate();
+                //mPacketList.BeginUpdate();
+                var pock =new ArrayList();
                 while (stream.Position < stream.Length)
                 {
                     long timestamp = reader.ReadInt64();
@@ -495,13 +505,21 @@ namespace MapleShark
                     mPackets.Add(packet);
                     if (!mOpcodes.Exists(op => op.Outbound == packet.Outbound && op.Header == packet.Opcode)) mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
                     if (definition != null && definition.Ignore) continue;
-                    if (Config.filter(packet.Name))
-                    {
-                        continue;
-                    }
-                    mPacketList.Items.Add(packet);
+                    //if (Config.filter(packet.Name))
+                    //{
+                    //    continue;
+                    //}
+                    //mPacketList.AddObject(packet);
+                    pock.Add(packet);
                 }
                 mPacketList.EndUpdate();
+                //Stopwatch sw = new Stopwatch();
+                Cursor.Current = Cursors.WaitCursor;
+                //sw.Start();
+                this.mPacketList.SetObjects(pock);
+                //sw.Stop();
+                Cursor.Current = Cursors.Default;
+                //mPacketList.EndUpdate();
                 if (mPacketList.Items.Count > 0)
                 {
                     mPacketList.EnsureVisible(0);
@@ -515,7 +533,7 @@ namespace MapleShark
         public void RefreshPackets()
         {
             Opcode search = (MainForm.SearchForm.ComboBox.SelectedIndex >= 0&& MainForm.SearchForm.ComboBox.SelectedIndex <= mOpcodes.Count  ? mOpcodes[MainForm.SearchForm.ComboBox.SelectedIndex] : null);
-            MaplePacket previous = mPacketList.SelectedItems.Count > 0 ? mPacketList.SelectedItems[0] as MaplePacket : null;
+            MaplePacket previous = mPacketList.SelectedObjects.Count > 0 ? mPacketList.SelectedObjects[0] as MaplePacket : null;
             mOpcodes.Clear();
             mPacketList.Items.Clear();
 
@@ -524,7 +542,8 @@ namespace MapleShark
             MainForm.PropertyForm.Properties.SelectedObject = null;
 
             if (!mViewOutboundMenu.Checked && !mViewInboundMenu.Checked) return;
-            mPacketList.BeginUpdate();
+            //mPacketList.BeginUpdate();
+            var pock =new ArrayList();
             for (int index = 0; index < mPackets.Count; ++index)
             {
                 MaplePacket packet = mPackets[index];
@@ -535,14 +554,23 @@ namespace MapleShark
                 packet.Name = definition == null ? "" : definition.Name;
                 if (!mOpcodes.Exists(op => op.Outbound == packet.Outbound && op.Header == packet.Opcode)) mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
                 if (definition != null && !mViewIgnoredMenu.Checked && definition.Ignore) continue;
-                mPacketList.Items.Add(packet);
-                if (Config.filter(packet.Name))
-                {
-                    continue;
-                }
+                pock.Add(packet);
+                //mPacketList.AddObject(packet);
+                //if (Config.filter(packet.Name))
+                //{
+                //    continue;
+                //}
                 if (packet == previous) packet.Selected = true;
             }
             mPacketList.EndUpdate();
+            //Stopwatch sw = new Stopwatch();
+            Cursor.Current = Cursors.WaitCursor;
+            //sw.Start();
+            this.mPacketList.SetObjects(pock);
+            //sw.Stop();
+            Cursor.Current = Cursors.Default;
+
+            //mPacketList.EndUpdate();
             MainForm.SearchForm.RefreshOpcodes(true);
 
             if (previous != null) previous.EnsureVisible();
@@ -583,10 +611,10 @@ namespace MapleShark
             mPackets.Add(packet);
             if (!mOpcodes.Exists(op => op.Outbound == packet.Outbound && op.Header == packet.Opcode)) mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
             if (definition != null && definition.Ignore) return;
-            if (!Config.filter(packet.Name))
-            {
-                mPacketList.Items.Add(packet);
-            }
+            //if (!Config.filter(packet.Name))
+            //{
+            //    mPacketList.AddObject(packet);
+            //}
         }
 
         public void RunSaveCMD()
@@ -701,7 +729,7 @@ namespace MapleShark
         private void CommonScript_FormClosed(object pSender, FormClosedEventArgs pArgs)
         {
             if (mPacketList.SelectedIndices.Count == 0) return;
-            MaplePacket packet = mPacketList.SelectedItems[0] as MaplePacket;
+            MaplePacket packet = mPacketList.SelectedObjects[0] as MaplePacket;
             MainForm.StructureForm.ParseMaplePacket(packet);
             Activate();
         }
@@ -713,21 +741,21 @@ namespace MapleShark
 
         private void mPacketList_SelectedIndexChanged(object pSender, EventArgs pArgs)
         {
-            if (mPacketList.SelectedItems.Count == 0)
+            if (mPacketList.SelectedObjects.Count == 0)
             {
                 MainForm.DataForm.HexBox.ByteProvider = null;
                 MainForm.StructureForm.Tree.Nodes.Clear();
                 MainForm.PropertyForm.Properties.SelectedObject = null;
                 return;
             }
-            MainForm.DataForm.HexBox.ByteProvider = new DynamicByteProvider((mPacketList.SelectedItems[0] as MaplePacket).Buffer);
-            MainForm.StructureForm.ParseMaplePacket(mPacketList.SelectedItems[0] as MaplePacket);
+            MainForm.DataForm.HexBox.ByteProvider = new DynamicByteProvider((mPacketList.SelectedObjects[0] as MaplePacket).Buffer);
+            MainForm.StructureForm.ParseMaplePacket(mPacketList.SelectedObjects[0] as MaplePacket);
         }
 
         private void mPacketList_ItemActivate(object pSender, EventArgs pArgs)
         {
             if (mPacketList.SelectedIndices.Count == 0) return;
-            MaplePacket packet = mPacketList.SelectedItems[0] as MaplePacket;
+            MaplePacket packet = mPacketList.SelectedObjects[0] as MaplePacket;
             string scriptPath = "Scripts" + Path.DirectorySeparatorChar + mLocale.ToString() + Path.DirectorySeparatorChar + mBuild.ToString() + Path.DirectorySeparatorChar + (packet.Outbound ? "发送" : "接收") + Path.DirectorySeparatorChar + "0x" + packet.Opcode.ToString("X4") + ".txt";
 
             if (!Directory.Exists(Path.GetDirectoryName(scriptPath))) Directory.CreateDirectory(Path.GetDirectoryName(scriptPath));
@@ -751,10 +779,10 @@ namespace MapleShark
             openingContextMenu = true;
             mPacketContextNameBox.Text = "";
             mPacketContextIgnoreMenu.Checked = false;
-            if (mPacketList.SelectedItems.Count == 0) pArgs.Cancel = true;
+            if (mPacketList.SelectedObjects.Count == 0) pArgs.Cancel = true;
             else
             {
-                MaplePacket packet = mPacketList.SelectedItems[0] as MaplePacket;
+                MaplePacket packet = mPacketList.SelectedObjects[0] as MaplePacket;
                 Definition definition = Config.Instance.GetDefinition(mBuild, mLocale, packet.Outbound, packet.Opcode);
                 if (definition != null)
                 {
@@ -769,7 +797,7 @@ namespace MapleShark
             mPacketContextNameBox.Focus();
             mPacketContextNameBox.SelectAll();
 
-            mPacketList.SelectedItems[0].EnsureVisible();
+            //mPacketList.SelectedObjects[0].EnsureVisible();
             openingContextMenu = false;
         }
 
@@ -777,7 +805,7 @@ namespace MapleShark
         {
             if (pArgs.Modifiers == Keys.None && pArgs.KeyCode == Keys.Enter)
             {
-                MaplePacket packet = mPacketList.SelectedItems[0] as MaplePacket;
+                MaplePacket packet = mPacketList.SelectedObjects[0] as MaplePacket;
                 Definition definition = Config.Instance.GetDefinition(mBuild, mLocale, packet.Outbound, packet.Opcode);
                 if (definition == null)
                 {
@@ -800,7 +828,7 @@ namespace MapleShark
         private void mPacketContextIgnoreMenu_CheckedChanged(object pSender, EventArgs pArgs)
         {
             if (openingContextMenu) return;
-            MaplePacket packet = mPacketList.SelectedItems[0] as MaplePacket;
+            MaplePacket packet = mPacketList.SelectedObjects[0] as MaplePacket;
             Definition definition = Config.Instance.GetDefinition(mBuild, mLocale, packet.Outbound, packet.Opcode);
             if (definition == null)
             {
@@ -838,7 +866,7 @@ namespace MapleShark
 
         private void SessionForm_Load(object sender, EventArgs e)
         {
-
+            mPacketList.CheckBoxes = false;
         }
 
         private void mMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -905,8 +933,8 @@ namespace MapleShark
 
         private void thisPacketOnlyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (mPacketList.SelectedItems.Count == 0) return;
-            var packet = mPacketList.SelectedItems[0] as MaplePacket;
+            if (mPacketList.SelectedObjects.Count == 0) return;
+            var packet = mPacketList.SelectedObjects[0] as MaplePacket;
             var index = packet.Index;
             mPackets.Remove(packet);
 
@@ -925,8 +953,8 @@ namespace MapleShark
 
         private void onlyVisibleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (mPacketList.SelectedItems.Count == 0) return;
-            var packet = mPacketList.SelectedItems[0] as MaplePacket;
+            if (mPacketList.SelectedObjects.Count == 0) return;
+            var packet = mPacketList.SelectedObjects[0] as MaplePacket;
 
             for (int i = 0; i < packet.Index; i++)
                 mPackets.Remove(mPacketList.Items[i] as MaplePacket);
@@ -935,8 +963,8 @@ namespace MapleShark
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (mPacketList.SelectedItems.Count == 0) return;
-            var packet = mPacketList.SelectedItems[0] as MaplePacket;
+            if (mPacketList.SelectedObjects.Count == 0) return;
+            var packet = mPacketList.SelectedObjects[0] as MaplePacket;
 
             mPackets.RemoveRange(0, mPackets.FindIndex((p) => { return p == packet; }));
             RefreshPackets();
@@ -944,8 +972,8 @@ namespace MapleShark
 
         private void onlyVisibleToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (mPacketList.SelectedItems.Count == 0) return;
-            var packet = mPacketList.SelectedItems[0] as MaplePacket;
+            if (mPacketList.SelectedObjects.Count == 0) return;
+            var packet = mPacketList.SelectedObjects[0] as MaplePacket;
 
             for (int i = packet.Index + 1; i < mPacketList.Items.Count; i++)
                 mPackets.Remove(mPacketList.Items[i] as MaplePacket);
@@ -954,8 +982,8 @@ namespace MapleShark
 
         private void allToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (mPacketList.SelectedItems.Count == 0) return;
-            var packet = mPacketList.SelectedItems[0] as MaplePacket;
+            if (mPacketList.SelectedObjects.Count == 0) return;
+            var packet = mPacketList.SelectedObjects[0] as MaplePacket;
             var startIndex = mPackets.FindIndex((p) => { return p == packet; }) + 1;
             mPackets.RemoveRange(startIndex, mPackets.Count - startIndex);
             RefreshPackets();
