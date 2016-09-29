@@ -318,8 +318,16 @@ namespace MapleShark
 
         private void placeHolderTextBox1_TextChanged(object sender, EventArgs e)
         {
-            if(DockPanel.ActiveDocument!=null)
-                TimedFilter((DockPanel.ActiveDocument as SessionForm ).ListView, ((TextBox)sender).Text);
+
+            if (DockPanel.ActiveDocument == null)
+                return;
+
+            var Filt = "";
+            if (((TextBox)sender).Text.Trim().ToLower() != "filter text" && ((TextBox)sender).Text.Trim().Length != 0)
+            {
+                Filt = ((TextBox)sender).Text;
+            }
+                TimedFilter((DockPanel.ActiveDocument as SessionForm ).ListView, Filt);
         }
         public void TimedFilter(ObjectListView olv, string txt)
         {

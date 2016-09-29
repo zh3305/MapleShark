@@ -39,7 +39,12 @@ namespace MapleShark.GUI
 
         private void tbPacketOpcode_TextChanged(object sender, EventArgs e)
         {
-          labOpcodeName.Text= Config.Instance.GetDefinition(Build, Locale, !radsend.Checked, UInt16.Parse(tbPacketOpcode.Text.Replace("0x", ""), System.Globalization.NumberStyles.HexNumber)).Name;
+            try
+            {
+                labOpcodeName.Text = Config.Instance.GetDefinition(Build, Locale, !radsend.Checked, UInt16.Parse(tbPacketOpcode.Text.Replace("0x", ""), System.Globalization.NumberStyles.HexNumber)).Name;
+            }
+            catch {
+            }
         }
         private void convet()
         {

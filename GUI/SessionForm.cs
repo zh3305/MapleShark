@@ -164,7 +164,7 @@ namespace MapleShark
 
                 PacketReader pr = new PacketReader(headerData);
 
-             
+
 
                 if (tcpData.Length < 13)//if (!(headerData.Length==1072&& headerData[0]==(byte)0x0E) &&(length != tcpData.Length || tcpData.Length < 13))
                 {
@@ -271,30 +271,28 @@ namespace MapleShark
                     DefinitionsContainer.Instance.SaveDefinition(definition);
                 }
 
+                string filename = "Scripts" +
+                    Path.DirectorySeparatorChar + mLocale.ToString() +
+                    Path.DirectorySeparatorChar + mBuild.ToString() +
+                    Path.DirectorySeparatorChar + "接收" +
+                    Path.DirectorySeparatorChar + "0xFFFF.txt";
+                if (!Directory.Exists(Path.GetDirectoryName(filename))) Directory.CreateDirectory(Path.GetDirectoryName(filename));
+                if (!File.Exists(filename))
                 {
-                    string filename = "Scripts" +
-                        Path.DirectorySeparatorChar + mLocale.ToString() +
-                        Path.DirectorySeparatorChar + mBuild.ToString() +
-                        Path.DirectorySeparatorChar + "接收" +
-                        Path.DirectorySeparatorChar + "0xFFFF.txt";
-                    if (!Directory.Exists(Path.GetDirectoryName(filename))) Directory.CreateDirectory(Path.GetDirectoryName(filename));
-                    if (!File.Exists(filename))
-                    {
-                        string contents = "";
-                        //contents += "using (ScriptAPI) {\r\n";
-                        contents += "\tScriptAPI.AddShort(\"Packet Size\");\r\n";
-                        contents += "\tScriptAPI.AddUShort(\"MapleStory Version\");\r\n";
-                        contents += "\tScriptAPI.AddString(\"MapleStory Patch Location/Subversion\");\r\n";
-                        contents += "\tScriptAPI.AddField(\"Local Initializing Vector (IV)\", 4);\r\n";
-                        contents += "\tScriptAPI.AddField(\"Remote Initializing Vector (IV)\", 4);\r\n";
-                        contents += "\tScriptAPI.AddByte(\"MapleStory Locale\");\r\n";
-                        if (mRemotePort == 8484 && ((mLocale == MapleLocale.GLOBAL && version >= 160) ||
-                                                    (mLocale == MapleLocale.TAIWAN && version >= 176) ||
-                                                    (mLocale == MapleLocale.CHINA && version >= 122)))
-                            //   contents += "\tScriptAPI.AddByte(\"Unknown\");\r\n";
-                            //contents += "}";
-                            File.WriteAllText(filename, contents);
-                    }
+                    string contents = "";
+                    //contents += "using (ScriptAPI) {\r\n";
+                    contents += "\tScriptAPI.AddShort(\"Packet Size\");\r\n";
+                    contents += "\tScriptAPI.AddUShort(\"MapleStory Version\");\r\n";
+                    contents += "\tScriptAPI.AddString(\"MapleStory Patch Location/Subversion\");\r\n";
+                    contents += "\tScriptAPI.AddField(\"Local Initializing Vector (IV)\", 4);\r\n";
+                    contents += "\tScriptAPI.AddField(\"Remote Initializing Vector (IV)\", 4);\r\n";
+                    contents += "\tScriptAPI.AddByte(\"MapleStory Locale\");\r\n";
+                    if (mRemotePort == 8484 && ((mLocale == MapleLocale.GLOBAL && version >= 160) ||
+                                                (mLocale == MapleLocale.TAIWAN && version >= 176) ||
+                                                (mLocale == MapleLocale.CHINA && version >= 122)))
+                        //   contents += "\tScriptAPI.AddByte(\"Unknown\");\r\n";
+                        //contents += "}";
+                        File.WriteAllText(filename, contents);
                 }
 
                 MaplePacket packet = new MaplePacket(pArrivalTime, false, mBuild, mLocale, 0xFFFF, definition == null ? "" : definition.Name, tcpData, (uint)0, BitConverter.ToUInt32(remoteIV, 0));
@@ -302,9 +300,9 @@ namespace MapleShark
                 {
                     mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
                 }
-         
-                mPacketList.AddObject(packet);
+
                 mPackets.Add(packet);
+                mPacketList.AddObjects(mPackets);
 
                 Console.WriteLine("[CONNECTION] MapleStory V{2}.{3} Locale {4}", mLocalEndpoint, mRemoteEndpoint, mBuild, subVersion, serverLocale);
                 ProcessTCPPacket(pTCPPacket, ref mInboundSequence, mInboundBuffer, mInboundStream, pArrivalTime);
@@ -359,9 +357,7 @@ namespace MapleShark
             bool refreshOpcodes = false;
             try
             {
-                var pock =new ArrayList();
                 mPacketList.BeginUpdate();
-
                 while ((packet = pStream.Read(pArrivalDate)) != null)
                 {
                     mPackets.Add(packet);
@@ -378,18 +374,17 @@ namespace MapleShark
                     //{
                     //    continue;
                     //}
-                    pock.Add(packet);
-                    //mPacketList.AddObject(packet);
-                    if (mPacketList.SelectedObjects.Count == 0) packet.EnsureVisible();
+                    //new System.Threading.Thread(delegate () { mPacketList.AddObject(packet); }).Start();
+                    //this.Invoke (new Action(() => { mPacketList.AddObject(packet); }));
+                    mPacketList.AddObject(packet);
+                    if (mPacketList.Items.Count == 0) packet.EnsureVisible();
                 }
-
                 mPacketList.EndUpdate();
+
                 //Stopwatch sw = new Stopwatch();
-                Cursor.Current = Cursors.WaitCursor;
                 //sw.Start();
-                this.mPacketList.SetObjects(pock);
+                //this.mPacketList.SetObjects(mPackets);
                 //sw.Stop();
-                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -473,7 +468,7 @@ namespace MapleShark
                 }
 
                 //mPacketList.BeginUpdate();
-                var pock =new ArrayList();
+                //var pock =new ArrayList();
                 while (stream.Position < stream.Length)
                 {
                     long timestamp = reader.ReadInt64();
@@ -510,22 +505,19 @@ namespace MapleShark
                     //    continue;
                     //}
                     //mPacketList.AddObject(packet);
-                    pock.Add(packet);
+                   // pock.Add(packet);
                 }
-                mPacketList.EndUpdate();
+                //mPacketList.EndUpdate();
                 //Stopwatch sw = new Stopwatch();
-                Cursor.Current = Cursors.WaitCursor;
                 //sw.Start();
-                this.mPacketList.SetObjects(pock);
+                this.mPacketList.AddObjects(mPackets);
                 //sw.Stop();
-                Cursor.Current = Cursors.Default;
                 //mPacketList.EndUpdate();
                 if (mPacketList.Items.Count > 0)
                 {
                     mPacketList.EnsureVisible(0);
                 }
             }
-
             Text = string.Format("{0} (ReadOnly)", Path.GetFileName(pFilename));
             Console.WriteLine("Loaded file: {0}", pFilename);
         }
@@ -543,7 +535,7 @@ namespace MapleShark
 
             if (!mViewOutboundMenu.Checked && !mViewInboundMenu.Checked) return;
             //mPacketList.BeginUpdate();
-            var pock =new ArrayList();
+            //var pock =new ArrayList();
             for (int index = 0; index < mPackets.Count; ++index)
             {
                 MaplePacket packet = mPackets[index];
@@ -554,7 +546,7 @@ namespace MapleShark
                 packet.Name = definition == null ? "" : definition.Name;
                 if (!mOpcodes.Exists(op => op.Outbound == packet.Outbound && op.Header == packet.Opcode)) mOpcodes.Add(new Opcode(packet.Outbound, packet.Opcode));
                 if (definition != null && !mViewIgnoredMenu.Checked && definition.Ignore) continue;
-                pock.Add(packet);
+                //pock.Add(packet);
                 //mPacketList.AddObject(packet);
                 //if (Config.filter(packet.Name))
                 //{
@@ -562,13 +554,11 @@ namespace MapleShark
                 //}
                 if (packet == previous) packet.Selected = true;
             }
-            mPacketList.EndUpdate();
+            //mPacketList.EndUpdate();
             //Stopwatch sw = new Stopwatch();
-            Cursor.Current = Cursors.WaitCursor;
             //sw.Start();
-            this.mPacketList.SetObjects(pock);
+            this.mPacketList.AddObjects(mPackets);
             //sw.Stop();
-            Cursor.Current = Cursors.Default;
 
             //mPacketList.EndUpdate();
             MainForm.SearchForm.RefreshOpcodes(true);

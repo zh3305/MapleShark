@@ -408,7 +408,13 @@ namespace MapleShark
 
         Dictionary<int, SessionForm> waiting = new Dictionary<int, SessionForm>();
         List<SessionForm> closes = new List<SessionForm>();
+
         private void mTimer_Tick(object sender, EventArgs e)
+        {
+            this.Invoke(new Action(() => { mTimer_Tick(); }));
+        }
+
+        private void mTimer_Tick()
         {
             try
             {

@@ -166,14 +166,15 @@ namespace MapleShark
             this.placeHolderTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.placeHolderTextBox1.BackColor = System.Drawing.SystemColors.Control;
             this.placeHolderTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Italic);
-            this.placeHolderTextBox1.ForeColor = System.Drawing.Color.Green;
+            this.placeHolderTextBox1.ForeColor = System.Drawing.SystemColors.Highlight;
             this.placeHolderTextBox1.Location = new System.Drawing.Point(55, 32);
             this.placeHolderTextBox1.Name = "placeHolderTextBox1";
             this.placeHolderTextBox1.PlaceHolderText = "Filter text";
             this.placeHolderTextBox1.Size = new System.Drawing.Size(256, 20);
             this.placeHolderTextBox1.TabIndex = 12;
-            this.placeHolderTextBox1.Text = "Regex Search";
+            this.placeHolderTextBox1.Text = "Filter Text";
             this.placeHolderTextBox1.TextChanged += new System.EventHandler(this.placeHolderTextBox1_TextChanged);
             // 
             // Tb_Regx

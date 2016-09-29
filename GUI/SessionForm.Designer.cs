@@ -67,6 +67,7 @@
             this.mSaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.mExportDialog = new System.Windows.Forms.SaveFileDialog();
             this.mPacketList = new MapleShark.DoubleBufferedListView();
+            this.Index = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.mTimestampColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.mDirectionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.mLengthColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -403,6 +404,7 @@
             // 
             // mPacketList
             // 
+            this.mPacketList.AllColumns.Add(this.Index);
             this.mPacketList.AllColumns.Add(this.mTimestampColumn);
             this.mPacketList.AllColumns.Add(this.mDirectionColumn);
             this.mPacketList.AllColumns.Add(this.mLengthColumn);
@@ -418,6 +420,7 @@
             this.mPacketList.CellEditUseWholeCell = false;
             this.mPacketList.CheckBoxes = true;
             this.mPacketList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            //this.Index,
             this.mTimestampColumn,
             this.mDirectionColumn,
             this.mLengthColumn,
@@ -461,11 +464,17 @@
             this.mPacketList.ItemActivate += new System.EventHandler(this.mPacketList_ItemActivate);
             this.mPacketList.SelectedIndexChanged += new System.EventHandler(this.mPacketList_SelectedIndexChanged);
             // 
+            // Index
+            // 
+            this.Index.AspectName = "id";
+            this.Index.DisplayIndex = global::MapleShark.Properties.Settings.Default.index;
+            this.Index.Text = "Index";
+            // 
             // mTimestampColumn
             // 
             this.mTimestampColumn.AspectName = "mTimestampColumn";
             this.mTimestampColumn.Text = "Timestamp";
-            this.mTimestampColumn.Width = 132;
+            this.mTimestampColumn.Width = 117;
             // 
             // mDirectionColumn
             // 
@@ -566,5 +575,6 @@
         private BrightIdeasSoftware.OLVColumn mLengthColumn;
         private BrightIdeasSoftware.OLVColumn mOpcodeColumn;
         private BrightIdeasSoftware.OLVColumn mNameColumn;
+        private BrightIdeasSoftware.OLVColumn Index;
     }
 }

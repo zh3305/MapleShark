@@ -10,8 +10,10 @@ namespace MapleShark.Tools
 {
     public class PlaceHolderTextBox : TextBox
     {
-
-        bool isPlaceHolder = true;
+       /// <summary>
+       /// 输入状态
+       /// </summary>
+     public   bool isPlaceHolder = true;
         string _placeHolderText;
         public string PlaceHolderText
         {

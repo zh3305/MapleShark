@@ -6,8 +6,12 @@ namespace MapleShark
 {
     public sealed class MaplePacket : BrightIdeasSoftware.OLVListItem
     {
-        public DateTime Timestamp { get; private set; }
-        /// <summary>
+        public string mTimestampColumn;
+        public string mDirectionColumn;
+        public string mLengthColumn;
+        public string mOpcodeColumn;
+        public string mNameColumn;
+        public DateTime Timestamp;
         /// 收发类别
         /// </summary>
         public bool Outbound { get; private set; }
@@ -34,7 +38,7 @@ namespace MapleShark
             //    //pName==string.Empty?pOutbound ?  Config.recv.getkey( "0x" + pOpcode.ToString("X4")): Config.send.getkey( "0x" + pOpcode.ToString("X4"))  :
             //    pName}
             //)
-            :base("")
+            : base("")
         {
             Timestamp = pTimestamp;
             Outbound = pOutbound;
@@ -45,20 +49,15 @@ namespace MapleShark
             PreDecodeIV = pPreDecodeIV;
             PostDecodeIV = pPostDecodeIV;
             name = pName;
+
+            mTimestampColumn = Timestamp.ToLocalTime().ToString("HH:mm:ss.fff");
+            mDirectionColumn = Outbound ? "Outbound" : "Inbound";
+            mLengthColumn = Buffer.Length.ToString();
+            mOpcodeColumn = "0x" + Opcode.ToString("X4");
+            mNameColumn = name;
         }
-        public string mTimestampColumn { get { return Timestamp.ToLocalTime().ToString("HH:mm:ss.fff"); } }
-        public string mDirectionColumn { get { return Outbound ? "Outbound" : "Inbound"; } }
-        public string mLengthColumn { get { return Buffer.Length.ToString(); } }
-        public string mOpcodeColumn { get { return "0x" + Opcode.ToString("X4"); } }
-        public string mNameColumn { get { return name; } }
-        public class mMaplePacket
-        {
-            public string Timestamp;
-            public string Direction;
-            public string Length;
-            public string Opcode;
-            public string Name;
-        }
+
+  
         public void Rewind() { Cursor = 0; }
 
         public bool ReadByte(out byte pValue)
