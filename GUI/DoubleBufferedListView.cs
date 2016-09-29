@@ -2,7 +2,7 @@
 
 namespace MapleShark
 {
-    public sealed class DoubleBufferedListView : BrightIdeasSoftware.ObjectListView
+    public sealed class DoubleBufferedListView : ListView// BrightIdeasSoftware.ObjectListView
     {
         public DoubleBufferedListView()
             : base()

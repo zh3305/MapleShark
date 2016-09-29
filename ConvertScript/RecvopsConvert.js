@@ -1,14 +1,3 @@
-// outtb.Document.Text=intb.Document.Text;
-// var s = intb.Document.Text;
-// var pattern = /\d{3}\d{2}/igm;
-// s=s.replace(pattern, function(){
-//  max = "dd";
-//   for(var i = 0; i < arguments.length-1; i++) {
-//           max =max+"["+ arguments[i]+" ] ";
-//   }
-//   return max;
-// });
-// outtb.Document.Text=s;
 var EdtTxt = intb.Document.Text;
 //替换函数
 var pattern = /(public|private|protected)([^\(]+)(\b\w+)([\(].+[\)])([^\)]+)$/igm;
@@ -121,7 +110,7 @@ EdtTxt = EdtTxt.replace(pattern, "$1 [$2]");
 pattern = /(=\s?)new\s+[^(]+\(([^()]*(\([^()]*\)[^()]*)?)\)/igm;
 EdtTxt = EdtTxt.replace(pattern, "$1 {/* $2 */}");
 
-//替换显示类型转换
+//替换显示类型转换 (int)a
 pattern = /(\([\w.]+\))((?:\s?\()|(?:\w+))/igm;
 EdtTxt = EdtTxt.replace(pattern, "/*$1*/ $2");
 

@@ -148,7 +148,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SyntaxBox\Properties\Resources.Designer.cs" />
     <Compile Include="Tools\AppUpdates.cs" />
     <Compile Include="Tools\PlaceHolderTextBox.cs">
       <SubType>Component</SubType>
@@ -221,11 +220,9 @@
     <Compile Include="Tools\PacketReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Docking\Resources.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConverterScriptForm.resx">
       <DependentUpon>ConverterScriptForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\DummyOutputWindow.resx">
       <DependentUpon>DummyOutputWindow.cs</DependentUpon>
@@ -252,11 +249,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SyntaxBox\Properties\Resources.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Docking\Resources\Thumbs.db" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -325,29 +318,6 @@
     <Content Include="ConvertScript\SSharpConvert.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Bottom.bmp" />
-    <Content Include="Docking\Resources\Dockindicator_PaneDiamond_Fill.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Hotspot.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_HotspotIndex.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Left.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Right.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Top.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelBottom.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelBottom_Active.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelFill.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelFill_Active.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelLeft.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelLeft_Active.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelRight.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelRight_Active.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelTop.bmp" />
-    <Content Include="Docking\Resources\DockIndicator_PanelTop_Active.bmp" />
-    <Content Include="Docking\Resources\DockPane_AutoHide.bmp" />
-    <Content Include="Docking\Resources\DockPane_Close.bmp" />
-    <Content Include="Docking\Resources\DockPane_Dock.bmp" />
-    <Content Include="Docking\Resources\DockPane_Option.bmp" />
-    <Content Include="Docking\Resources\DockPane_OptionOverflow.bmp" />
     <Content Include="WinPcap_4.1.3.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

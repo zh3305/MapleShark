@@ -13,10 +13,10 @@ namespace MapleShark
         public ushort LowPort = 8484;
         public ushort HighPort = 8989;
         //Dictonary 
-        //public static Tools.ReadProperties send;
-        //public static Tools.ReadProperties recv;
-        //public static Tools.ReadProperties StkHeader;
-        //public static Dictionary<String, bool> StkHeaderS=new Dictionary<string, bool>();
+        public static Tools.ReadProperties send;
+        public static Tools.ReadProperties recv;
+        public static Tools.ReadProperties StkHeader;
+        public static Dictionary<String, bool> StkHeaderS = new Dictionary<string, bool>();
 
         /// <summary>
         /// 过滤方向.True 正向,Flse 反向
@@ -77,29 +77,29 @@ namespace MapleShark
         {
             return Environment.CurrentDirectory  + Path.DirectorySeparatorChar + (pOutbound ? "sendops" : "recvops") + ".properties";
         }
-        //public static void LoadProperties()
-        //{
-        //    //Tools.IniFiles inif = new Tools.IniFiles(GetPropertiesFile(pOutbound));
-        //    //send = new Tools.ReadProperties(Config.GetPropertiesFile(true));
-        //    //recv = new Tools.ReadProperties(Config.GetPropertiesFile(false));
-        //    if (StkHeader != null) StkHeader.Clear();
-        //    StkHeader = new Tools.ReadProperties(Environment.CurrentDirectory + Path.DirectorySeparatorChar + "StkHeader.properties");
-        //    StkHeaderdirection = Config.StkHeader.ContainsKey("StkHeaderdirection") ? Config.StkHeader["StkHeaderdirection"].ToLower() == "true" : true;
-        //    StkHeaderS.Clear();
-        //    foreach (var i in StkHeader)
-        //    {
-        //        if (i.Value.ToLower() == "true")
-        //        {
-        //            if (!StkHeaderS.ContainsKey(i.Key))
-        //                StkHeaderS.Add(i.Key, true);
-        //        }
-        //    }
+        public static void LoadProperties()
+        {
+            //Tools.IniFiles inif = new Tools.IniFiles(GetPropertiesFile(pOutbound));
+            //send = new Tools.ReadProperties(Config.GetPropertiesFile(true));
+            //recv = new Tools.ReadProperties(Config.GetPropertiesFile(false));
+            if (StkHeader != null) StkHeader.Clear();
+            StkHeader = new Tools.ReadProperties(Environment.CurrentDirectory + Path.DirectorySeparatorChar + "StkHeader.properties");
+            StkHeaderdirection = Config.StkHeader.ContainsKey("StkHeaderdirection") ? Config.StkHeader["StkHeaderdirection"].ToLower() == "true" : true;
+            StkHeaderS.Clear();
+            foreach (var i in StkHeader)
+            {
+                if (i.Value.ToLower() == "true")
+                {
+                    if (!StkHeaderS.ContainsKey(i.Key))
+                        StkHeaderS.Add(i.Key, true);
+                }
+            }
 
-        //}
-        //public static bool filter(string headr)
-        //{
-        //    return StkHeaderdirection ? StkHeaderS.ContainsKey(headr) : !StkHeaderS.ContainsKey(headr);
-        //}
+        }
+        public static bool filter(string headr)
+        {
+            return StkHeaderdirection ? StkHeaderS.ContainsKey(headr) : !StkHeaderS.ContainsKey(headr);
+        }
 
         internal void Save()
         {

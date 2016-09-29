@@ -81,7 +81,7 @@ namespace MapleShark
 
             for (int index = initialIndex; index < session.ListView.Items.Count; ++index)
             {
-                MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
+                MaplePacket packet = session.ListView.Items[index] as MaplePacket;
                 if (packet.Outbound == search.Outbound && packet.Opcode == search.Header)
                 {
                     session.ListView.SelectedIndices.Clear();
@@ -123,7 +123,7 @@ namespace MapleShark
             long startIndex = MainForm.DataForm.HexBox.SelectionLength > 0 ? MainForm.DataForm.HexBox.SelectionStart : -1;
             for (int index = initialIndex; index < session.ListView.Items.Count; ++index)//循环选择列表
             {
-                MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
+                MaplePacket packet = session.ListView.Items[index] as MaplePacket;
                 long searchIndex = startIndex + 1;
                 bool found = false;
                 while (searchIndex <= packet.Buffer.Length - pattern.Length)
@@ -159,7 +159,7 @@ namespace MapleShark
             int initialIndex = session.ListView.SelectedIndices.Count == 0 ? 0 : session.ListView.SelectedIndices[0];
             for (int index = initialIndex - 1; index > 0; --index)
             {
-                MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
+                MaplePacket packet = session.ListView.Items[index] as MaplePacket;
                 if (packet.Outbound == search.Outbound && packet.Opcode == search.Header)
                 {
                     session.ListView.SelectedIndices.Clear();
@@ -203,7 +203,7 @@ namespace MapleShark
             }
             for (int index = initialIndex; index < session.ListView.Items.Count; ++index)
             {
-                MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
+                MaplePacket packet = session.ListView.Items[index] as MaplePacket;
                 if (!checkBox1.Checked || (packet.Outbound == search.Outbound && packet.Opcode == search.Header))
                 {
                     String SerTex;
@@ -269,7 +269,7 @@ namespace MapleShark
             //        //int initialIndex = session.ListView.SelectedIndices.Count == 0 ? 0 : session.ListView.SelectedIndices[0] + 1;
             //        for (int index = initialIndex; index < session.ListView.Items.Count; ++index)
             //        {
-            //            MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
+            //            MaplePacket packet = session.ListView.Items[index] as MaplePacket;
             //            long searchIndex = startIndex + 1;
             //            bool found = false;
             //            if (packet.Outbound == search.Outbound && packet.Opcode == search.Header)
@@ -294,7 +294,7 @@ namespace MapleShark
             //                }
             //                startIndex = -1;
 
-            //                //MaplePacket packet = session.ListView.GetItem(index).RowObject as MaplePacket;
+            //                //MaplePacket packet = session.ListView.Items[index] as MaplePacket;
             //                //if (packet.Outbound == search.Outbound && packet.Opcode == search.Header)
             //                //{
             //                //    session.ListView.SelectedIndices.Clear();
@@ -321,13 +321,25 @@ namespace MapleShark
 
             if (DockPanel.ActiveDocument == null)
                 return;
-
             var Filt = "";
             if (((TextBox)sender).Text.Trim().ToLower() != "filter text" && ((TextBox)sender).Text.Trim().Length != 0)
             {
                 Filt = ((TextBox)sender).Text;
             }
-                TimedFilter((DockPanel.ActiveDocument as SessionForm ).ListView, Filt);
+            Filt = Filt.ToLower();
+            //(DockPanel.ActiveDocument as SessionForm).mPackets.ForEach(x=>
+            //( (x.Name.ToLower().Contains(Filt))? (DockPanel.ActiveDocument as SessionForm).ListView[x]:false
+            //    )
+           //(DockPanel.ActiveDocument as SessionForm).ListView.Items.Cast (t=>t.Name.ToLower().Contains(Filt));
+            (DockPanel.ActiveDocument as SessionForm).ListView.Items.Clear(); // clear list items before adding 
+                                                                              // filter the items match with search key and add result to list view 
+            (DockPanel.ActiveDocument as SessionForm).ListView.Items.AddRange(
+                (DockPanel.ActiveDocument as SessionForm).mPackets.
+                Where(i => string.IsNullOrEmpty(Filt) || i.Name.ToLower().Contains(Filt))
+                //.Select(c => new ListViewItem(c.Name)).ToArray()
+                .ToArray()
+                );
+            //    TimedFilter((DockPanel.ActiveDocument as SessionForm ).ListView, Filt);
         }
         public void TimedFilter(ObjectListView olv, string txt)
         {
