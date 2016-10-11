@@ -38,6 +38,7 @@ namespace MapleShark
         public StructureForm()
         {
             InitializeComponent();
+            VroomJs.AssemblyLoader.EnsureLoaded();
         }
 
         public MainForm MainForm { get { return ParentForm as MainForm; } }
@@ -56,7 +57,6 @@ namespace MapleShark
             {
                 mParsing = pPacket;
 
-                var engine = new Jint.Engine();
                 try
                 {
                     StringBuilder scriptCode = new StringBuilder();
@@ -68,17 +68,41 @@ namespace MapleShark
                     // script.Context.SetItem("ScriptAPI", new ScriptAPI(this));
                     // script.Execute();
 
-                    //Jint
-                   // var engine = new Jint.Engine();
-                    engine.SetValue("ScriptAPI", new ScriptAPI(this));
-                    engine.SetValue("mplew", new mplew(this));
+                    //Jint params支持性不好
+                    //var engine = new Jint.Engine();
+                    //engine.SetValue("ScriptAPI", new ScriptAPI(this));
+                    //engine.SetValue("mplew", new mplew(this));
+                    //engine.Execute(commonCode.ToString());
+                    //engine.Execute(scriptCode.ToString());
+
+                    //NiL.JS 不支持错误行号
+                    //var context = new NiL.JS.Core.Context();
+                    //context.DefineVariable("ScriptAPI").Assign(NiL.JS.Core.JSValue.Marshal(new ScriptAPI(this)));
+                    //context.DefineVariable("mplew").Assign(NiL.JS.Core.JSValue.Marshal(new mplew(this)));
+                    //context.Eval(commonCode.ToString());
+                    //context.Eval(scriptCode.ToString());
+
+                    //VroomJs  params不支持
+                    //var engine = new VroomJs.JsEngine(4, 32);
+                    //using (VroomJs.JsContext context = engine.CreateContext())
+                    //{
+                    //    context.SetVariable("ScriptAPI", new ScriptAPI(this));
+                    //    context.SetVariable("mplew", new mplew(this));
+                    //    context.Execute(commonCode.ToString());
+                    //    context.Execute(scriptCode.ToString());
+                    //}
+
+                    var engine = new Microsoft.ClearScript.V8.V8ScriptEngine();
+                    engine.AddHostObject("ScriptAPI", new ScriptAPI(this));
+                    engine.AddHostObject("mplew", new mplew(this));
                     engine.Execute(commonCode.ToString());
                     engine.Execute(scriptCode.ToString());
 
-                    //var context = new NiL.JS.Core.Context();
-                    //context.DefineVariable("ScriptAPI").Assign(NiL.JS.Core.JSValue.Marshal(new ScriptAPI(this)));
-                    //context.Eval(scriptCode.ToString());
-
+                }
+                catch (Microsoft.ClearScript.ScriptEngineException ex)
+                {
+                    MainForm.mDummyOutputWindow.Append( ex.ErrorDetails);
+                    MainForm.mDummyOutputWindow.Activate();
                 }
                 catch (Jint.Parser.ParserException exc)
                 {
@@ -90,15 +114,25 @@ namespace MapleShark
                 }
                 catch (Jint.Runtime.JavaScriptException exc)
                 {
-                    MainForm.mDummyOutputWindow.Append(exc.LineNumber + " : " + exc.Message); ;
+                    MainForm.mDummyOutputWindow.Append(" LineNumber:" + exc.LineNumber + " : " + exc.Message); ;
                     MainForm.mDummyOutputWindow.Activate();
                     //OutputForm output = new OutputForm("Script Error");
                     //output.Append(exc.LineNumber + " : " + exc.Message);
                     //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
                 }
+                catch (NiL.JS.Core.JSException ex)
+                {
+                    MainForm.mDummyOutputWindow.Append(ex.Error.Value.ToString());
+                    MainForm.mDummyOutputWindow.Activate();
+                }
+                catch (VroomJs.JsException ex)
+                {
+                    MainForm.mDummyOutputWindow.Append(" LineNumber:" + ex.Line + " : " + ex.Message); ;
+                    MainForm.mDummyOutputWindow.Activate();
+                }
                 catch (Exception exc)
                 {
-                    MainForm.mDummyOutputWindow.Append(exc.InnerException.Message.ToString());
+                    MainForm.mDummyOutputWindow.Append(exc.ToString());
                     MainForm.mDummyOutputWindow.Activate();
                     //OutputForm output = new OutputForm("Script Error");
                     //output.Append(exc.ToString());
@@ -153,14 +187,6 @@ namespace MapleShark
             if (!mParsing.ReadPaddedString(out value, pLength)) throw new Exception("Insufficient packet data");
             Color color = Ck<string>(ref pName, value, compare);
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - pLength, pLength, color));
-            return value;
-        }
-        internal string APIAddString(string pName, params string[] compare)
-        {
-            APIStartNode(pName);
-            short size = APIAddShort("Size");
-            string value = APIAddPaddedString(pName, size, compare);
-            APIEndNode(false);
             return value;
         }
         public Color Ck<T>(ref string pName,T value, params T[] compare) where T : IComparable //struct,
@@ -310,9 +336,25 @@ namespace MapleShark
         }
         internal string APIAddString(string pName)
         {
-            APIStartNode(pName);
+            if (pName == "")
+            {
+                pName = "String";
+            }
+           APIStartNode(pName);
             short size = APIAddShort("Size");
             string value = APIAddPaddedString("String", size);
+            APIEndNode(false);
+            return value;
+        }
+        internal string APIAddString(string pName, params string[] compare)
+        {
+            if (pName == "")
+            {
+                pName = "String";
+            }
+            APIStartNode(pName);
+            short size = APIAddShort("Size");
+            string value = APIAddPaddedString(pName, size, compare);
             APIEndNode(false);
             return value;
         }
@@ -336,9 +378,25 @@ namespace MapleShark
         internal void APIStartNode(string pName)
         {
             StructureNode node = new StructureNode(pName, mParsing.Buffer, mParsing.Cursor, 0);
-            if (mSubNodes.Count > 0) mSubNodes.Peek().Nodes.Add(node);
-            else mTree.Nodes.Add(node);
+            if (mSubNodes.Count > 0)
+            {
+                mSubNodes.Peek().Nodes.Add(node);
+            }
+            else
+            {
+                mTree.Nodes.Add(node);
+            }
             mSubNodes.Push(node);
+        }
+        internal void SetNode(string pName)
+        {
+            if (mSubNodes.Count > 0)
+            {
+                StructureNode node = mSubNodes.Pop();
+                node.Name = pName;
+                //node.Length = mParsing.Cursor - node.Cursor;
+                //   if (pExpand) node.Expand();
+            }
         }
         internal void APIEndNode(bool pExpand)
         {

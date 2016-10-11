@@ -1,4 +1,5 @@
-﻿using MapleShark.Tools;
+﻿using AutoCompleteComboBox;
+using MapleShark.Tools;
 
 namespace MapleShark
 {
@@ -30,7 +31,7 @@ namespace MapleShark
         /// </summary>
         private void InitializeComponent()
         {
-            this.mOpcodeCombo = new System.Windows.Forms.ComboBox();
+            this.mOpcodeCombo =  new SuggestComboBox();
             this.mNextOpcodeButton = new System.Windows.Forms.Button();
             this.mPrevOpcodeButton = new System.Windows.Forms.Button();
             this.mPrevSequenceButton = new System.Windows.Forms.Button();
@@ -49,7 +50,9 @@ namespace MapleShark
             // 
             this.mOpcodeCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mOpcodeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mOpcodeCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.mOpcodeCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.mOpcodeCombo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.mOpcodeCombo.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mOpcodeCombo.FormattingEnabled = true;
             this.mOpcodeCombo.Location = new System.Drawing.Point(3, 3);
@@ -168,7 +171,7 @@ namespace MapleShark
             | System.Windows.Forms.AnchorStyles.Right)));
             this.placeHolderTextBox1.BackColor = System.Drawing.SystemColors.Control;
             this.placeHolderTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Italic);
-            this.placeHolderTextBox1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.placeHolderTextBox1.ForeColor = System.Drawing.Color.Gray;
             this.placeHolderTextBox1.Location = new System.Drawing.Point(55, 32);
             this.placeHolderTextBox1.Name = "placeHolderTextBox1";
             this.placeHolderTextBox1.PlaceHolderText = "Filter text";
@@ -239,7 +242,7 @@ namespace MapleShark
 
         #endregion
 
-        private System.Windows.Forms.ComboBox mOpcodeCombo;
+        private SuggestComboBox mOpcodeCombo;
         private System.Windows.Forms.Button mNextOpcodeButton;
         private System.Windows.Forms.HexBox mSequenceHex;
         private System.Windows.Forms.Button mNextSequenceButton;

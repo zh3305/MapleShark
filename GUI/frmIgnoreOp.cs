@@ -24,6 +24,9 @@ namespace MapleShark.GUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Outbound.AspectToStringConverter = delegate (object cellValue) {
+                return ((bool)cellValue) ? "Recv" : "Send";
+            };
             olvSimple.AddObjects(definition);
         }
 

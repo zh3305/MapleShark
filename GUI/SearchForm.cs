@@ -1,4 +1,5 @@
-﻿using BrightIdeasSoftware;
+﻿using AutoCompleteComboBox;
+using BrightIdeasSoftware;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace MapleShark
         }
 
         public MainForm MainForm { get { return ParentForm as MainForm; } }
-        public ComboBox ComboBox { get { return mOpcodeCombo; } }
+        public SuggestComboBox ComboBox { get { return mOpcodeCombo; } }
         public HexBox HexBox { get { return mSequenceHex; } }
 
         public void RefreshOpcodes(bool pReselect)
@@ -57,13 +58,26 @@ namespace MapleShark
             foreach (Opcode op in session.Opcodes)
             {
                 Definition definition = Config.Instance.GetDefinition(session.Build, session.Locale, op.Outbound, op.Header);
-                int addedIndex = mOpcodeCombo.Items.Add(string.Format("{0} 0x{1:X4} {2}", (op.Outbound ? "Outbound  " : "Inbound   "), op.Header, definition == null || string.IsNullOrEmpty(definition.Name) ? "" : definition.Name));
+                int addedIndex = mOpcodeCombo.Items.Add(string.Format("{2,-35}    0x{1:X4}    {0}", (op.Outbound ? "Outbound  " : "Inbound   "), op.Header, definition == null || string.IsNullOrEmpty(definition.Name) ? "" : definition.Name));
 
                 if (selected != null && selected.Outbound == op.Outbound && selected.Header == op.Header)
                 {
                     mOpcodeCombo.SelectedIndex = addedIndex;
                 }
             }
+            //this.comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;   //设置自动完成的源 
+            //this.comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;    //设置自动完成的的形式 
+            //mOpcodeCombo.DataSource = suggestComboBox1.Items.Cast<string>().Select(i => new Person { Name = i }).ToList();
+            //mOpcodeCombo.DisplayMember = "Name";
+
+            // then you have to set the PropertySelector like this:
+            mOpcodeCombo.PropertySelector = collection => collection.Cast<string>().Select(p => p.ToString());
+
+            // filter rule can be customized: e.g. a StartsWith search:
+            mOpcodeCombo.FilterRule = (item, text) => item.StartsWith(text.Trim(), StringComparison.CurrentCultureIgnoreCase);
+
+            // ordering rule can also be customized: e.g. order by the surname:
+            mOpcodeCombo.SuggestListOrderRule = s => s.Split(' ')[1];
         }
 
         private void mOpcodeCombo_SelectedIndexChanged(object pSender, EventArgs pArgs)

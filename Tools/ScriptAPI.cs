@@ -40,7 +40,7 @@ namespace MapleShark
         {
             Console.WriteLine(count);
         }
-        public void Write(string pPath, string pLine) {
+        public void WriteFile(string pPath, string pLine) {
 			pLine = pLine.Replace("\r\n", "\\r\\n");
 			using (StreamWriter writer = File.AppendText(pPath)) {
 				writer.WriteLine(pLine);
@@ -50,10 +50,37 @@ namespace MapleShark
     }
     public sealed class mplew : ScriptAPI
     {
-        public mplew(StructureForm pStructure) : base(pStructure)
+        public void LogMessage(string Text)
         {
+            MainForm.mDummyOutputWindow.LogMessage(Text);
+            MainForm.mDummyOutputWindow.Activate();
         }
-
+        public void LogWarning(string Text)
+        {
+            MainForm.mDummyOutputWindow.LogWarning(Text);
+            MainForm.mDummyOutputWindow.Activate();
+        }
+        public void LogError(string Text)
+        {
+            MainForm.mDummyOutputWindow.LogError(Text);
+            MainForm.mDummyOutputWindow.Activate();
+        }
+        public void LogAppend( string Text)
+        {
+            LogAppend(Color.Black, Text);
+        }
+        public void LogAppend(int FromArgb, string Text)
+        {
+            Color color = Color.FromArgb(FromArgb);
+            LogAppend(color, Text);
+        }
+        public void LogAppend(Color color, string Text)
+        {
+            MainForm.mDummyOutputWindow.LogAppend(color, Text);
+            MainForm.mDummyOutputWindow.Activate();
+        }
+        public mplew(StructureForm pStructure) : base(pStructure) { }
+   
         /**
          * Write the number of zero bytes
          *
@@ -90,22 +117,34 @@ namespace MapleShark
         //        baosWrite(b[x]);
         //    }
         //}
-
+        public byte write(params byte[] b)
+        {
+            return write("", b);
+        }
         public byte write(string Name,params byte[] b)
         {
            return base.mStructure.APIAddByte(Name, b);
         }
-
+        public int writeShort( params int[] b)
+        {
+            return writeShort("", b);
+        }
         public int writeShort(string Name, params int[] b)
         {
          return   base.mStructure.APIAddShort(Name, b);
         }
-
+        public int writeInt( params int[] b)
+        {
+            return writeInt("", b);
+        }
         public int writeInt(string Name, params int[] b)
         {
             return base.mStructure.APIAddInt(Name, b);
         }
-
+        public String writeAsciiString( int length, params String[] b)
+        {
+            return writeAsciiString("", length, b);
+        }
         public String writeAsciiString(String Name,int length, params String[] b)
         {
             return base.mStructure.APIAddPaddedString(Name, length, b);
@@ -155,6 +194,10 @@ namespace MapleShark
             //log("\r\n");
         }
 
+        public long writeLong( params long[] b)
+        {
+            return writeLong("", b);
+        }
         /**
          * Write a long integer to the stream.
          *
@@ -164,7 +207,10 @@ namespace MapleShark
         {
             return base.mStructure.APIAddLong(Name, b);
         }
-
+        public long writeReversedLong( params long[] b)//未实现
+        {
+            return writeReversedLong("", b);
+        }
         public long writeReversedLong(String Name, params long[] b)//未实现
         {
             return base.mStructure.APIAddLong(Name, b);
@@ -177,6 +223,10 @@ namespace MapleShark
             //baosWrite((byte)((l >>> 16) & 0xFF));
             //baosWrite((byte)((l >>> 24) & 0xFF));
             //log("\r\n");
+        }
+        public long writeReversedInt(params int[] b)//未实现
+        {
+            return writeReversedInt("", b);
         }
         public long writeReversedInt(String Name, params int[] b)//未实现
         {
@@ -191,6 +241,10 @@ namespace MapleShark
         {
             base.AddField("skip " + length, length);
         }
+        public byte[] writeBuffer( int length)
+        {
+            return writeBuffer("",  length);
+        }
         public byte[] writeBuffer(String Name, int length)
         {
             StartNode("Buffer " + Name);
@@ -201,6 +255,10 @@ namespace MapleShark
             }
             EndNode(false);
             return rtb;
+        }
+        public byte[] writeBuffer( string HexString)
+        {
+            return writeBuffer("", HexString);
         }
         public byte[] writeBuffer(String Name, string HexString)
         {

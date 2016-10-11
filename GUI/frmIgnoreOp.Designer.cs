@@ -132,11 +132,14 @@
             // Outbound
             // 
             this.Outbound.AspectName = "Outbound";
-            this.Outbound.Text = "Outbound";
+            this.Outbound.AspectToStringFormat = "";
+            this.Outbound.Text = "OutIn";
+            this.Outbound.Width = 80;
             // 
             // Opcode
             // 
             this.Opcode.AspectName = "Opcode";
+            this.Opcode.AspectToStringFormat = "0x{0:X4}";
             this.Opcode.Text = "Opcode";
             // 
             // pName

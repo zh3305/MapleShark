@@ -15,6 +15,7 @@ namespace MapleShark
         [STAThread]
         private static void Main(string[] pArgs)
         {
+
             AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
             {
                 Exception e = (Exception)args.ExceptionObject;
