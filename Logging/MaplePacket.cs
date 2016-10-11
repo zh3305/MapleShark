@@ -208,7 +208,7 @@ namespace MapleShark
             if (Cursor + pLength > Length) return false;
             int length = 0;
             while (length < pLength && Buffer[Cursor + length] != 0x00) ++length;
-            if (length > 0) pValue = Encoding.ASCII.GetString(Buffer, Cursor, length);
+            if (length > 0) pValue = Encoding.Default.GetString(Buffer, Cursor, length);// encoding.GetString Encoding.ASCII.GetString(Buffer, Cursor, length);
             Cursor += pLength;
             return true;
         }
