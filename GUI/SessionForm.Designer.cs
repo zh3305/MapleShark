@@ -66,21 +66,15 @@
             this.addPacketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.mExportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.忽略列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mPacketList = new MapleShark.DoubleBufferedListView();
             this.mTimestampColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mDirectionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mLengthColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mOpcodeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mNameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            //this.Index = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            //this.mTimestampColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            //this.mDirectionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            //this.mLengthColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            //this.mOpcodeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            //this.mNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.mPacketContextMenu.SuspendLayout();
             this.mMenu.SuspendLayout();
-            //((System.ComponentModel.ISupportInitialize)(this.mPacketList)).BeginInit();
             this.SuspendLayout();
             // 
             // mPacketContextMenu
@@ -199,7 +193,8 @@
             this.mMainFileMenu,
             this.mViewMenu,
             this.dataToolStripMenuItem,
-            this.addPacketsToolStripMenuItem});
+            this.addPacketsToolStripMenuItem,
+            this.忽略列表ToolStripMenuItem});
             this.mMenu.Location = new System.Drawing.Point(0, 0);
             this.mMenu.Name = "mMenu";
             this.mMenu.Size = new System.Drawing.Size(752, 25);
@@ -407,23 +402,15 @@
             this.mExportDialog.RestoreDirectory = true;
             this.mExportDialog.Title = "Export";
             // 
+            // 忽略列表ToolStripMenuItem
+            // 
+            this.忽略列表ToolStripMenuItem.Name = "忽略列表ToolStripMenuItem";
+            this.忽略列表ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.忽略列表ToolStripMenuItem.Text = "忽略列表";
+            this.忽略列表ToolStripMenuItem.Click += new System.EventHandler(this.忽略列表ToolStripMenuItem_Click);
+            // 
             // mPacketList
             // 
-            //this.mPacketList.AllColumns.Add(this.Index);
-            //this.mPacketList.AllColumns.Add(this.mTimestampColumn);
-            //this.mPacketList.AllColumns.Add(this.mDirectionColumn);
-            //this.mPacketList.AllColumns.Add(this.mLengthColumn);
-            //this.mPacketList.AllColumns.Add(this.mOpcodeColumn);
-            //this.mPacketList.AllColumns.Add(this.mNameColumn);
-            //this.mPacketList.AllowColumnReorder = true;
-            //this.mPacketList.AllowDrop = true;
-            //this.mPacketList.AlternateRowBackColor = System.Drawing.Color.White;
-            //this.mPacketList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            //| System.Windows.Forms.AnchorStyles.Left) 
-            //| System.Windows.Forms.AnchorStyles.Right)));
-            //this.mPacketList.AutoArrange = false;
-            //this.mPacketList.CellEditUseWholeCell = false;
-            //this.mPacketList.CheckBoxes = true;
             this.mPacketList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.mTimestampColumn,
             this.mDirectionColumn,
@@ -436,16 +423,15 @@
             this.mPacketList.FullRowSelect = true;
             this.mPacketList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.mPacketList.HideSelection = false;
-            this.mPacketList.Location = new System.Drawing.Point(0, 0);
+            this.mPacketList.Location = new System.Drawing.Point(0, 25);
             this.mPacketList.MultiSelect = false;
             this.mPacketList.Name = "mPacketList";
-            this.mPacketList.Size = new System.Drawing.Size(752, 451);
+            this.mPacketList.Size = new System.Drawing.Size(752, 426);
             this.mPacketList.TabIndex = 0;
             this.mPacketList.UseCompatibleStateImageBehavior = false;
             this.mPacketList.View = System.Windows.Forms.View.Details;
             this.mPacketList.ItemActivate += new System.EventHandler(this.mPacketList_ItemActivate);
             this.mPacketList.SelectedIndexChanged += new System.EventHandler(this.mPacketList_SelectedIndexChanged);
-
             // 
             // mTimestampColumn
             // 
@@ -473,44 +459,6 @@
             // 
             // SessionForm
             // 
-            //// 
-            //// Index
-            //// 
-            //this.Index.AspectName = "id";
-            //this.Index.DisplayIndex = global::MapleShark.Properties.Settings.Default.index;
-            //this.Index.Text = "Index";
-            //// 
-            //// mTimestampColumn
-            //// 
-            //this.mTimestampColumn.AspectName = "mTimestampColumn";
-            //this.mTimestampColumn.Text = "Timestamp";
-            //this.mTimestampColumn.Width = 117;
-            //// 
-            //// mDirectionColumn
-            //// 
-            //this.mDirectionColumn.AspectName = "mDirectionColumn";
-            //this.mDirectionColumn.Text = "Direction";
-            //this.mDirectionColumn.Width = 80;
-            //// 
-            //// mLengthColumn
-            //// 
-            //this.mLengthColumn.AspectName = "mLengthColumn";
-            //this.mLengthColumn.Text = "Length";
-            //// 
-            //// mOpcodeColumn
-            //// 
-            //this.mOpcodeColumn.AspectName = "mOpcodeColumn";
-            //this.mOpcodeColumn.Text = "Opcode";
-            //// 
-            //// mNameColumn
-            //// 
-            //this.mNameColumn.AspectName = "mNameColumn";
-            //this.mNameColumn.Text = "Name";
-            //this.mNameColumn.Width = 243;
-            //this.mNameColumn.WordWrap = true;
-            //// 
-            //// SessionForm
-            //// 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 451);
@@ -529,7 +477,6 @@
             this.mPacketContextMenu.PerformLayout();
             this.mMenu.ResumeLayout(false);
             this.mMenu.PerformLayout();
-            //((System.ComponentModel.ISupportInitialize)(this.mPacketList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -580,6 +527,7 @@
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem1;
         private DoubleBufferedListView mPacketList;
         private System.Windows.Forms.ToolStripMenuItem addPacketsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 忽略列表ToolStripMenuItem;
         //private BrightIdeasSoftware.OLVColumn mTimestampColumn;
         //private BrightIdeasSoftware.OLVColumn mDirectionColumn;
         //private BrightIdeasSoftware.OLVColumn mLengthColumn;

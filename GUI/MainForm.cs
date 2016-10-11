@@ -37,10 +37,13 @@ namespace MapleShark
             _startupArguments = startupArguments;
             //mDockPanel.Theme= new VS2013BlueTheme();
             //mDockPanel.Theme = new VS2013LightTheme();
-           // mDockPanel.Theme = new VS2013DarkTheme();
+            // mDockPanel.Theme = new VS2013DarkTheme();
             // mDockPanel.Theme = new VS2012BlueTheme();
             // mDockPanel.Theme = new VS2012LightTheme();
             // mDockPanel.Theme = new VS2012DarkTheme();
+            //mDockPanel.Theme = new VS2015BlueTheme();
+            mDockPanel.Theme = new VS2015LightTheme();
+            //mDockPanel.Theme = new VS2015DarkTheme();
         }
 
         public SearchForm SearchForm { get { return mSearchForm; } }
@@ -166,6 +169,14 @@ namespace MapleShark
             {
                 SetDefautDock();
             }
+
+            foreach (string arg in _startupArguments)
+            {
+                SessionForm session = NewSession();
+                session.OpenReadOnly(arg);
+                session.Show(mDockPanel, DockState.Document);
+            }
+            mDockPanel.ResumeLayout(true, true);
         }
         public void SetDefautDock()
         {
@@ -178,12 +189,6 @@ namespace MapleShark
             mDummyOutputWindow.Show(mDockPanel, DockState.DockBottom);
             mDataForm.Activate();
 
-            foreach (string arg in _startupArguments)
-            {
-                SessionForm session = NewSession();
-                session.OpenReadOnly(arg);
-                session.Show(mDockPanel, DockState.Document);
-            }
             mDockPanel.ResumeLayout(true, true);
         }
         private IDockContent GetContentFromPersistString(string persistString)

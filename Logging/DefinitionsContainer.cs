@@ -24,7 +24,18 @@ namespace MapleShark
 
             return _definitions[pLocale][pVersion].Find(d => { return d.Outbound == pOutbound && d.Opcode == pOpcode; });
         }
-
+        /// <summary>
+        /// 获得封包列表
+        /// </summary>
+        /// <param name="pLocale"></param>
+        /// <param name="pVersion"></param>
+        /// <returns></returns>
+        public List<Definition> GetDefinitionList(byte pLocale, ushort pVersion)
+        {
+            if (!_definitions.ContainsKey(pLocale)) return null;
+            if (!_definitions[pLocale].ContainsKey(pVersion)) return null;
+            return _definitions[pLocale][pVersion];
+        }
         public void SaveDefinition(Definition pDefinition)
         {
             if (!_definitions.ContainsKey(pDefinition.Locale)) _definitions.Add(pDefinition.Locale, new Dictionary<ushort, List<Definition>>());

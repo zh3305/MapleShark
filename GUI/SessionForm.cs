@@ -983,5 +983,11 @@ namespace MapleShark
             new GUI.frmAddPacket(mPackets, mBuild, mLocale).ShowDialog(this);
             RefreshPackets();
         }
+
+        private void 忽略列表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new GUI.frmIgnoreOp(DefinitionsContainer.Instance.GetDefinitionList(mLocale, mBuild)).ShowDialog(this);
+            RefreshPackets();
+        }
     }
 }

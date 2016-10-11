@@ -325,7 +325,9 @@
             // 
             // mDockPanel
             // 
-            this.mDockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mDockPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mDockPanel.DockBackColor = System.Drawing.Color.FloralWhite;
             this.mDockPanel.DockBottomPortion = 0.3D;
             this.mDockPanel.DockLeftPortion = 0.3D;
