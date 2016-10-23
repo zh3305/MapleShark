@@ -101,12 +101,29 @@ namespace MapleShark.GUI
                 //engine.Execute(@"var Console={};Console.WriteLine=System.Console.WriteLine");
                 //context.DefineVariable("").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof( Console)));
                 //engine.Execute(scriptCode.ToString());
-                context.DefineVariable("intb").Assign(NiL.JS.Core.JSValue.Marshal(InTb));
-                context.DefineVariable("outtb").Assign(NiL.JS.Core.JSValue.Marshal(OutTb));
-                context.DefineVariable("Console").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof(Console)));
-                context.DefineVariable("window").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof(Tools.window)));
+                //context.DefineVariable("intb").Assign(NiL.JS.Core.JSValue.Marshal(InTb));
+                //context.DefineVariable("outtb").Assign(NiL.JS.Core.JSValue.Marshal(OutTb));
+                //context.DefineVariable("Console").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof(Console)));
+                //context.DefineVariable("window").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof(Tools.window)));
 
-                context.Eval(scriptCode.ToString());
+                //context.Eval(scriptCode.ToString());
+
+
+                 //Microsoft.ClearScript 
+                 //循环变量必须先声明 : 不声明如下情况只会执行一次 
+                 //for ( i = 0; i < 4; i++ ) {  
+                 // for (var  i = 0; i < 4; i++ ) {  没问题
+                var engine = new Microsoft.ClearScript.V8.V8ScriptEngine();
+                engine.AddHostObject("intb", InTb);
+                engine.AddHostObject("outtb", OutTb);
+                engine.AddHostType("Console", typeof(Console));
+                engine.AddHostType("window", typeof(Tools.window));
+                engine.Execute(scriptCode.ToString());
+            }
+            catch (Microsoft.ClearScript.ScriptEngineException ex)
+            {
+                MainForm.mDummyOutputWindow.Append(ex.ErrorDetails);
+                MainForm.mDummyOutputWindow.Activate();
             }
             catch (Exception exc)
             {

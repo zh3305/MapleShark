@@ -68,21 +68,21 @@ namespace MapleShark
                     // script.Context.SetItem("ScriptAPI", new ScriptAPI(this));
                     // script.Execute();
 
-                    //Jint params支持性不好
+                    //Jint 语法支持不好
                     //var engine = new Jint.Engine();
                     //engine.SetValue("ScriptAPI", new ScriptAPI(this));
                     //engine.SetValue("mplew", new mplew(this));
                     //engine.Execute(commonCode.ToString());
                     //engine.Execute(scriptCode.ToString());
 
-                    //NiL.JS 不支持错误行号
+                    //NiL.JS 不支持抛出异常行号
                     //var context = new NiL.JS.Core.Context();
                     //context.DefineVariable("ScriptAPI").Assign(NiL.JS.Core.JSValue.Marshal(new ScriptAPI(this)));
                     //context.DefineVariable("mplew").Assign(NiL.JS.Core.JSValue.Marshal(new mplew(this)));
                     //context.Eval(commonCode.ToString());
                     //context.Eval(scriptCode.ToString());
 
-                    //VroomJs  params不支持
+                    //VroomJs 
                     //var engine = new VroomJs.JsEngine(4, 32);
                     //using (VroomJs.JsContext context = engine.CreateContext())
                     //{
@@ -92,6 +92,10 @@ namespace MapleShark
                     //    context.Execute(scriptCode.ToString());
                     //}
 
+                    // Microsoft.ClearScript 
+                    // 循环变量必须先声明 : 不声明如下情况只会执行一次 
+                    // for ( i = 0; i < 4; i++ ) {  
+                    //  for (var  i = 0; i < 4; i++ ) {  没问题
                     var engine = new Microsoft.ClearScript.V8.V8ScriptEngine();
                     engine.AddHostObject("ScriptAPI", new ScriptAPI(this));
                     engine.AddHostObject("mplew", new mplew(this));
@@ -109,7 +113,7 @@ namespace MapleShark
                     //OutputForm output = new OutputForm("Script Error");
                     //output.Append(exc.Message);
                     //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
-                    MainForm.mDummyOutputWindow.Append(exc.Message); ; ;
+                    MainForm.mDummyOutputWindow.Append(exc.Message);
                     MainForm.mDummyOutputWindow.Activate();
                 }
                 catch (Jint.Runtime.JavaScriptException exc)
@@ -147,8 +151,7 @@ namespace MapleShark
         private TreeNodeCollection CurrentNodes { get { return mSubNodes.Count > 0 ? mSubNodes.Peek().Nodes : mTree.Nodes; } }
         internal string APIGetFiletime()
         {
-            string ret = DateTime.Now.ToFileTime().ToString().Substring(12);
-            return ret;
+            return  DateTime.Now.ToFileTime().ToString().Substring(12); 
         }
         internal byte APIAddByte(string pName)
         {

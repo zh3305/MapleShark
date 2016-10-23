@@ -50,31 +50,31 @@ namespace MapleShark
     }
     public sealed class mplew : ScriptAPI
     {
-        public void LogMessage(string Text)
+        public void LogMessage(String Text)
         {
             MainForm.mDummyOutputWindow.LogMessage(Text);
             MainForm.mDummyOutputWindow.Activate();
         }
-        public void LogWarning(string Text)
+        public void LogWarning(String Text)
         {
             MainForm.mDummyOutputWindow.LogWarning(Text);
             MainForm.mDummyOutputWindow.Activate();
         }
-        public void LogError(string Text)
+        public void LogError(String Text)
         {
             MainForm.mDummyOutputWindow.LogError(Text);
             MainForm.mDummyOutputWindow.Activate();
         }
-        public void LogAppend( string Text)
+        public void LogAppend(String Text)
         {
             LogAppend(Color.Black, Text);
         }
-        public void LogAppend(int FromArgb, string Text)
+        public void LogAppend(int FromArgb, String Text)
         {
             Color color = Color.FromArgb(FromArgb);
             LogAppend(color, Text);
         }
-        public void LogAppend(Color color, string Text)
+        public void LogAppend(Color color, String Text)
         {
             MainForm.mDummyOutputWindow.LogAppend(color, Text);
             MainForm.mDummyOutputWindow.Activate();
@@ -86,7 +86,7 @@ namespace MapleShark
          *
          * @param i
          */
-        public void writeZeroBytes(string Name,  int i)
+        public void writeZeroBytes(String Name,  int i)
         {
             base.StartNode(Name + " Zero "+i);
             for (int x = 0; x < i; x++)
@@ -121,7 +121,7 @@ namespace MapleShark
         {
             return write("", b);
         }
-        public byte write(string Name,params byte[] b)
+        public byte write(String Name,params byte[] b)
         {
            return base.mStructure.APIAddByte(Name, b);
         }
@@ -129,7 +129,7 @@ namespace MapleShark
         {
             return writeShort("", b);
         }
-        public int writeShort(string Name, params int[] b)
+        public int writeShort(String Name, params int[] b)
         {
          return   base.mStructure.APIAddShort(Name, b);
         }

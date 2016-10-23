@@ -91,6 +91,8 @@ void 	EndNode(bool expand)
 void 	Write(string file, string line)
 int 	Remaining()//剩余封包数量
 void 	CWrite(string text) //输出到控制台
+string  GetFiletime() 
+void    WriteFile(string pPath, string pLine) 
 ```
 
 
@@ -126,4 +128,10 @@ long    writeReversedInt(String Name, params int[] b)//反向操作未实现
 long    skip(int length)//跳过指定个数
 byte[]  writeBuffer(String Name,int length))
 byte[]  writeBuffer(String Name, string HexString)//HexString 冒险岛hex String
+void    LogMessage(string Text)
+void    LogWarning(string Text)
+void    LogError(string Text)  
+void    LogAppend(string Text)
+void    LogAppend(int FromArgb, string Text)
+void    LogAppend(Color color, string Text)
 ```

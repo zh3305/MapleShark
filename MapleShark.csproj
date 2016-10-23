@@ -18,7 +18,7 @@
     <ManifestCertificateThumbprint>1304DF4D34E319CB095546126AA1385992210D02</ManifestCertificateThumbprint>
     <ManifestKeyFile>MapleShark_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -123,7 +123,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>pxa.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Alsing.SyntaxBox, Version=1.4.10.0, Culture=neutral, processorArchitecture=MSIL">
@@ -142,8 +143,8 @@
       <HintPath>packages\ILRepack.Lib.2.0.10\lib\net40\ILRepack.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Jint, Version=2.9.1.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
-      <HintPath>packages\Jint.2.9.1\lib\portable-net40+sl50+win+WindowsPhoneApp81+wp80\Jint.dll</HintPath>
+    <Reference Include="jint, Version=2.10.2.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>packages\jint.2.10.2\lib\net45\jint.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NiL.JS, Version=2.4.995.0, Culture=neutral, PublicKeyToken=f1426dd7ad77fce3, processorArchitecture=MSIL">
@@ -165,6 +166,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Diagnostics.Contracts" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Web" />
@@ -334,7 +336,6 @@
     <None Include="Licenses\v8.strongtalk.license" />
     <None Include="Licenses\v8.v8.license" />
     <None Include="Licenses\v8.valgrind.license" />
-    <None Include="MapleShark_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -450,7 +451,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="pxa.pfx" />
     <None Include="Resources\Button-Blank-Green-icon.png" />
     <None Include="Resources\Button-Blank-Red-icon.png" />
     <None Include="Resources\save-icon.png" />
