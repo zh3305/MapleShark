@@ -52,18 +52,18 @@ namespace MapleShark
     {
         public void LogMessage(String Text)
         {
-            MainForm.mDummyOutputWindow.LogMessage(Text);
-            MainForm.mDummyOutputWindow.Activate();
+            MainForm.MDummyOutputWindow.LogMessage(Text);
+            MainForm.MDummyOutputWindow.Activate();
         }
         public void LogWarning(String Text)
         {
-            MainForm.mDummyOutputWindow.LogWarning(Text);
-            MainForm.mDummyOutputWindow.Activate();
+            MainForm.MDummyOutputWindow.LogWarning(Text);
+            MainForm.MDummyOutputWindow.Activate();
         }
         public void LogError(String Text)
         {
-            MainForm.mDummyOutputWindow.LogError(Text);
-            MainForm.mDummyOutputWindow.Activate();
+            MainForm.MDummyOutputWindow.LogError(Text);
+            MainForm.MDummyOutputWindow.Activate();
         }
         public void LogAppend(String Text)
         {
@@ -76,8 +76,8 @@ namespace MapleShark
         }
         public void LogAppend(Color color, String Text)
         {
-            MainForm.mDummyOutputWindow.LogAppend(color, Text);
-            MainForm.mDummyOutputWindow.Activate();
+            MainForm.MDummyOutputWindow.LogAppend(color, Text);
+            MainForm.MDummyOutputWindow.Activate();
         }
         public mplew(StructureForm pStructure) : base(pStructure) { }
    
@@ -117,13 +117,13 @@ namespace MapleShark
         //        baosWrite(b[x]);
         //    }
         //}
-        public byte write(params byte[] b)
+        public byte write(String Name, params int[] b)
+        {
+            return base.mStructure.APIAddByte(Name, b);
+        }
+        public byte write(params int[] b)
         {
             return write("", b);
-        }
-        public byte write(String Name,params byte[] b)
-        {
-           return base.mStructure.APIAddByte(Name, b);
         }
         public int writeShort( params int[] b)
         {
@@ -140,6 +140,10 @@ namespace MapleShark
         public int writeInt(string Name, params int[] b)
         {
             return base.mStructure.APIAddInt(Name, b);
+        }
+        public String writeAsciiString( String b)
+        {
+            return writeAsciiString(b.Length , b);
         }
         public String writeAsciiString( int length, params String[] b)
         {

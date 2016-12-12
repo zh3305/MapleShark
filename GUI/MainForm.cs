@@ -26,7 +26,7 @@ namespace MapleShark
         private DataForm mDataForm = new DataForm();
         private StructureForm mStructureForm = new StructureForm();
         private PropertyForm mPropertyForm = new PropertyForm();
-        public static DummyOutputWindow mDummyOutputWindow = new DummyOutputWindow();
+        private static DummyOutputWindow mDummyOutputWindow = new DummyOutputWindow();
 
         private string[] _startupArguments = null;
 
@@ -51,6 +51,41 @@ namespace MapleShark
         public StructureForm StructureForm { get { return mStructureForm; } }
         public PropertyForm PropertyForm { get { return mPropertyForm; } }
         public byte Locale { get { return (mDockPanel.ActiveDocument as SessionForm).Locale; } }
+
+        public static DummyOutputWindow MDummyOutputWindow
+        {
+            get
+            {
+                if (mDummyOutputWindow != null && !mDummyOutputWindow.IsDisposed)
+                {
+                    return mDummyOutputWindow;
+                }
+                else
+                {
+                    mDummyOutputWindow = new DummyOutputWindow();
+                    return mDummyOutputWindow;
+                }
+            }
+
+            set
+            {
+                mDummyOutputWindow = value;
+            }
+        }
+
+        public static DummyOutputWindow MDummyOutputWindow1
+        {
+            get
+            {
+                return mDummyOutputWindow;
+            }
+
+            set
+            {
+                mDummyOutputWindow = value;
+            }
+        }
+
         public string _dockpanelConfigFile = "DockPanel.xml";
 
         PcapDevice device;
@@ -411,7 +446,7 @@ namespace MapleShark
             else mPropertyForm.Hide();
         }
 
-        Dictionary<int, SessionForm> waiting = new Dictionary<int, SessionForm>();
+      public static  Dictionary<int, SessionForm> waiting = new Dictionary<int, SessionForm>();
         List<SessionForm> closes = new List<SessionForm>();
 
         private void mTimer_Tick(object sender, EventArgs e)
@@ -457,6 +492,7 @@ namespace MapleShark
                         else
                         {
                             int hash = tcpPacket.DestinationPort << 16 | tcpPacket.SourcePort;
+
                             session = Array.Find(MdiChildren, f => (f as SessionForm).MatchTCPPacket(tcpPacket)) as SessionForm;
                             if (session != null)
                             {
@@ -762,6 +798,11 @@ namespace MapleShark
         {
             if (outToolStripMenuItem.Checked) mDummyOutputWindow.Show();
             else mDummyOutputWindow.Hide();
+        }
+
+        private void mViewPropertiesMenu_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

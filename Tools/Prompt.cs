@@ -2,16 +2,24 @@
  * PROMPT DIALOG
  * 
  * A user input dialog inspired by Javascript window.Prompt().
- * 
+ *   ‰»ÎøÚ
  *
  */
 
+using Newtonsoft.Json;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace MapleShark.Tools
 {
     public static class window
     {
+        public static string ConvetXmlToJson(string XMLText)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(XMLText);
+            return JsonConvert.SerializeXmlNode(doc);
+        }
         /// <summary>
         /// Displays a prompt dialog and returns a value.
         /// </summary>

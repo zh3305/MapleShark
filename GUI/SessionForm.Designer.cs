@@ -64,15 +64,16 @@
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeLoggedPacketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addPacketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.忽略列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.mExportDialog = new System.Windows.Forms.SaveFileDialog();
-            this.忽略列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mPacketList = new MapleShark.DoubleBufferedListView();
             this.mTimestampColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mDirectionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mLengthColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mOpcodeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mNameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.复制数据到剪贴板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mPacketContextMenu.SuspendLayout();
             this.mMenu.SuspendLayout();
             this.SuspendLayout();
@@ -194,7 +195,8 @@
             this.mViewMenu,
             this.dataToolStripMenuItem,
             this.addPacketsToolStripMenuItem,
-            this.忽略列表ToolStripMenuItem});
+            this.忽略列表ToolStripMenuItem,
+            this.复制数据到剪贴板ToolStripMenuItem});
             this.mMenu.Location = new System.Drawing.Point(0, 0);
             this.mMenu.Name = "mMenu";
             this.mMenu.Size = new System.Drawing.Size(752, 25);
@@ -390,6 +392,13 @@
             this.addPacketsToolStripMenuItem.Text = "Add packets";
             this.addPacketsToolStripMenuItem.Click += new System.EventHandler(this.addPacketsToolStripMenuItem_Click_1);
             // 
+            // 忽略列表ToolStripMenuItem
+            // 
+            this.忽略列表ToolStripMenuItem.Name = "忽略列表ToolStripMenuItem";
+            this.忽略列表ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.忽略列表ToolStripMenuItem.Text = "忽略列表";
+            this.忽略列表ToolStripMenuItem.Click += new System.EventHandler(this.忽略列表ToolStripMenuItem_Click);
+            // 
             // mSaveDialog
             // 
             this.mSaveDialog.Filter = "MapleShark Binary Files|*.msb";
@@ -401,13 +410,6 @@
             this.mExportDialog.Filter = "Text Files|*.txt";
             this.mExportDialog.RestoreDirectory = true;
             this.mExportDialog.Title = "Export";
-            // 
-            // 忽略列表ToolStripMenuItem
-            // 
-            this.忽略列表ToolStripMenuItem.Name = "忽略列表ToolStripMenuItem";
-            this.忽略列表ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.忽略列表ToolStripMenuItem.Text = "忽略列表";
-            this.忽略列表ToolStripMenuItem.Click += new System.EventHandler(this.忽略列表ToolStripMenuItem_Click);
             // 
             // mPacketList
             // 
@@ -456,6 +458,13 @@
             // 
             this.mNameColumn.Text = "Name";
             this.mNameColumn.Width = 175;
+            // 
+            // 复制数据到剪贴板ToolStripMenuItem
+            // 
+            this.复制数据到剪贴板ToolStripMenuItem.Name = "复制数据到剪贴板ToolStripMenuItem";
+            this.复制数据到剪贴板ToolStripMenuItem.Size = new System.Drawing.Size(116, 21);
+            this.复制数据到剪贴板ToolStripMenuItem.Text = "复制数据到剪贴板";
+            this.复制数据到剪贴板ToolStripMenuItem.Click += new System.EventHandler(this.复制数据到剪贴板ToolStripMenuItem_Click_1);
             // 
             // SessionForm
             // 
@@ -528,6 +537,7 @@
         private DoubleBufferedListView mPacketList;
         private System.Windows.Forms.ToolStripMenuItem addPacketsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 忽略列表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 复制数据到剪贴板ToolStripMenuItem;
         //private BrightIdeasSoftware.OLVColumn mTimestampColumn;
         //private BrightIdeasSoftware.OLVColumn mDirectionColumn;
         //private BrightIdeasSoftware.OLVColumn mLengthColumn;

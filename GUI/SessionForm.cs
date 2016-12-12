@@ -28,7 +28,8 @@ namespace MapleShark
             Show,
             Continue,
             Terminated,
-            CloseMe
+            CloseMe,
+            lastsion//上一次
         }
 
         private string mFilename = null;
@@ -37,6 +38,9 @@ namespace MapleShark
         private ushort mRemotePort = 0;
         private ushort mProxyPort = 0;
         private uint mOutboundSequence = 0;
+        /// <summary>
+        /// 读取数据序列???
+        /// </summary>
         private uint mInboundSequence = 0;
         private ushort mBuild = 0;
         private byte mLocale = 0;
@@ -81,7 +85,7 @@ namespace MapleShark
 
         internal bool MatchTCPPacket(TcpPacket pTCPPacket)
         {
-            if (mTerminated) return false;
+           // if (mTerminated) return false;
             if (pTCPPacket.SourcePort == mLocalPort && pTCPPacket.DestinationPort == (mProxyPort > 0 ? mProxyPort : mRemotePort)) return true;
             if (pTCPPacket.SourcePort == (mProxyPort > 0 ? mProxyPort : mRemotePort) && pTCPPacket.DestinationPort == mLocalPort) return true;
             return false;
@@ -109,7 +113,7 @@ namespace MapleShark
             mLocalEndpoint = "127.0.0.1";
             mLocalPort = 10000;
         }
-
+        SessionForm sionf;
         internal Results BufferTCPPacket(TcpPacket pTCPPacket, DateTime pArrivalTime)
         {
             if (pTCPPacket.Fin || pTCPPacket.Rst)
@@ -129,8 +133,8 @@ namespace MapleShark
 
                 try
                 {
-                    mRemoteEndpoint = ((PacketDotNet.IPv4Packet)pTCPPacket.ParentPacket).SourceAddress.ToString() + ":" + pTCPPacket.SourcePort.ToString();
-                    mLocalEndpoint = ((PacketDotNet.IPv4Packet)pTCPPacket.ParentPacket).DestinationAddress.ToString() + ":" + pTCPPacket.DestinationPort.ToString();
+                    mRemoteEndpoint = ((IPv4Packet)pTCPPacket.ParentPacket).SourceAddress.ToString() + ":" + pTCPPacket.SourcePort.ToString();
+                    mLocalEndpoint = ((IPv4Packet)pTCPPacket.ParentPacket).DestinationAddress.ToString() + ":" + pTCPPacket.DestinationPort.ToString();
                     Console.WriteLine("[CONNECTION] From {0} to {1} Lenth {2} ", mRemoteEndpoint, mLocalEndpoint, pTCPPacket.PayloadData.Length);
 
                     return Results.Continue;
@@ -149,17 +153,21 @@ namespace MapleShark
             {
                 return Results.Continue;
             }
+
+            //if (sionf != null)
+            //{
+            //    return sionf.BufferTCPPacket(pTCPPacket, pArrivalTime);
+            //}
             if (mBuild == 0)
             {
                 byte[] tcpData = pTCPPacket.PayloadData;
 
                 if (pTCPPacket.SourcePort == mLocalPort) mOutboundSequence += (uint)tcpData.Length;
                 else mInboundSequence += (uint)tcpData.Length;
-
+              
                 ushort length = (ushort)(BitConverter.ToUInt16(tcpData, 0) + 2);
                 byte[] headerData = new byte[tcpData.Length];
                 Buffer.BlockCopy(tcpData, 0, headerData, 0, tcpData.Length);
-
                 bool mIsKMS = false;
 
                 PacketReader pr = new PacketReader(headerData);
@@ -221,20 +229,65 @@ namespace MapleShark
                     Console.WriteLine("Connection on port {0} did not have a MapleStory Handshake", mLocalEndpoint);
                     return Results.CloseMe;
                 }
+                ushort version;
+                byte subVersion;
+                string patchLocation;
+                byte[] localIV;
+                byte[] remoteIV;
+                byte serverLocale;
+                try
+                {
+                    pr.ReadUShort();
+                    version = pr.ReadUShort();
+                    subVersion = 1;
+                    patchLocation = pr.ReadMapleString();
+                    localIV = pr.ReadBytes(4);
+                    remoteIV = pr.ReadBytes(4);
+                    serverLocale = pr.ReadByte();
+                }
+                catch (Exception )
+                {
+                    Console.WriteLine("读取封包错误! SourcePort :" + pTCPPacket.SourcePort + " mLocalPort :" + mLocalPort + " 数据:\r\n"
+                        + BitConverter.ToString(tcpData).Replace("-", " "));
 
-                pr.ReadUShort();
-                ushort version = pr.ReadUShort();
-                byte subVersion = 1;
-                string patchLocation = pr.ReadMapleString();
-                byte[] localIV = pr.ReadBytes(4);
-                byte[] remoteIV = pr.ReadBytes(4);
-                byte serverLocale = pr.ReadByte();
+                    //MainForm.mDummyOutputWindow.LogError("读取封包错误! SourcePort :"+ pTCPPacket.SourcePort+ " mLocalPort :" + mLocalPort + " 数据:\r\n" 
+                    //    + BitConverter.ToString(tcpData).Replace("-"," "));
+                    //MainForm.mDummyOutputWindow.Activate();//BufferTCPPacket(TcpPacket pTCPPacket, Da
 
+
+                    // sionf = (MainForm.mDockPanel.DocumentsToArray()[MainForm.mDockPanel.DocumentsCount-1] as SessionForm);
+                    // sionf.BufferTCPPacket(pTCPPacket, pArrivalTime);
+
+                    //sionf.mLocalPort = mLocalPort;
+                    //sionf.mRemotePort = mRemotePort;
+                    //sionf.mOutboundSequence = mOutboundSequence;
+                    //sionf.startTime = startTime;
+                    //sionf.Text = Text;
+
+
+                    //sion.mLocalPort = pTCPPacket.SourcePort;
+                    //sion.mProxyPort = pTCPPacket.DestinationPort;
+                    //sion.mRemotePort = pTCPPacket.DestinationPort;
+                    //int hash = pTCPPacket.DestinationPort << 16 | pTCPPacket.SourcePort;
+                    //MainForm.waiting[hash] = sion;
+                    if (pTCPPacket.SourcePort == mLocalPort)
+                    {
+                        mOutboundSequence -= (uint)tcpData.Length;
+                    }
+                    else
+                    {
+                        mInboundSequence -= (uint)tcpData.Length;
+                    }
+                    return Results.Continue;
+                }
                 if (serverLocale > 0x12)
                 {
                     return Results.CloseMe;
                 }
-
+                if (tcpData.Length!= length)
+                {
+                    mInboundSequence -= (uint)tcpData.Length-length;
+                }
                 if (serverLocale == 0x02 || (serverLocale == 0x01 && version > 255)) mIsKMS = true;
                 else mIsKMS = false;
 
@@ -331,7 +384,10 @@ namespace MapleShark
                     pStream.Append(data);
                     pSequence += (uint)data.Length;
                 }
-                if (pTCPPacket.SequenceNumber > pSequence) pBuffer[(uint)pTCPPacket.SequenceNumber] = pTCPPacket.PayloadData;
+                if (pTCPPacket.SequenceNumber > pSequence)
+                {
+                    pBuffer[pTCPPacket.SequenceNumber] = pTCPPacket.PayloadData;
+                }
             }
             if (pTCPPacket.SequenceNumber < pSequence)
             {
@@ -988,6 +1044,15 @@ namespace MapleShark
         {
             new GUI.frmIgnoreOp(DefinitionsContainer.Instance.GetDefinitionList(mLocale, mBuild)).ShowDialog(this);
             RefreshPackets();
+        }
+
+
+
+        private void 复制数据到剪贴板ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (mPacketList.SelectedItems.Count == 0) return;
+            var packet = mPacketList.SelectedItems[0] as MaplePacket;
+            Clipboard.SetData(DataFormats.Text, BitConverter.ToString(tools.HexTool.writeShort(packet.Opcode).Concat(packet.Buffer).ToArray()).Replace("-", " "));
         }
     }
 }

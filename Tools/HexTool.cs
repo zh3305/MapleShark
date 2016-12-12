@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace tools
@@ -32,14 +33,24 @@ namespace tools
         //    buf.put(arr);
         //    return ret;
         //}
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are not available in .NET:
-        //ORIGINAL LINE: public static String toString(final int intValue)
         public static string ToString(int intValue)
         {
             return intValue.ToString("x");
         }
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are not available in .NET:
-        //ORIGINAL LINE: public static String toString(final byte[] bytes)
+        public static string ToString(byte[] bytes)
+        {
+            if (bytes.Length <= 0)
+            {
+                return "";
+            }
+            StringBuilder hexed = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hexed.Append(ToString(bytes[i]));
+                hexed.Append(' ');
+            }
+            return hexed.ToString().Substring(0, hexed.Length - 1);
+        }
         public static string ToString(sbyte[] bytes)
         {
             if (bytes.Length <= 0)
@@ -193,6 +204,11 @@ namespace tools
             }
             return builder.ToString();
         }
+
+        internal static byte[] writeShort(ushort opcode)
+        {
+            return new byte[] { (byte)(opcode & 0xFF), (byte)((opcode >> 8) & 0xFF) };
+        }
     }
 
 }
@@ -268,7 +284,6 @@ internal static class StringHelperClass
     {
         return System.Text.Encoding.GetEncoding(encoding).GetString((byte[])(object)bytes, index, count);
     }
-
     //--------------------------------------------------------------------------------
     //	These methods are used to replace calls to the Java String.getBytes methods.
     //--------------------------------------------------------------------------------

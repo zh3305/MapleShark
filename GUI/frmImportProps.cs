@@ -57,7 +57,14 @@ namespace MapleShark
 
                 string headerval = splitted[1].Trim();
                 if (headerval.StartsWith("0x"))
+                {
+                    if (headerval.Contains("FFFF"))//跳过FFFF
+                    {
+                        continue;
+                    }
                     header = ushort.Parse(headerval.Substring(2), System.Globalization.NumberStyles.HexNumber);
+
+                       }
                 else
                     header = ushort.Parse(headerval, System.Globalization.NumberStyles.Integer);
 

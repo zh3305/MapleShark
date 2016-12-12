@@ -73,7 +73,7 @@
             this.converScripToolStripMenuItem});
             this.mMenu.Location = new System.Drawing.Point(0, 0);
             this.mMenu.Name = "mMenu";
-            this.mMenu.Size = new System.Drawing.Size(944, 25);
+            this.mMenu.Size = new System.Drawing.Size(857, 25);
             this.mMenu.TabIndex = 1;
             // 
             // mFileMenu
@@ -201,6 +201,7 @@
             this.mViewPropertiesMenu.Size = new System.Drawing.Size(164, 22);
             this.mViewPropertiesMenu.Text = "&Properties";
             this.mViewPropertiesMenu.CheckedChanged += new System.EventHandler(this.mViewPropertiesMenu_CheckedChanged);
+            this.mViewPropertiesMenu.Click += new System.EventHandler(this.mViewPropertiesMenu_Click);
             // 
             // outToolStripMenuItem
             // 
@@ -253,7 +254,7 @@
             this.toolStripTextBox1});
             this.toolStrip.Location = new System.Drawing.Point(0, 25);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(944, 25);
+            this.toolStrip.Size = new System.Drawing.Size(857, 25);
             this.toolStrip.TabIndex = 11;
             this.toolStrip.Text = "ToolStrip";
             // 
@@ -325,9 +326,8 @@
             // 
             // mDockPanel
             // 
-            this.mDockPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mDockPanel.AutoSize = true;
+            this.mDockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mDockPanel.DockBackColor = System.Drawing.Color.FloralWhite;
             this.mDockPanel.DockBottomPortion = 0.3D;
             this.mDockPanel.DockLeftPortion = 0.3D;
@@ -335,7 +335,7 @@
             this.mDockPanel.DockTopPortion = 75D;
             this.mDockPanel.Location = new System.Drawing.Point(0, 50);
             this.mDockPanel.Name = "mDockPanel";
-            this.mDockPanel.Size = new System.Drawing.Size(944, 561);
+            this.mDockPanel.Size = new System.Drawing.Size(857, 481);
             this.mDockPanel.TabIndex = 4;
             this.mDockPanel.ActiveDocumentChanged += new System.EventHandler(this.mDockPanel_ActiveDocumentChanged);
             // 
@@ -344,7 +344,7 @@
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 611);
+            this.ClientSize = new System.Drawing.Size(857, 531);
             this.Controls.Add(this.mDockPanel);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.mMenu);
@@ -378,7 +378,6 @@
         private System.Windows.Forms.Timer mTimer;
         private System.Windows.Forms.OpenFileDialog mImportDialog;
         private System.Windows.Forms.OpenFileDialog mOpenDialog;
-        private WeifenLuo.WinFormsUI.Docking.DockPanel mDockPanel;
         private System.Windows.Forms.ToolStripMenuItem mViewMenu;
         private System.Windows.Forms.ToolStripMenuItem mViewPropertiesMenu;
         private System.Windows.Forms.ToolStripMenuItem mViewStructureMenu;
@@ -402,6 +401,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripMenuItem outToolStripMenuItem;
+        public WeifenLuo.WinFormsUI.Docking.DockPanel mDockPanel;
     }
 }
 

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -38,7 +39,7 @@ namespace MapleShark
         public StructureForm()
         {
             InitializeComponent();
-            VroomJs.AssemblyLoader.EnsureLoaded();
+            //VroomJs.AssemblyLoader.EnsureLoaded();
         }
 
         public MainForm MainForm { get { return ParentForm as MainForm; } }
@@ -96,7 +97,7 @@ namespace MapleShark
                     // 循环变量必须先声明 : 不声明如下情况只会执行一次 
                     // for ( i = 0; i < 4; i++ ) {  
                     //  for (var  i = 0; i < 4; i++ ) {  没问题
-                    var engine = new Microsoft.ClearScript.V8.V8ScriptEngine();
+                    var engine = new Microsoft.ClearScript.V8.V8ScriptEngine();//Windows.JScriptEngine
                     engine.AddHostObject("ScriptAPI", new ScriptAPI(this));
                     engine.AddHostObject("mplew", new mplew(this));
                     engine.Execute(commonCode.ToString());
@@ -105,39 +106,39 @@ namespace MapleShark
                 }
                 catch (Microsoft.ClearScript.ScriptEngineException ex)
                 {
-                    MainForm.mDummyOutputWindow.Append( ex.ErrorDetails);
-                    MainForm.mDummyOutputWindow.Activate();
+                    MainForm.MDummyOutputWindow.Append( ex.ErrorDetails);
+                    MainForm.MDummyOutputWindow.Activate();
                 }
-                catch (Jint.Parser.ParserException exc)
-                {
-                    //OutputForm output = new OutputForm("Script Error");
-                    //output.Append(exc.Message);
-                    //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
-                    MainForm.mDummyOutputWindow.Append(exc.Message);
-                    MainForm.mDummyOutputWindow.Activate();
-                }
-                catch (Jint.Runtime.JavaScriptException exc)
-                {
-                    MainForm.mDummyOutputWindow.Append(" LineNumber:" + exc.LineNumber + " : " + exc.Message); ;
-                    MainForm.mDummyOutputWindow.Activate();
-                    //OutputForm output = new OutputForm("Script Error");
-                    //output.Append(exc.LineNumber + " : " + exc.Message);
-                    //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
-                }
-                catch (NiL.JS.Core.JSException ex)
-                {
-                    MainForm.mDummyOutputWindow.Append(ex.Error.Value.ToString());
-                    MainForm.mDummyOutputWindow.Activate();
-                }
-                catch (VroomJs.JsException ex)
-                {
-                    MainForm.mDummyOutputWindow.Append(" LineNumber:" + ex.Line + " : " + ex.Message); ;
-                    MainForm.mDummyOutputWindow.Activate();
-                }
+                //catch (Jint.Parser.ParserException exc)
+                //{
+                //    //OutputForm output = new OutputForm("Script Error");
+                //    //output.Append(exc.Message);
+                //    //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
+                //    MainForm.MDummyOutputWindow.Append(exc.Message);
+                //    MainForm.MDummyOutputWindow.Activate();
+                //}
+                //catch (Jint.Runtime.JavaScriptException exc)
+                //{
+                //    MainForm.MDummyOutputWindow.Append(" LineNumber:" + exc.LineNumber + " : " + exc.Message); ;
+                //    MainForm.MDummyOutputWindow.Activate();
+                //    //OutputForm output = new OutputForm("Script Error");
+                //    //output.Append(exc.LineNumber + " : " + exc.Message);
+                //    //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
+                //}
+                //catch (NiL.JS.Core.JSException ex)
+                //{
+                //    MainForm.MDummyOutputWindow.Append(ex.Error.Value.ToString());
+                //    MainForm.MDummyOutputWindow.Activate();
+                //}
+                //catch (VroomJs.JsException ex)
+                //{
+                //    MainForm.MDummyOutputWindow.Append(" LineNumber:" + ex.Line + " : " + ex.Message); ;
+                //    MainForm.MDummyOutputWindow.Activate();
+                //}
                 catch (Exception exc)
                 {
-                    MainForm.mDummyOutputWindow.Append(exc.ToString());
-                    MainForm.mDummyOutputWindow.Activate();
+                    MainForm.MDummyOutputWindow.Append(exc.ToString());
+                    MainForm.MDummyOutputWindow.Activate();
                     //OutputForm output = new OutputForm("Script Error");
                     //output.Append(exc.ToString());
                     //output.Show(DockPanel, new Rectangle(MainForm.Location, new Size(400, 400)));
@@ -160,11 +161,12 @@ namespace MapleShark
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 1, 1));
             return value;
         }
-        internal byte APIAddByte(string pName, params Byte[] compare)
+        internal byte APIAddByte(string pName, params int[] compare)
         {
+            byte[] bytes = compare.Select(x => (byte)x).ToArray();
             byte value;
             if (!mParsing.ReadByte(out value)) throw new Exception("Insufficient packet data");
-            Color color = Ck<Byte>(ref pName, value, compare);
+            Color color = Ck<byte>(ref pName, value, bytes);
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 1, 1, color));
             return value;
         }
@@ -251,7 +253,7 @@ namespace MapleShark
         {
             short value;
             if (!mParsing.ReadShort(out value)) throw new Exception("Insufficient packet data");
-            Color color = Ck<int>(ref pName, value, compare);
+            Color color = Ck<int>(ref pName, (int)value, compare);
             CurrentNodes.Add(new StructureNode(pName, mParsing.Buffer, mParsing.Cursor - 2, 2, color));
             return value;
         }

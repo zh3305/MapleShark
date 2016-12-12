@@ -68,6 +68,7 @@ namespace MapleShark
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockBottomAutoHide;
             this.TabText = "Output";
             this.Text = "Output";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DummyOutputWindow_FormClosing);
             this.ResumeLayout(false);
 
 		}

@@ -74,5 +74,9 @@ namespace MapleShark
             mTextBox.AppendText("\n");
         }
         #endregion
+
+        private void DummyOutputWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+        }
     }
 }

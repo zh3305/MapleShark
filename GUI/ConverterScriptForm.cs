@@ -91,15 +91,17 @@ namespace MapleShark.GUI
             }
             StringBuilder scriptCode = new StringBuilder();
             scriptCode.Append(File.ReadAllText(Filepath));
-            var context = new NiL.JS.Core.Context();
+            //var context = new NiL.JS.Core.Context();
             try
             {
+
+                //ES6 完全不支持
                 //var engine = new Jint.Engine(cfg => cfg.AllowClr());
                 //engine.SetValue("intb", InTb);
                 //engine.SetValue("outtb", OutTb);
                 ////engine.SetValue("Console",new Jint.Native.JsValue Console);
                 //engine.Execute(@"var Console={};Console.WriteLine=System.Console.WriteLine");
-                //context.DefineVariable("").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof( Console)));
+                //context.DefineVariable("").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof(Console)));
                 //engine.Execute(scriptCode.ToString());
                 //context.DefineVariable("intb").Assign(NiL.JS.Core.JSValue.Marshal(InTb));
                 //context.DefineVariable("outtb").Assign(NiL.JS.Core.JSValue.Marshal(OutTb));
@@ -109,21 +111,44 @@ namespace MapleShark.GUI
                 //context.Eval(scriptCode.ToString());
 
 
-                 //Microsoft.ClearScript 
-                 //循环变量必须先声明 : 不声明如下情况只会执行一次 
-                 //for ( i = 0; i < 4; i++ ) {  
-                 // for (var  i = 0; i < 4; i++ ) {  没问题
+                //Microsoft.ClearScript 
+                //循环变量必须先声明 : 不声明如下情况只会执行一次 
+                //for ( i = 0; i < 4; i++ ) {  
+                // for (var  i = 0; i < 4; i++ ) {  没问题
                 var engine = new Microsoft.ClearScript.V8.V8ScriptEngine();
                 engine.AddHostObject("intb", InTb);
                 engine.AddHostObject("outtb", OutTb);
                 engine.AddHostType("Console", typeof(Console));
                 engine.AddHostType("window", typeof(Tools.window));
+
+                //context.DefineVariable("window").Assign(NiL.JS.Core.JSValue.GetConstructor(typeof(Tools.window)));
                 engine.Execute(scriptCode.ToString());
+
+                //ES6 完全不支持
+                //NiL.JS 不支持抛出异常行号
+                //var engine = new NiL.JS.Core.Context();
+                //engine.DefineVariable("outtb").Assign(NiL.JS.Core.JSValue.Marshal(OutTb));
+                //engine.Eval(scriptCode.ToString());
+
+                //VroomJs 支持不好
+                //var engine = new VroomJs.JsEngine(4, 32);
+                //using (VroomJs.JsContext context1 = engine.CreateContext())
+                //{
+                //    context1.SetVariable("outtb", OutTb);
+                //    context1.Execute(scriptCode.ToString());
+                //}
+
+                //Jurassic
+                //CLR types are not supported
+                //var engine = new Jurassic.ScriptEngine();
+                //engine.SetGlobalValue("console", new Jurassic.Library.FirebugConsole(engine));
+                //engine.Execute(scriptCode.ToString());
+
             }
             catch (Microsoft.ClearScript.ScriptEngineException ex)
             {
-                MainForm.mDummyOutputWindow.Append(ex.ErrorDetails);
-                MainForm.mDummyOutputWindow.Activate();
+                MainForm.MDummyOutputWindow.Append(ex.ErrorDetails);
+                MainForm.MDummyOutputWindow.Activate();
             }
             catch (Exception exc)
             {
@@ -131,8 +156,8 @@ namespace MapleShark.GUI
                 //output.Append(exc.ToString());
                 //output.Show(this);
 
-                MainForm.mDummyOutputWindow.Append(exc.ToString()); ;
-                MainForm.mDummyOutputWindow.Activate();
+                MainForm.MDummyOutputWindow.Append(exc.ToString()); ;
+                MainForm.MDummyOutputWindow.Activate();
             }
 
         }

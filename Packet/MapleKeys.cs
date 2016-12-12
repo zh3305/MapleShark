@@ -112,7 +112,7 @@ namespace MapleShark
                         for (int i = 0; i < 8; i++)
                             ret[i * 4] = key[i];
 
-                        Console.WriteLine("Using key for version {0}.{1} {2}", v, sv, BitConverter.ToString(ret));
+                        Console.WriteLine("Using key for version {0}.{1} ", v, sv, BitConverter.ToString(ret));
                         return ret;
                     }
                     if (sv == 0) break;
