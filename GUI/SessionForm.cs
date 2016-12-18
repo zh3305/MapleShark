@@ -85,7 +85,7 @@ namespace MapleShark
 
         internal bool MatchTCPPacket(TcpPacket pTCPPacket)
         {
-           // if (mTerminated) return false;
+            // if (mTerminated) return false;
             if (pTCPPacket.SourcePort == mLocalPort && pTCPPacket.DestinationPort == (mProxyPort > 0 ? mProxyPort : mRemotePort)) return true;
             if (pTCPPacket.SourcePort == (mProxyPort > 0 ? mProxyPort : mRemotePort) && pTCPPacket.DestinationPort == mLocalPort) return true;
             return false;
@@ -113,7 +113,7 @@ namespace MapleShark
             mLocalEndpoint = "127.0.0.1";
             mLocalPort = 10000;
         }
-        SessionForm sionf;
+        //SessionForm sionf;
         internal Results BufferTCPPacket(TcpPacket pTCPPacket, DateTime pArrivalTime)
         {
             if (pTCPPacket.Fin || pTCPPacket.Rst)
@@ -162,9 +162,11 @@ namespace MapleShark
             {
                 byte[] tcpData = pTCPPacket.PayloadData;
 
-                if (pTCPPacket.SourcePort == mLocalPort) mOutboundSequence += (uint)tcpData.Length;
-                else mInboundSequence += (uint)tcpData.Length;
-              
+                if (pTCPPacket.SourcePort == mLocalPort)
+                    mOutboundSequence += (uint)tcpData.Length;
+                else
+                    mInboundSequence += (uint)tcpData.Length;
+
                 ushort length = (ushort)(BitConverter.ToUInt16(tcpData, 0) + 2);
                 byte[] headerData = new byte[tcpData.Length];
                 Buffer.BlockCopy(tcpData, 0, headerData, 0, tcpData.Length);
@@ -245,7 +247,7 @@ namespace MapleShark
                     remoteIV = pr.ReadBytes(4);
                     serverLocale = pr.ReadByte();
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     Console.WriteLine("读取封包错误! SourcePort :" + pTCPPacket.SourcePort + " mLocalPort :" + mLocalPort + " 数据:\r\n"
                         + BitConverter.ToString(tcpData).Replace("-", " "));
@@ -284,12 +286,13 @@ namespace MapleShark
                 {
                     return Results.CloseMe;
                 }
-                if (tcpData.Length!= length)
+                if (serverLocale == 0x02 || (serverLocale == 0x01 && version > 255))
                 {
-                    mInboundSequence -= (uint)tcpData.Length-length;
+                    mIsKMS = true;
                 }
-                if (serverLocale == 0x02 || (serverLocale == 0x01 && version > 255)) mIsKMS = true;
-                else mIsKMS = false;
+                else {
+                    mIsKMS = false;
+                }
 
                 if (mIsKMS)
                 {
@@ -311,16 +314,33 @@ namespace MapleShark
                 mOutboundStream = new MapleStream(true, mBuild, mLocale, localIV, subVersion);
                 mInboundStream = new MapleStream(false, mBuild, mLocale, remoteIV, subVersion);
 
+                if (tcpData.Length != length)
+                {
+                    //mInboundSequence -= (uint)tcpData.Length-length;
+                    int difference = tcpData.Length - length;
+                    if (difference > 0)
+                    {
+                        //byte[] data = new byte[difference];
+                        //Array.Copy(pTCPPacket.PayloadData, length, data, 0, difference);
+                        //if (data.Length > difference)
+                        //{
+                        mInboundStream.Append(pTCPPacket.PayloadData, length, difference);
+                        // mInboundSequence += (uint)(data.Length - difference);
+                        //}
+                    }
+                }
                 // Generate HandShake packet
                 Definition definition = Config.Instance.GetDefinition(mBuild, mLocale, false, 0xFFFF);
                 if (definition == null)
                 {
-                    definition = new Definition();
-                    definition.Outbound = false;
-                    definition.Locale = mLocale;
-                    definition.Opcode = 0xFFFF;
-                    definition.Name = "握手包";
-                    definition.Build = mBuild;
+                    definition = new Definition()
+                    {
+                        Outbound = false,
+                        Locale = mLocale,
+                        Opcode = 0xFFFF,
+                        Name = "握手包",
+                        Build = mBuild
+                    };
                     DefinitionsContainer.Instance.SaveDefinition(definition);
                 }
 
@@ -359,7 +379,11 @@ namespace MapleShark
 
                 Console.WriteLine("[CONNECTION] MapleStory V{2}.{3} Locale {4}", mLocalEndpoint, mRemoteEndpoint, mBuild, subVersion, serverLocale);
                 ProcessTCPPacket(pTCPPacket, ref mInboundSequence, mInboundBuffer, mInboundStream, pArrivalTime);
-                return Results.Show;
+                if (tcpData.Length != length)
+                {
+                    mInboundSequence += (uint)tcpData.Length ;
+                }
+                    return Results.Show;
             }
             if (pTCPPacket.SourcePort == mLocalPort)
             {
@@ -374,7 +398,7 @@ namespace MapleShark
 
         private void ProcessTCPPacket(TcpPacket pTCPPacket, ref uint pSequence, Dictionary<uint, byte[]> pBuffer, MapleStream pStream, DateTime pArrivalDate)
         {
-            if (pTCPPacket.SequenceNumber > pSequence)
+            if (pTCPPacket.SequenceNumber > pSequence)//
             {
                 byte[] data;
 
@@ -580,7 +604,7 @@ namespace MapleShark
 
         public void RefreshPackets()
         {
-            Opcode search = (MainForm.SearchForm.ComboBox.SelectedIndex >= 0&& MainForm.SearchForm.ComboBox.SelectedIndex <= mOpcodes.Count  ? mOpcodes[MainForm.SearchForm.ComboBox.SelectedIndex] : null);
+            Opcode search = (MainForm.SearchForm.ComboBox.SelectedIndex >= 0 && MainForm.SearchForm.ComboBox.SelectedIndex <= mOpcodes.Count ? mOpcodes[MainForm.SearchForm.ComboBox.SelectedIndex] : null);
             MaplePacket previous = mPacketList.SelectedItems.Count > 0 ? mPacketList.SelectedItems[0] as MaplePacket : null;
             mOpcodes.Clear();
             mPacketList.Items.Clear();
@@ -667,7 +691,7 @@ namespace MapleShark
             mFileSaveMenu.PerformClick();
         }
 
-        private void mFileSaveMenu_Click(object pSender, EventArgs pArgs)
+        private void MFileSaveMenu_Click(object pSender, EventArgs pArgs)
         {
             if (mFilename == null)
             {

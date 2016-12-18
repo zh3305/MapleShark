@@ -106,7 +106,7 @@ namespace MapleShark
             if (!mAES.ConfirmHeader(mBuffer, 0))
             {
                 //throw new Exception("Failed to confirm packet header");
-               // Console.WriteLine("无法确认数据包报头");
+                Console.WriteLine("无法确认数据包报头");
                 return null;
             }
 
@@ -127,11 +127,11 @@ namespace MapleShark
             byte[] packetBuffer = new byte[packetSize];
             Buffer.BlockCopy(mBuffer, headerLength, packetBuffer, 0, packetSize);
 
-            var preDecodeIV = BitConverter.ToUInt32(mAES.mIV, 0);
+            var preDecodeIV = BitConverter.ToUInt32(mAES.MIV, 0);
 
             Decrypt(packetBuffer, _transformMethod);
 
-            var postDecodeIV = BitConverter.ToUInt32(mAES.mIV, 0);
+            var postDecodeIV = BitConverter.ToUInt32(mAES.MIV, 0);
 
             mCursor -= _expectedDataSize;
             if (mCursor > 0) Buffer.BlockCopy(mBuffer, _expectedDataSize, mBuffer, 0, mCursor);

@@ -32,7 +32,7 @@ namespace MapleShark
         private ushort mBuild = 0;
         private RijndaelManaged mAES = new RijndaelManaged();
         private ICryptoTransform mTransformer = null;
-        public byte[] mIV { get; private set; }
+        public byte[] MIV { get; private set; }
 
         internal MapleAES(ushort pBuild, byte pLocale, byte[] pIV, byte pSubVersion)
         {
@@ -46,18 +46,18 @@ namespace MapleShark
             mAES.Mode = CipherMode.ECB;
             mAES.Padding = PaddingMode.PKCS7;
             mTransformer = mAES.CreateEncryptor();
-            mIV = pIV;
+            MIV = pIV;
         }
 
         public void ShiftIVOld()
         {
-            mIV = BitConverter.GetBytes(214013 * BitConverter.ToUInt32(mIV, 0) + 2531011);
+            MIV = BitConverter.GetBytes(214013 * BitConverter.ToUInt32(MIV, 0) + 2531011);
         }
 
         public bool ConfirmHeader(byte[] pBuffer, int pStart)
         {
-            bool b = (pBuffer[pStart] ^ mIV[2]) == (mBuild & 0xFF) &&
-                   (pBuffer[pStart + 1] ^ mIV[3]) == ((mBuild >> 8) & 0xFF);
+            bool b = (pBuffer[pStart] ^ MIV[2]) == (mBuild & 0xFF) &&
+                   (pBuffer[pStart + 1] ^ MIV[3]) == ((mBuild >> 8) & 0xFF);
             return b;
         }
 
@@ -95,13 +95,13 @@ namespace MapleShark
         public void TransformKMS(byte[] pBuffer)
         {
             byte[] oudeIV = new byte[4];
-            Buffer.BlockCopy(mIV, 0, oudeIV, 0, 4);
+            Buffer.BlockCopy(MIV, 0, oudeIV, 0, 4);
             for (int i = 0; i < pBuffer.Length; i++)
             {
-                byte v7 = (byte)(pBuffer[i] ^ sShiftKey[mIV[0]]);
+                byte v7 = (byte)(pBuffer[i] ^ sShiftKey[MIV[0]]);
                 byte v8 = (byte)((v7 >> 1) & 0x55 | 2 * (v7 & 0xD5));
                 pBuffer[i] = (byte)(0x10 * v8 | (v8 >> 4));
-                Morph(pBuffer[i], mIV);
+                Morph(pBuffer[i], MIV);
             }
 
             ShiftIV(oudeIV);
@@ -111,7 +111,7 @@ namespace MapleShark
         public void TransformOldKMS(byte[] pBuffer)
         {
             for (int i = 0; i < pBuffer.Length; i++)
-                pBuffer[i] = (byte)(16 * (mIV[0] ^ pBuffer[i]) | ((byte)(mIV[0] ^ pBuffer[i]) >> 4));
+                pBuffer[i] = (byte)(16 * (MIV[0] ^ pBuffer[i]) | ((byte)(MIV[0] ^ pBuffer[i]) >> 4));
 
             ShiftIVOld();
         }
@@ -119,10 +119,10 @@ namespace MapleShark
         public void TransformAES(byte[] pData)
         {
             byte[] freshIVBlock = new byte[16] {
-                mIV[0], mIV[1], mIV[2], mIV[3],
-                mIV[0], mIV[1], mIV[2], mIV[3],
-                mIV[0], mIV[1], mIV[2], mIV[3],
-                mIV[0], mIV[1], mIV[2], mIV[3]
+                MIV[0], MIV[1], MIV[2], MIV[3],
+                MIV[0], MIV[1], MIV[2], MIV[3],
+                MIV[0], MIV[1], MIV[2], MIV[3],
+                MIV[0], MIV[1], MIV[2], MIV[3]
             };
             byte[] currentIVBlock = new byte[16];
             int dataSize = pData.Length;
@@ -149,13 +149,13 @@ namespace MapleShark
         }
         public void ShiftIV(byte[] pOldIV = null)
         {
-            if (pOldIV == null) pOldIV = mIV;
+            if (pOldIV == null) pOldIV = MIV;
 
             byte[] newIV = new byte[] { 0xF2, 0x53, 0x50, 0xC6 };
             for (int i = 0; i < 4; ++i)
                 Morph(pOldIV[i], newIV);
 
-            Buffer.BlockCopy(newIV, 0, mIV, 0, mIV.Length);
+            Buffer.BlockCopy(newIV, 0, MIV, 0, MIV.Length);
         }
 
         public static void Morph(byte pValue, byte[] pIV)

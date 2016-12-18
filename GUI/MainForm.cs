@@ -696,9 +696,11 @@ namespace MapleShark
 
         private void importMSnifferToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Select MSniffer logfile";
-            ofd.Filter = "All files|*.*";
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Title = "Select MSniffer logfile",
+                Filter = "All files|*.*"
+            };
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 ReadMSnifferFile(ofd.FileName);
         }

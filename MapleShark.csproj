@@ -6,7 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{01F7E3B6-B831-4D44-8B44-095768212822}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MapleShark</RootNamespace>
     <AssemblyName>MapleShark</AssemblyName>
@@ -186,6 +186,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GUI\ConverterScriptForm.cs">
       <SubType>Form</SubType>
     </Compile>

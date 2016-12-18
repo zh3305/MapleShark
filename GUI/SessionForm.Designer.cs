@@ -231,7 +231,7 @@
             this.mFileSaveMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mFileSaveMenu.Size = new System.Drawing.Size(158, 22);
             this.mFileSaveMenu.Text = "&Save";
-            this.mFileSaveMenu.Click += new System.EventHandler(this.mFileSaveMenu_Click);
+            this.mFileSaveMenu.Click += new System.EventHandler(this.MFileSaveMenu_Click);
             // 
             // mFileExportMenu
             // 
