@@ -198,16 +198,32 @@ namespace MapleShark
             //log("\r\n");
         }
 
-        public long writeLong( params long[] b)
-        {
-            return writeLong("", b);
-        }
+        //public long writeLong( params long[] b)
+        //{
+        //    return writeLong("", b);
+        //}
         /**
          * Write a long integer to the stream.
          *
          * @param l The long integer to write.
          */
-        public long writeLong(String Name, params long[] b)
+        public long writeLong(int Name)
+        {
+            return base.mStructure.APIAddLong("",Name);
+        }
+        public long writeLong(string Name)
+        {
+            return base.mStructure.APIAddLong(Name);
+        }
+        public long writeLong(String Name, params String[] b)
+        {
+            long[] tou = new long[b.Length];
+            for (int i = 0; i < b.Length; i++)  {
+                tou[i] = long.Parse(b[i]);
+            }
+            return base.mStructure.APIAddLong(Name, tou);
+        }
+        public long writeLong(String Name, long b)
         {
             return base.mStructure.APIAddLong(Name, b);
         }
