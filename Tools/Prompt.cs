@@ -12,6 +12,9 @@ using System.Xml;
 
 namespace MapleShark.Tools
 {
+    /// <summary>
+    ///  ‰»ÎøÚ
+    /// </summary>
     public static class window
     {
         public static string ConvetXmlToJson(string XMLText)
