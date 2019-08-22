@@ -1,0 +1,3 @@
+var text = nextString("素材地址");
+hintFunction("fieldEffect_PlayFieldSound(path)");
+hintMsg(text);
