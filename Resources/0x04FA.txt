@@ -1,0 +1,16 @@
+var type = nextByte("请求类型");
+nextInt("实体实体ID");    
+var npc = nextInt("NPCID");      
+var x1 = nextShort("X1");
+var y1 = nextShort("Y1");
+nextShort("?");
+nextShort("?");
+var x2 = nextShort("X2");
+var y2 = nextShort("Y2");
+nextInt("?");      
+nextInt("?");     
+nextShort("?");   
+var x3 = nextShort("X3");
+var y3 = nextShort("Y3");       
+hint("解散召唤的临时NPC");    
+hintFunction(npc + ", ("+x1+","+y1+") -> ("+x2+","+y2+")");
