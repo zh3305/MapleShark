@@ -547,13 +547,13 @@ namespace MapleShark
             {
                 started = false;
                 mStopStartButton.Image = Properties.Resources.Button_Blank_Green_icon;
-                mStopStartButton.Text = "Start sniffing";
+                mStopStartButton.Text = "开始嗅探";
             }
             else
             {
                 started = true;
                 mStopStartButton.Image = Properties.Resources.Button_Blank_Red_icon;
-                mStopStartButton.Text = "Stop sniffing";
+                mStopStartButton.Text = "停止嗅探";
             }
         }
 
