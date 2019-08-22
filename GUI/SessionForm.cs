@@ -128,7 +128,7 @@ namespace MapleShark
                 mLocalPort = (ushort)pTCPPacket.SourcePort;
                 mRemotePort = (ushort)pTCPPacket.DestinationPort;
                 mOutboundSequence = (uint)(pTCPPacket.SequenceNumber + 1);
-                Text = "Port " + mLocalPort + " - " + mRemotePort;
+                Text = "端口 " + mLocalPort + " - " + mRemotePort;
                 startTime = DateTime.Now;
 
                 try
@@ -217,7 +217,7 @@ namespace MapleShark
                             mProxyPort = mRemotePort;
                             mRemotePort = portr.ReadUShort();
                             mLocalEndpoint += ":" + mRemotePort;
-                            Text = "Port " + mLocalPort + " - " + mRemotePort + "(Proxy" + mProxyPort + ")";
+                            Text = "端口 " + mLocalPort + " - " + mRemotePort + "(Proxy" + mProxyPort + ")";
                             Console.WriteLine("[socks5] From {0} to {1} (Proxy {2})", mRemoteEndpoint, mLocalEndpoint, mProxyEndpoint);
                         }
                         socks5++;
@@ -598,7 +598,7 @@ namespace MapleShark
                     mPacketList.EnsureVisible(0);
                 }
             }
-            Text = string.Format("{0} (ReadOnly)", Path.GetFileName(pFilename));
+            Text = string.Format("{0} (只读)", Path.GetFileName(pFilename));
             Console.WriteLine("Loaded file: {0}", pFilename);
         }
 
@@ -650,7 +650,7 @@ namespace MapleShark
             mPacketList_SelectedIndexChanged(null, null);
         }
 
-        private static Regex _packetRegex = new Regex(@"(.{1,2}):(.{1,2}):(.{1,2})\.\d+\|(發送到客戶端|發送到伺服器|握手包)\|[^\|]+\|[^\|]+\|(\d+)\|([^\|]+)\|");
+        private static Regex _packetRegex = new Regex(@"(.{1,2}):(.{1,2}):(.{1,2})\.\d+\|(发送到客戶端|发送到服务器|握手包)\|[^\|]+\|[^\|]+\|(\d+)\|([^\|]+)\|");
         internal void ParseMSnifferLine(string packetLine)
         {
             var match = _packetRegex.Match(packetLine);
@@ -665,7 +665,7 @@ namespace MapleShark
             );
             int packetLength = int.Parse(match.Groups[5].Value);
             byte[] buffer = new byte[packetLength - 2];
-            bool outbound = match.Groups[4].Value == "發送到伺服器";
+            bool outbound = match.Groups[4].Value == "发送到服务器";
             string[] bytesText = match.Groups[6].Value.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             ushort opcode = (ushort)(byte.Parse(bytesText[0], System.Globalization.NumberStyles.HexNumber) | byte.Parse(bytesText[1], System.Globalization.NumberStyles.HexNumber) << 8);
@@ -949,7 +949,7 @@ namespace MapleShark
             si.txtVersion.Text = mBuild.ToString();
             si.txtPatchLocation.Text = mPatchLocation;
             si.txtLocale.Text = mLocale.ToString();
-            si.txtAdditionalInfo.Text = "Connection info:\r\n" + mLocalEndpoint + " <-> " + mRemoteEndpoint + (mProxyEndpoint != "???" ? "\r\nProxy:" + mProxyEndpoint : "");
+            si.txtAdditionalInfo.Text = "连接信息:\r\n" + mLocalEndpoint + " <-> " + mRemoteEndpoint + (mProxyEndpoint != "???" ? "\r\n代理:" + mProxyEndpoint : "");
 
             if (mLocale == 1 || mLocale == 2)
             {
@@ -961,7 +961,7 @@ namespace MapleShark
                     ushort maplerVersion = (ushort)(test & 0x7FFF);
                     int extraOption = (test >> 15) & 1;
                     int subVersion = (test >> 16) & 0xFF;
-                    si.txtAdditionalInfo.Text += "Real Version: " + maplerVersion + "\r\nSubversion: " + subVersion + "\r\nExtra flag: " + extraOption;
+                    si.txtAdditionalInfo.Text += "真实版本: " + maplerVersion + "\r\n子版本: " + subVersion + "\r\n额外标签: " + extraOption;
                 }
                 catch { }
             }
@@ -985,7 +985,7 @@ namespace MapleShark
 
         private void removeLoggedPacketsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to delete all logged packets?", "!!", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No) return;
+            if (MessageBox.Show("确定要删除所有已记录封包吗？", "!!", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No) return;
 
             ClearedPackets = true;
 
