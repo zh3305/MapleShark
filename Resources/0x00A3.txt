@@ -1,0 +1,4 @@
+var type1 = nextByte("消息类型");
+var type2 = nextByte("消息类型");
+var text = nextString("素材地址");
+hintFunction("playerMsg(2)");        
