@@ -1,0 +1,24 @@
+var v1 = nextInt("？Player");  
+if(v1==3){
+    nextInt("？");  	
+}
+var type = swap32(nextInt("对话类型"));
+nextShort("？");
+if(type==4 || type==5){
+	var npc = nextInt("NPCID");
+}
+nextString("对话内容");
+nextByte("？");
+nextByte("？");
+nextInt("？");
+if(type==2){
+	hintFunction("sendNextS(msg)");
+}else if(type==3){
+	hintFunction("sendNextSNoESC(msg)");
+}else if(type==4){
+	hintFunction("sendNext("+npc+", msg)");
+}else if(type==5){
+	hintFunction("sendNextNoESC("+npc+", msg)");
+}else if(type==17){
+	hintFunction("? sendNextSNoESC(msg)");
+}
