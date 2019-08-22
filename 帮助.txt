@@ -1,0 +1,77 @@
+整体说明
+=========
+本工具用来抓取冒险岛客户端与服务端之间的通讯。默认情况下抓取官服。如果有特殊需要可以修改配置。
+
+程序启动后会自动开启封包嗅探。如果关闭了嗅探，再次开启后必须要重新登录游戏或者切换频道才能继续有效抓包。
+
+
+定义封包类型
+=========
+可以为指定包头定义类型名称，方便分辨。信息会保存在 Scripts\<地区编号>\<版本号>\PacketDefinitions.xml 里。中国服的地区编号为4。
+
+
+自定义脚本
+=========
+
+可以编写脚本来识别封包的数据，提高阅读效率。MapleShark的原始脚本引擎基于 ScriptDotNet，也称为 S#，详情请看 http://www.protsyk.com/scriptdotnet/ 。
+
+经过 zh3305 的改造，现在支持基于JavaScript来编写脚本了。因此接口语法也比原版有一定变动。
+
+自定义脚本位于 Scripts\<地区编号>\<版本号> 下的 发送\ 和 接收\ 文件夹内，格式为 <十六进制包头值>.txt，例如 0xFFFF.txt。程序启动后会加载里面的定义，如果符合规范会解析对应封包的数据。
+
+与封包相关的接口函数有：
+
+byte ScriptAPI.AddByte(string name)
+  读取一个Byte数据，标注为指定名称。返回获取的数据。
+  
+sbyte ScriptAPI.AddSByte(string name)
+  读取一个有符号Byte数据，标注为指定名称。返回获取的数据。
+
+ushort ScriptAPI.AddUShort(string name)
+  读取一个无符号Byte数据，标注为指定名称。返回获取的数据。
+
+short ScriptAPI.AddShort(string name)
+  读取一个Short数据，标注为指定名称。返回获取的数据。
+
+uint ScriptAPI.AddUInt(string name)
+  读取一个无符号Int数据，标注为指定名称。返回获取的数据。
+
+int ScriptAPI.AddInt(string name)
+  读取一个Int数据，标注为指定名称。返回获取的数据。
+
+float ScriptAPI.AddFloat(string name)
+  读取一个Float数据，标注为指定名称。返回获取的数据。
+
+double ScriptAPI.AddDouble(string name)
+  读取一个Double数据，标注为指定名称。返回获取的数据。
+
+bool ScriptAPI.AddBool(string name)
+  读取一个Bool数据，标注为指定名称。返回获取的数据。
+  
+long ScriptAPI.AddLong(string name)
+  读取一个Long数据，标注为指定名称。返回获取的数据。
+
+double ScriptAPI.AddDouble(string name)
+  读取一个Double数据，标注为指定名称。返回获取的数据。
+  
+string ScriptAPI.AddString(string name)
+  读取一个String数据，标注为指定名称。长度由开头的字节定义，符合冒险岛规范。返回获取的数据。
+
+string ScriptAPI.AddPaddedString(string name, int length)
+  读取一个定长String数据，标注为指定名称。返回获取的数据。
+
+void ScriptAPI.AddField(string name, int length)
+  读取一个无格式的定长数据，标注为指定名称。返回获取的数据。
+
+void ScriptAPI.StartNode(string name)
+  添加一个根节点，标注为指定名称。一般起到标注作用。
+
+void ScriptAPI.EndNode(bool expand)
+  结束一个根节点。
+
+void Write(string file, string line)
+  往指定文件写入数据。
+  
+int ScriptAPI.Remaining()
+ 返回该封包里未处理的剩余字节数量。
+
