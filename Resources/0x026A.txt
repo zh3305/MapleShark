@@ -1,0 +1,6 @@
+var type = nextByte("请求类型");
+var quest = nextInt("？");
+var text = nextString("参数内容");
+hintMsg(text);   
+nextInt("？");
+nextInt("？");
