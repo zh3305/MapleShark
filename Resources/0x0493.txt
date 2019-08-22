@@ -1,0 +1,2 @@
+var type = nextByte("请求类型");
+var mob = nextInt("怪物ID");
