@@ -89,35 +89,35 @@
             this.mFileQuit});
             this.mFileMenu.Name = "mFileMenu";
             this.mFileMenu.Size = new System.Drawing.Size(39, 21);
-            this.mFileMenu.Text = "&File";
+            this.mFileMenu.Text = "文件";
             // 
             // mFileOpenMenu
             // 
             this.mFileOpenMenu.Name = "mFileOpenMenu";
             this.mFileOpenMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.mFileOpenMenu.Size = new System.Drawing.Size(239, 22);
-            this.mFileOpenMenu.Text = "&Open";
+            this.mFileOpenMenu.Text = "打开 .sb 文件";
             this.mFileOpenMenu.Click += new System.EventHandler(this.mFileOpenMenu_Click);
             // 
             // mFileImportMenu
             // 
             this.mFileImportMenu.Name = "mFileImportMenu";
             this.mFileImportMenu.Size = new System.Drawing.Size(239, 22);
-            this.mFileImportMenu.Text = "Import .pcap file";
+            this.mFileImportMenu.Text = "导入 .pcap 文件";
             this.mFileImportMenu.Click += new System.EventHandler(this.mFileImportMenu_Click);
             // 
             // importJavapropertiesFileToolStripMenuItem
             // 
             this.importJavapropertiesFileToolStripMenuItem.Name = "importJavapropertiesFileToolStripMenuItem";
             this.importJavapropertiesFileToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.importJavapropertiesFileToolStripMenuItem.Text = "Import Java *.properties file";
+            this.importJavapropertiesFileToolStripMenuItem.Text = "导入 Java *.properties 文件";
             this.importJavapropertiesFileToolStripMenuItem.Click += new System.EventHandler(this.importJavapropertiesFileToolStripMenuItem_Click);
             // 
             // importMSnifferToolStripMenuItem
             // 
             this.importMSnifferToolStripMenuItem.Name = "importMSnifferToolStripMenuItem";
             this.importMSnifferToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.importMSnifferToolStripMenuItem.Text = "Import MSniffer logfile";
+            this.importMSnifferToolStripMenuItem.Text = "导入 MSniffer 日志文件";
             this.importMSnifferToolStripMenuItem.Click += new System.EventHandler(this.importMSnifferToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
@@ -129,7 +129,7 @@
             // 
             this.setupToolStripMenuItem.Name = "setupToolStripMenuItem";
             this.setupToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.setupToolStripMenuItem.Text = "MapleShark Setup";
+            this.setupToolStripMenuItem.Text = "MapleShark 配置";
             this.setupToolStripMenuItem.Click += new System.EventHandler(this.setupToolStripMenuItem_Click);
             // 
             // mFileSeparatorMenu
@@ -142,7 +142,7 @@
             this.mFileQuit.Name = "mFileQuit";
             this.mFileQuit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.mFileQuit.Size = new System.Drawing.Size(239, 22);
-            this.mFileQuit.Text = "&Quit";
+            this.mFileQuit.Text = "退出";
             this.mFileQuit.Click += new System.EventHandler(this.mFileQuit_Click);
             // 
             // mViewMenu
@@ -155,7 +155,7 @@
             this.outToolStripMenuItem});
             this.mViewMenu.Name = "mViewMenu";
             this.mViewMenu.Size = new System.Drawing.Size(47, 21);
-            this.mViewMenu.Text = "&View";
+            this.mViewMenu.Text = "视图";
             this.mViewMenu.DropDownOpening += new System.EventHandler(this.mViewMenu_DropDownOpening);
             // 
             // mViewSearchMenu
@@ -166,7 +166,7 @@
             this.mViewSearchMenu.Name = "mViewSearchMenu";
             this.mViewSearchMenu.ShortcutKeys = System.Windows.Forms.Keys.F9;
             this.mViewSearchMenu.Size = new System.Drawing.Size(164, 22);
-            this.mViewSearchMenu.Text = "Sea&rch";
+            this.mViewSearchMenu.Text = "搜索";
             this.mViewSearchMenu.CheckedChanged += new System.EventHandler(this.mViewSearchMenu_CheckedChanged);
             // 
             // mViewDataMenu
@@ -177,7 +177,7 @@
             this.mViewDataMenu.Name = "mViewDataMenu";
             this.mViewDataMenu.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.mViewDataMenu.Size = new System.Drawing.Size(164, 22);
-            this.mViewDataMenu.Text = "&Data";
+            this.mViewDataMenu.Text = "数据";
             this.mViewDataMenu.CheckedChanged += new System.EventHandler(this.mViewDataMenu_CheckedChanged);
             // 
             // mViewStructureMenu
@@ -188,7 +188,7 @@
             this.mViewStructureMenu.Name = "mViewStructureMenu";
             this.mViewStructureMenu.ShortcutKeys = System.Windows.Forms.Keys.F11;
             this.mViewStructureMenu.Size = new System.Drawing.Size(164, 22);
-            this.mViewStructureMenu.Text = "&Structure";
+            this.mViewStructureMenu.Text = "结构";
             this.mViewStructureMenu.CheckedChanged += new System.EventHandler(this.mViewStructureMenu_CheckedChanged);
             // 
             // mViewPropertiesMenu
@@ -199,7 +199,7 @@
             this.mViewPropertiesMenu.Name = "mViewPropertiesMenu";
             this.mViewPropertiesMenu.ShortcutKeys = System.Windows.Forms.Keys.F12;
             this.mViewPropertiesMenu.Size = new System.Drawing.Size(164, 22);
-            this.mViewPropertiesMenu.Text = "&Properties";
+            this.mViewPropertiesMenu.Text = "属性";
             this.mViewPropertiesMenu.CheckedChanged += new System.EventHandler(this.mViewPropertiesMenu_CheckedChanged);
             this.mViewPropertiesMenu.Click += new System.EventHandler(this.mViewPropertiesMenu_Click);
             // 
@@ -210,7 +210,7 @@
             this.outToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.outToolStripMenuItem.Name = "outToolStripMenuItem";
             this.outToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.outToolStripMenuItem.Text = "&Out";
+            this.outToolStripMenuItem.Text = "输出";
             this.outToolStripMenuItem.Click += new System.EventHandler(this.outToolStripMenuItem_Click);
             // 
             // converScripToolStripMenuItem
@@ -265,7 +265,7 @@
             this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.openToolStripButton.Text = "Open";
+            this.openToolStripButton.Text = "打开";
             this.openToolStripButton.Click += new System.EventHandler(this.mFileOpenMenu_Click);
             // 
             // saveToolStripButton
@@ -275,7 +275,7 @@
             this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.saveToolStripButton.Text = "Save";
+            this.saveToolStripButton.Text = "保存";
             this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // toolStripSeparator1
@@ -289,7 +289,7 @@
             this.mStopStartButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mStopStartButton.Name = "mStopStartButton";
             this.mStopStartButton.Size = new System.Drawing.Size(101, 22);
-            this.mStopStartButton.Text = "Stop sniffing";
+            this.mStopStartButton.Text = "停止嗅探";
             this.mStopStartButton.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator2
@@ -304,7 +304,7 @@
             this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.helpToolStripButton.Name = "helpToolStripButton";
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.helpToolStripButton.Text = "Help";
+            this.helpToolStripButton.Text = "帮助";
             this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
             // 
             // toolStripSeparator3
@@ -354,7 +354,7 @@
             this.MainMenuStrip = this.mMenu;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MapleShark";
+            this.Text = "MapleShark 冒险岛封包工具";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
