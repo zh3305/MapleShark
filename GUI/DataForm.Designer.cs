@@ -64,7 +64,7 @@
             this.HideOnClose = true;
             this.Name = "DataForm";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom;
-            this.Text = "Data";
+            this.Text = "数据";
             this.ResumeLayout(false);
 
         }
