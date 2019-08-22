@@ -52,7 +52,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(297, 34);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Loading MapleShark...";
+            this.label1.Text = "正在载入 MapleShark...";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // initialisator
