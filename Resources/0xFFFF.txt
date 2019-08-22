@@ -1,0 +1,6 @@
+nextShort("封包大小");
+nextShort("冒险岛版本号",false);
+nextString("冒险岛补丁版本");
+nextField("本地初始化向量", 4);
+nextField("远程初始化向量", 4);
+nextByte("冒险岛地区号");
