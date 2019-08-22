@@ -54,7 +54,7 @@
             this.radsend.Size = new System.Drawing.Size(83, 16);
             this.radsend.TabIndex = 1;
             this.radsend.TabStop = true;
-            this.radsend.Text = "SendPacket";
+            this.radsend.Text = "发送封包";
             this.radsend.UseVisualStyleBackColor = true;
             // 
             // radioButton2
@@ -64,7 +64,7 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(83, 16);
             this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "RecvPacket";
+            this.radioButton2.Text = "接收封包";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -76,7 +76,7 @@
             this.groupBox1.Size = new System.Drawing.Size(136, 60);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Select Opcode Type";
+            this.groupBox1.Text = "选择封包头类型";
             // 
             // label1
             // 
@@ -86,7 +86,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 3;
-            this.label1.Text = "PacketOpcode";
+            this.label1.Text = "封包头";
             // 
             // labOpcodeName
             // 
@@ -105,7 +105,7 @@
             this.groupBox2.Size = new System.Drawing.Size(641, 188);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Packet";
+            this.groupBox2.Text = "封包";
             // 
             // tb_Packets
             // 
@@ -125,7 +125,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 60);
             this.button1.TabIndex = 7;
-            this.button1.Text = "Add";
+            this.button1.Text = "添加";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -137,7 +137,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Build:";
+            this.label3.Text = "构建:";
             // 
             // tbBuild
             // 
@@ -164,7 +164,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Locale:";
+            this.label2.Text = "地区:";
             // 
             // tbPacketOpcode
             // 
