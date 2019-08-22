@@ -559,8 +559,9 @@ namespace MapleShark
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists("Readme.txt"))
-            {
+            if (System.IO.File.Exists("帮助.txt")){
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + @"\帮助.txt");
+            }else if (System.IO.File.Exists("Readme.txt"))            {
                 System.Diagnostics.Process.Start(Environment.CurrentDirectory + @"\Readme.txt");
             }
         }
