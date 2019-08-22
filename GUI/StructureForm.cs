@@ -346,8 +346,8 @@ namespace MapleShark
                 pName = "String";
             }
            APIStartNode(pName);
-            short size = APIAddShort("Size");
-            string value = APIAddPaddedString("String", size);
+            short size = APIAddShort("字符数");
+            string value = APIAddPaddedString("文本", size);
             APIEndNode(false);
             return value;
         }
@@ -358,7 +358,7 @@ namespace MapleShark
                 pName = "String";
             }
             APIStartNode(pName);
-            short size = APIAddShort("Size");
+            short size = APIAddShort("字符数");
             string value = APIAddPaddedString(pName, size, compare);
             APIEndNode(false);
             return value;
