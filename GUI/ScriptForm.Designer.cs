@@ -50,7 +50,7 @@
             this.mSaveButton.Name = "mSaveButton";
             this.mSaveButton.Size = new System.Drawing.Size(490, 25);
             this.mSaveButton.TabIndex = 5;
-            this.mSaveButton.Text = "&Save script";
+            this.mSaveButton.Text = "保存脚本";
             this.mSaveButton.UseVisualStyleBackColor = true;
             this.mSaveButton.Click += new System.EventHandler(this.mSaveButton_Click);
             // 
@@ -85,7 +85,7 @@
             this.mScriptEditor.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(219)))), ((int)(((byte)(214)))));
             this.mScriptEditor.TabIndex = 0;
             this.mScriptEditor.TabsToSpaces = true;
-            this.mScriptEditor.Text = "\tScriptAPI.AddShort(\"Packet Size\");";
+            this.mScriptEditor.Text = "\tScriptAPI.AddShort(\"封包大小 [Short]\");";
             this.mScriptEditor.VirtualWhitespace = true;
             this.mScriptEditor.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
             this.mScriptEditor.TextChanged += new System.EventHandler(this.mScriptEditor_TextChanged);
@@ -123,7 +123,7 @@
             this.mImportButton.Name = "mImportButton";
             this.mImportButton.Size = new System.Drawing.Size(254, 25);
             this.mImportButton.TabIndex = 0;
-            this.mImportButton.Text = "Import script...";
+            this.mImportButton.Text = "导入脚本中...";
             this.mImportButton.UseVisualStyleBackColor = true;
             this.mImportButton.Click += new System.EventHandler(this.mImportButton_Click);
             // 
@@ -149,7 +149,7 @@
             this.Name = "ScriptForm";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Script";
+            this.Text = "脚本";
             this.Load += new System.EventHandler(this.ScriptForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
