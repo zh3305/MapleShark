@@ -11,14 +11,16 @@ nextString("对话内容");
 nextByte("？");
 nextByte("？");
 nextInt("？");
-if(type==2){
-	hintFunction("sendNextS(msg)");
+if(type==2){    
+	var output = "sendNextS(msg);";
 }else if(type==3){
-	hintFunction("sendNextSNoESC(msg)");
+	var output = "sendNextSNoESC(msg);";    
 }else if(type==4){
-	hintFunction("sendNext("+npc+", msg)");
+	var output = "sendNext("+npc+", msg);";
 }else if(type==5){
-	hintFunction("sendNextNoESC("+npc+", msg)");
+	var output = "sendNextNoESC("+npc+", msg);";
 }else if(type==17){
-	hintFunction("? sendNextSNoESC(msg)");
+	var output = "sendNextSNoESC(msg);";
 }
+hintFunction(output);
+ScriptAPI.Write("output.js",output);
