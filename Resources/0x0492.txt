@@ -1,0 +1,2 @@
+var mob = nextInt("怪物ID");
+var type = nextByte("?");

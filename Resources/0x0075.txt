@@ -1,0 +1,35 @@
+var type = nextByte("请求类型");    
+if(type==0x01){                    
+    var quest = nextInt("任务ID");     
+	nextByte("?");         
+	var text = nextString("参数内容");
+	hint("系统存储数据？");
+	hintFunction("?("+quest+", \""+text+"\")");
+	hintMsg(text);
+}else if(type==0x0E){                    
+    var quest = nextInt("任务ID");
+	var text = nextString("参数内容");
+	hint("更新任务的Info，一般用于标志任务完成进度");
+	hintFunction("updateInfoQuest("+quest+", \""+text+"\")");
+	hintMsg(text);
+}else if(type==0x2A){                     
+    var quest = nextInt("任务ID");
+	var text = nextString("参数内容");   
+	hint("系统存储数据？");              
+	hintFunction("?("+quest+", \""+text+"\")");
+	hintMsg(text);
+}else if(type==0x2F){    
+    var count = nextInt("数组长度");	 
+	for(var i=0;i<count;i++){   
+		node("任务 ["+i+"]");      
+	    nextInt("?");	
+	    nextInt("?");	
+	    nextInt("?");	               
+	    nextInt("?");		
+	    nextInt("?");	  
+		nextShort("?");	 
+		nextString("str1"); 
+		node(false);
+	} 
+	hint("系统存储数据？");                                  
+}

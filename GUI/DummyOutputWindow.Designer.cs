@@ -52,7 +52,7 @@ namespace MapleShark
             this.mTextBox.Name = "mTextBox";
             this.mTextBox.Size = new System.Drawing.Size(674, 217);
             this.mTextBox.TabIndex = 2;
-            this.mTextBox.Text = "\n---------------------- Done ----------------------\n";
+            this.mTextBox.Text = "\n---------------------- 完成 ----------------------\n";
             this.mTextBox.WordWrap = false;
             // 
             // DummyOutputWindow
@@ -60,14 +60,14 @@ namespace MapleShark
             this.ClientSize = new System.Drawing.Size(674, 241);
             this.Controls.Add(this.mTextBox);
             this.Controls.Add(this.comboBox);
-            this.Font = new System.Drawing.Font("����", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("ËÎÌå", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.HideOnClose = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DummyOutputWindow";
             this.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockBottomAutoHide;
             this.TabText = "Output";
-            this.Text = "Output";
+            this.Text = "输出";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DummyOutputWindow_FormClosing);
             this.ResumeLayout(false);
 

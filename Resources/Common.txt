@@ -1,0 +1,103 @@
+function nextByte(name) {
+	if(ScriptAPI.Remaining() >= 1)
+    return nextByte(name, false);
+}
+function nextByte(name, unsigned) {
+	if(ScriptAPI.Remaining() >= 1){
+		if(unsigned==true){
+			return ScriptAPI.AddUByte(name + " [无符号 Byte]");
+		}else{
+			return ScriptAPI.AddSByte(name + " [Byte]");
+		}
+	}
+}
+
+function nextShort(name) {
+	if(ScriptAPI.Remaining() >= 2)
+	return nextShort(name, false);
+}
+function nextShort(name, unsigned) {
+	if(ScriptAPI.Remaining() >= 2){
+		if(unsigned==true){
+			return ScriptAPI.AddUShort(name + " [无符号 Short]");
+		}else{
+			return ScriptAPI.AddShort(name + " [Short]");
+		}
+	}
+}
+
+function nextInt(name) {
+	if(ScriptAPI.Remaining() >= 4)
+	return nextInt(name, false);
+}
+function nextInt(name, unsigned) {
+	if(ScriptAPI.Remaining() >= 4){
+	if(unsigned==true){
+			return ScriptAPI.AddUInt(name + " [无符号 Int]");
+		}else{
+			return ScriptAPI.AddInt(name + " [Int]");
+		}
+	}
+}
+
+function nextLong(name) {
+	if(ScriptAPI.Remaining() >= 8)
+    return ScriptAPI.AddLong(name + " [Long]");
+}
+function nextFloat(name) {
+	if(ScriptAPI.Remaining() >= 4)
+    return ScriptAPI.AddFloat(name + " [Float]");
+}
+function nextDouble(name) {
+	if(ScriptAPI.Remaining() >= len)
+    return ScriptAPI.AddDouble(name + " [Double]");
+}
+
+function nextString(name) {
+    return ScriptAPI.AddString(name + " [字符串]");
+}
+function nextStringFix(name, len) {
+	if(ScriptAPI.Remaining() >= len)
+    return ScriptAPI.AddPaddedString(name + " [字符串]", len);
+}
+function nextField(name, len) {
+	if(ScriptAPI.Remaining() >= len)
+    return ScriptAPI.AddField(name + " [无格式]", len);
+}
+
+function hint(str){
+	ScriptAPI.AddComment("[说明] "+str);
+}
+function hintFunction(str){
+	ScriptAPI.AddComment("[对应方法] "+str);
+}
+function hintMsg(str){
+	hintMsg(str, 40);
+}
+function hintMsg(str, len){
+	ScriptAPI.AddComment("[文本缩略] "+str.substring(0,len)+ (str.length>len?"...":""));
+}
+
+function node(input){
+	if(input==true || input==false){
+		ScriptAPI.EndNode(input);
+	}else{
+		ScriptAPI.StartNode(input);
+	}
+}
+
+function toBytes(str) {
+	var bytes = []; // char codes
+    var res = "";
+	for (var i = 0; i < str.length; ++i) {
+	  res += str.charCodeAt(i)+' ';
+	}
+    return res;
+}
+
+function swap32(val) {
+    return ((val & 0xFF) << 24)
+           | ((val & 0xFF00) << 8)
+           | ((val >> 8) & 0xFF00)
+           | ((val >> 24) & 0xFF);
+}

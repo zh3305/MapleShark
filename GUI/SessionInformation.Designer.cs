@@ -41,7 +41,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "MapleStory Version:";
+            this.label1.Text = "冒险岛版本:";
             // 
             // label2
             // 
@@ -50,7 +50,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(138, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "MapleStory Patch Location:";
+            this.label2.Text = "冒险岛子版本:";
             // 
             // txtVersion
             // 
@@ -83,7 +83,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "MapleStory Locale:";
+            this.label3.Text = "冒险岛地区号:";
             // 
             // txtAdditionalInfo
             // 
@@ -102,7 +102,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(111, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Additional Information:";
+            this.label4.Text = "额外信息:";
             // 
             // button1
             // 
@@ -110,7 +110,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(254, 30);
             this.button1.TabIndex = 8;
-            this.button1.Text = "Close";
+            this.button1.Text = "关闭";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -130,7 +130,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SessionInformation";
-            this.Text = "Session Information";
+            this.Text = "会话信息";
             this.Load += new System.EventHandler(this.SessionInformation_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,0 +1,2 @@
+nextString("消息");
+hintFunction("playerMessage(-1, msg)");

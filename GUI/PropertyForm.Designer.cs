@@ -58,7 +58,7 @@
             this.Name = "PropertyForm";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom;
             this.ShowInTaskbar = false;
-            this.Text = "Properties";
+            this.Text = "属性";
             this.ResumeLayout(false);
 
         }

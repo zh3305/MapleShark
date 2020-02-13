@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -158,10 +158,15 @@ namespace MapleShark
 
         private void Decrypt(byte[] pBuffer, TransformMethod pTransformLocale)
         {
-            if ((pTransformLocale & TransformMethod.AES) != 0) mAES.TransformAES(pBuffer);
+			Console.WriteLine("Start Decrypt...");
+			
+            if ((pTransformLocale & TransformMethod.AES) != 0){
+				Console.WriteLine("TransformAES...");
+				mAES.TransformAES(pBuffer);
+			}
 
-            if ((pTransformLocale & TransformMethod.MAPLE_CRYPTO) != 0)
-            {
+            if ((pTransformLocale & TransformMethod.MAPLE_CRYPTO) != 0){
+				Console.WriteLine("TransformMethod.MAPLE_CRYPTO...");
                 for (int index1 = 1; index1 <= 6; ++index1)
                 {
                     byte firstFeedback = 0;
@@ -203,11 +208,23 @@ namespace MapleShark
                 }
             }
 
-            if ((pTransformLocale & TransformMethod.KMS_CRYPTO) != 0) mAES.TransformKMS(pBuffer);
-            if ((pTransformLocale & TransformMethod.OLD_KMS_CRYPTO) != 0) mAES.TransformOldKMS(pBuffer);
+            if ((pTransformLocale & TransformMethod.KMS_CRYPTO) != 0) {
+				Console.WriteLine("TransformKMS...");
+				mAES.TransformKMS(pBuffer);
+			}
+            if ((pTransformLocale & TransformMethod.OLD_KMS_CRYPTO) != 0) {
+				Console.WriteLine("TransformOldKMS...");
+				mAES.TransformOldKMS(pBuffer);
+			}
 
-            if ((pTransformLocale & TransformMethod.SHIFT_IV) != 0) mAES.ShiftIV();
-            if ((pTransformLocale & TransformMethod.SHIFT_IV_OLD) != 0) mAES.ShiftIVOld();
+            if ((pTransformLocale & TransformMethod.SHIFT_IV) != 0) {
+				Console.WriteLine("ShiftIV...");
+				mAES.ShiftIV();
+			}
+            if ((pTransformLocale & TransformMethod.SHIFT_IV_OLD) != 0){
+				Console.WriteLine("ShiftIVOld...");
+				mAES.ShiftIVOld();
+			}
         }
 
         public static byte RollLeft(byte pThis, int pCount)

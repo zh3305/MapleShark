@@ -79,23 +79,23 @@ namespace MapleShark
             //initialisator.ReportProgress(0, "Checking for updates");
             //CraftNetTools.AppUpdates.Check();
 
-            initialisator.ReportProgress(0, "Initializing MapleStory AES Keys");
+            initialisator.ReportProgress(0, "初始化冒险岛 AES 秘钥");
             MapleKeys.Initialize();
 
             //initialisator.ReportProgress(0, "Loading Script.NET context");
             //ScriptNET.Runtime.RuntimeHost.Initialize();
 
-            initialisator.ReportProgress(0, "Loading packet definitions");
+            initialisator.ReportProgress(0, "加载封包定义");
             DefinitionsContainer.Load();
 
-            initialisator.ReportProgress(0, "Loading + 保存配置文件");
+            initialisator.ReportProgress(0, "加载 + 保存配置文件");
             Config.Instance.Save();
 
             //initialisator.ReportProgress(0, "Loading 加在包头配置");
             //Config.LoadProperties();
 
-            initialisator.ReportProgress(0, "Registering .msb extension");
-            RegisterFileAssociation(".msb", "MapleShark", "MapleShark Binary File", filepath, string.Empty, 0);
+            initialisator.ReportProgress(0, "注册 .msb 扩展名");
+            RegisterFileAssociation(".msb", "MapleShark", "MapleShark 二进制文件", filepath, string.Empty, 0);
         }
 
 
@@ -127,7 +127,7 @@ namespace MapleShark
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error registering file association: {0}", ex.ToString());
+                Console.WriteLine("注册文件关联失败: {0}", ex.ToString());
             }
         }
 

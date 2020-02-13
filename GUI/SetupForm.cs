@@ -17,7 +17,7 @@ namespace MapleShark
         {
             InitializeComponent();
 
-            Text = "MapleShark " + Program.AssemblyVersion + ", " + Program.AssemblyCopyright;
+            Text = "MapleShark 冒险岛封包工具 " + Program.AssemblyVersion + ", " + Program.AssemblyCopyright;
             bool selected = false;
             int localAreaConnection = -1;
 

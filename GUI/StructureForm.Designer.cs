@@ -57,7 +57,7 @@
             this.HideOnClose = true;
             this.Name = "StructureForm";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockTop;
-            this.Text = "Structure";
+            this.Text = "封包结构";
             this.ResumeLayout(false);
 
         }

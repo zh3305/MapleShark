@@ -43,8 +43,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(270, 26);
             this.label1.TabIndex = 0;
-            this.label1.Text = "This file seems to be from an old version of MapleShark.\r\nPlease identify which l" +
-    "ocale this MSB file is from:";
+            this.label1.Text = "文件似乎来自于旧版本 MapleShark.\r\n请确认该 MSB 文件对应的地区:";
             // 
             // nudLocale
             // 
@@ -64,7 +63,7 @@
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(274, 23);
             this.btnContinue.TabIndex = 2;
-            this.btnContinue.Text = "Continue";
+            this.btnContinue.Text = "继续";
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
             // 
@@ -84,7 +83,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Other:";
+            this.label3.Text = "其他:";
             // 
             // frmLocale
             // 
@@ -100,7 +99,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmLocale";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MapleShark";
+            this.Text = "MapleShark 冒险岛封包工具";
             this.Load += new System.EventHandler(this.frmLocale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudLocale)).EndInit();
             this.ResumeLayout(false);

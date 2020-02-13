@@ -60,7 +60,7 @@
             this.groupBox9.Size = new System.Drawing.Size(117, 41);
             this.groupBox9.TabIndex = 37;
             this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Filter";
+            this.groupBox9.Text = "过滤器";
             // 
             // textBoxFilterSimple
             // 
@@ -126,7 +126,7 @@
             // 
             this.Ignore.AspectName = "Ignore";
             this.Ignore.CheckBoxes = true;
-            this.Ignore.Text = "Ignore";
+            this.Ignore.Text = "忽略";
             this.Ignore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Outbound
@@ -140,23 +140,23 @@
             // 
             this.Opcode.AspectName = "Opcode";
             this.Opcode.AspectToStringFormat = "0x{0:X4}";
-            this.Opcode.Text = "Opcode";
+            this.Opcode.Text = "封包头";
             // 
             // pName
             // 
             this.pName.AspectName = "Name";
-            this.pName.Text = "Name";
+            this.pName.Text = "封包类型名称";
             this.pName.Width = 255;
             // 
             // Build
             // 
             this.Build.AspectName = "Build";
-            this.Build.Text = "Build";
+            this.Build.Text = "构建";
             // 
             // Locale
             // 
             this.Locale.AspectName = "Locale";
-            this.Locale.Text = "Locale";
+            this.Locale.Text = "地区";
             // 
             // columnHeader11
             // 
@@ -166,7 +166,7 @@
             this.columnHeader11.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader11.MaximumWidth = 200;
             this.columnHeader11.MinimumWidth = 100;
-            this.columnHeader11.Text = "Person";
+            this.columnHeader11.Text = "个人";
             this.columnHeader11.ToolTipText = "This is a long tooltip text that should appear when the mouse is over this column" +
     " header but contains absolutely no useful information :)";
             this.columnHeader11.UseInitialLetterForGroup = true;
@@ -237,7 +237,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(64, 23);
             this.button1.TabIndex = 38;
-            this.button1.Text = "send";
+            this.button1.Text = "发送";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -247,7 +247,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(64, 23);
             this.button2.TabIndex = 38;
-            this.button2.Text = "recv";
+            this.button2.Text = "接收";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -257,7 +257,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(64, 23);
             this.button3.TabIndex = 38;
-            this.button3.Text = "all";
+            this.button3.Text = "全部";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -272,7 +272,7 @@
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.olvSimple);
             this.Name = "frmIgnoreOp";
-            this.Text = "OPList";
+            this.Text = "封包头列表";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();

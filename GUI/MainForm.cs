@@ -547,20 +547,21 @@ namespace MapleShark
             {
                 started = false;
                 mStopStartButton.Image = Properties.Resources.Button_Blank_Green_icon;
-                mStopStartButton.Text = "Start sniffing";
+                mStopStartButton.Text = "开始嗅探";
             }
             else
             {
                 started = true;
                 mStopStartButton.Image = Properties.Resources.Button_Blank_Red_icon;
-                mStopStartButton.Text = "Stop sniffing";
+                mStopStartButton.Text = "停止嗅探";
             }
         }
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists("Readme.txt"))
-            {
+            if (System.IO.File.Exists("帮助.txt")){
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + @"\帮助.txt");
+            }else if (System.IO.File.Exists("Readme.txt"))            {
                 System.Diagnostics.Process.Start(Environment.CurrentDirectory + @"\Readme.txt");
             }
         }

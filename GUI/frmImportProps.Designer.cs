@@ -60,7 +60,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Properties file:";
+            this.label1.Text = "配置文件:";
             // 
             // label2
             // 
@@ -69,7 +69,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "MapleStory Locale ID:";
+            this.label2.Text = "冒险岛地区 ID:";
             // 
             // nudLocale
             // 
@@ -90,7 +90,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "MapleStory Version:";
+            this.label3.Text = "冒险岛版本:";
             // 
             // nudVersion
             // 
@@ -126,7 +126,7 @@
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(344, 23);
             this.btnImport.TabIndex = 11;
-            this.btnImport.Text = "Import File";
+            this.btnImport.Text = "导入文件";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
@@ -146,7 +146,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 13);
             this.label4.TabIndex = 13;
-            this.label4.Text = "Is Send opcode file";
+            this.label4.Text = "是发送封包头文件";
             // 
             // groupBox1
             // 
@@ -156,7 +156,7 @@
             this.groupBox1.Size = new System.Drawing.Size(342, 182);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Log";
+            this.groupBox1.Text = "日志";
             // 
             // txtLog
             // 
@@ -187,7 +187,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmImportProps";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Import Properties File";
+            this.Text = "导入配置文件";
             ((System.ComponentModel.ISupportInitialize)(this.nudLocale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVersion)).EndInit();
             this.groupBox1.ResumeLayout(false);

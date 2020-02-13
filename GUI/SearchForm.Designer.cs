@@ -69,7 +69,7 @@ namespace MapleShark
             this.mNextOpcodeButton.Name = "mNextOpcodeButton";
             this.mNextOpcodeButton.Size = new System.Drawing.Size(65, 25);
             this.mNextOpcodeButton.TabIndex = 5;
-            this.mNextOpcodeButton.Text = "Next";
+            this.mNextOpcodeButton.Text = "下一个";
             this.mNextOpcodeButton.UseVisualStyleBackColor = true;
             this.mNextOpcodeButton.Click += new System.EventHandler(this.mNextOpcodeButton_Click);
             // 
@@ -81,7 +81,7 @@ namespace MapleShark
             this.mPrevOpcodeButton.Name = "mPrevOpcodeButton";
             this.mPrevOpcodeButton.Size = new System.Drawing.Size(65, 25);
             this.mPrevOpcodeButton.TabIndex = 9;
-            this.mPrevOpcodeButton.Text = "Prev";
+            this.mPrevOpcodeButton.Text = "上一个";
             this.mPrevOpcodeButton.UseVisualStyleBackColor = true;
             this.mPrevOpcodeButton.Click += new System.EventHandler(this.mPrevOpcodeButton_Click);
             // 
@@ -93,7 +93,7 @@ namespace MapleShark
             this.mPrevSequenceButton.Name = "mPrevSequenceButton";
             this.mPrevSequenceButton.Size = new System.Drawing.Size(65, 23);
             this.mPrevSequenceButton.TabIndex = 8;
-            this.mPrevSequenceButton.Text = "Prev";
+            this.mPrevSequenceButton.Text = "上一个";
             this.mPrevSequenceButton.UseVisualStyleBackColor = true;
             // 
             // mNextSequenceButton
@@ -104,7 +104,7 @@ namespace MapleShark
             this.mNextSequenceButton.Name = "mNextSequenceButton";
             this.mNextSequenceButton.Size = new System.Drawing.Size(65, 23);
             this.mNextSequenceButton.TabIndex = 7;
-            this.mNextSequenceButton.Text = "Next";
+            this.mNextSequenceButton.Text = "下一个";
             this.mNextSequenceButton.UseVisualStyleBackColor = true;
             this.mNextSequenceButton.Click += new System.EventHandler(this.mNextSequenceButton_Click);
             // 
@@ -115,7 +115,7 @@ namespace MapleShark
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(65, 25);
             this.button1.TabIndex = 10;
-            this.button1.Text = "Search";
+            this.button1.Text = "搜索";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -139,7 +139,7 @@ namespace MapleShark
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(54, 18);
             this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "OnOp";
+            this.checkBox1.Text = "搜包头";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Cb_NoEmpty
@@ -151,7 +151,7 @@ namespace MapleShark
             this.Cb_NoEmpty.Name = "Cb_NoEmpty";
             this.Cb_NoEmpty.Size = new System.Drawing.Size(61, 18);
             this.Cb_NoEmpty.TabIndex = 13;
-            this.Cb_NoEmpty.Text = "NoEmy";
+            this.Cb_NoEmpty.Text = "不为空";
             this.Cb_NoEmpty.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -162,7 +162,7 @@ namespace MapleShark
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 14);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Filter";
+            this.label1.Text = "过滤器";
             // 
             // placeHolderTextBox1
             // 
@@ -174,10 +174,10 @@ namespace MapleShark
             this.placeHolderTextBox1.ForeColor = System.Drawing.Color.Gray;
             this.placeHolderTextBox1.Location = new System.Drawing.Point(55, 32);
             this.placeHolderTextBox1.Name = "placeHolderTextBox1";
-            this.placeHolderTextBox1.PlaceHolderText = "Filter text";
+            this.placeHolderTextBox1.PlaceHolderText = "过滤器文本";
             this.placeHolderTextBox1.Size = new System.Drawing.Size(256, 20);
             this.placeHolderTextBox1.TabIndex = 12;
-            this.placeHolderTextBox1.Text = "Filter Text";
+            this.placeHolderTextBox1.Text = "过滤器文本";
             this.placeHolderTextBox1.TextChanged += new System.EventHandler(this.placeHolderTextBox1_TextChanged);
             // 
             // Tb_Regx
@@ -187,10 +187,10 @@ namespace MapleShark
             this.Tb_Regx.ForeColor = System.Drawing.Color.Gray;
             this.Tb_Regx.Location = new System.Drawing.Point(348, 32);
             this.Tb_Regx.Name = "Tb_Regx";
-            this.Tb_Regx.PlaceHolderText = "Regex Search";
+            this.Tb_Regx.PlaceHolderText = "正则表达式搜索";
             this.Tb_Regx.Size = new System.Drawing.Size(218, 20);
             this.Tb_Regx.TabIndex = 12;
-            this.Tb_Regx.Text = "Regex Search";
+            this.Tb_Regx.Text = "正则表达式搜索";
             // 
             // mSequenceHex
             // 
@@ -233,7 +233,7 @@ namespace MapleShark
             this.MinimumSize = new System.Drawing.Size(300, 60);
             this.Name = "SearchForm";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockTop;
-            this.Text = "Search";
+            this.Text = "搜索";
             this.Load += new System.EventHandler(this.SearchForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

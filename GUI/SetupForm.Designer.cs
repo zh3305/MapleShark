@@ -49,7 +49,7 @@
             this.mCancelButton.Name = "mCancelButton";
             this.mCancelButton.Size = new System.Drawing.Size(75, 23);
             this.mCancelButton.TabIndex = 14;
-            this.mCancelButton.Text = "&Cancel";
+            this.mCancelButton.Text = "取消";
             this.mCancelButton.UseVisualStyleBackColor = true;
             // 
             // mOKButton
@@ -59,7 +59,7 @@
             this.mOKButton.Name = "mOKButton";
             this.mOKButton.Size = new System.Drawing.Size(75, 23);
             this.mOKButton.TabIndex = 13;
-            this.mOKButton.Text = "&Ok";
+            this.mOKButton.Text = "确认";
             this.mOKButton.UseVisualStyleBackColor = true;
             this.mOKButton.Click += new System.EventHandler(this.mOKButton_Click);
             // 
@@ -116,7 +116,7 @@
             this.mPortsLabel.Name = "mPortsLabel";
             this.mPortsLabel.Size = new System.Drawing.Size(34, 13);
             this.mPortsLabel.TabIndex = 10;
-            this.mPortsLabel.Text = "&Ports:";
+            this.mPortsLabel.Text = "端口:";
             // 
             // mInterfaceCombo
             // 
@@ -135,7 +135,7 @@
             this.mInterfaceLabel.Name = "mInterfaceLabel";
             this.mInterfaceLabel.Size = new System.Drawing.Size(52, 13);
             this.mInterfaceLabel.TabIndex = 8;
-            this.mInterfaceLabel.Text = "&Interface:";
+            this.mInterfaceLabel.Text = "网络连接:";
             // 
             // mMainPicture
             // 
@@ -168,7 +168,7 @@
             this.MinimizeBox = false;
             this.Name = "SetupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Setup";
+            this.Text = "配置";
             this.Load += new System.EventHandler(this.SetupForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mHighPortNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mLowPortNumeric)).EndInit();
